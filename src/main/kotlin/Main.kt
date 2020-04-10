@@ -7,6 +7,11 @@ import kotlinx.coroutines.runBlocking
 fun main() {
     val userService = UserService(DefaultApiSettings(), ApacheEngineConfig(), KotlinxSerializer())
     runBlocking {
-        println(userService.getUser(44322889).toString())
+        println(
+            userService.getUsers(
+                listOf(44322889, 44322888),
+                listOf("frozencure")
+            ).toString()
+        )
     }
 }
