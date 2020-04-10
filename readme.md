@@ -4,7 +4,77 @@ A modern Kotlin library for accessing the newest Twitch Helix API.
 
 ## 1. Getting started
 
+For now, endpoints that require an OAuth token are not supported. Only the ones that client id work.
+
+In order to get a client id for your twitch extension follow [this guide](https://dev.twitch.tv/docs/api).
+
+Example of performing a GET user request
+```
+val userService = UserService(DefaultApiSettings(), ApacheEngineConfig(), KotlinxSerializer())
+    runBlocking {
+        println(userService.getUser(44322889).toString())
+    }
+```
+
+In this case, the client id has to be set in the `DefaultApiSettings` class (you can also write your own implementation of `IApiSettings`):
+
+```
+class DefaultApiSettings : IApiSettings {
+
+    override val clientId: Pair<String, String> = Pair("Client-ID", "<insert client id here>")
+}
+```
+
 ## 2. Currently Supported Endpoints
+
+* GET `helix/users?id=[user id]`
+
+### 2.1 Class diagramm
+
+```plantuml
+@startuml
+interface IApiSettings {
+    String clientId
+}
+
+abstract class ResourceService {
+    settings : IApiSettings
+    engineConfig : HttpClientEngineConfig
+    jsonSerialize : JsonSerializer
+}
+
+class HelixResponse {
+    data : Collection<AbstractResource>
+    pagination : Pagination?
+
+}
+
+class Pagination {
+    cursor : String
+}
+
+abstract class AbstractResource
+
+class UserService {
+    getUser(id : Long) : User?
+}
+
+class User
+
+ResourceService *- IApiSettings : has
+
+ResourceService <|-- UserService : implements
+
+UserService o-- User : is handled
+
+AbstractResource <|-- User : implements
+
+ResourceService o-- HelixResponse
+
+HelixResponse o-- AbstractResource
+HelixResponse o-- Pagination
+@enduml
+```
     
 ## 3. Dependencies
 
