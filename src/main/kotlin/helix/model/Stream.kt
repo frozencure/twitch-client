@@ -7,25 +7,25 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Stream(
     @SerialName("game_id")
-    val gameId: String, // 516575
+    val gameId: String,
     @SerialName("id")
-    val id: String, // 37461209856
+    val id: String,
     @SerialName("language")
-    val language: String, // en
+    val language: String,
     @SerialName("started_at")
-    val startedAt: String, // 2020-04-10T08:24:06Z
+    val startedAt: String,
     @SerialName("tag_ids")
     val tagIds: List<String>,
     @SerialName("thumbnail_url")
-    val thumbnailUrl: String, // https://static-cdn.jtvnw.net/previews-ttv/live_user_xqcow-{width}x{height}.jpg
+    val thumbnailUrl: String,
     @SerialName("title")
-    val title: String, // 🔴VALORANT BETA DROPS HERE 🔴 HIGH % CHANCE HERE
+    val title: String,
     @SerialName("type")
-    val type: String, // live
+    val type: String,
     @SerialName("user_id")
-    val userId: String, // 71092938
+    val userId: String,
     @SerialName("user_name")
-    val userName: String, // xQcOW
+    val userName: String,
     @SerialName("viewer_count")
-    val viewerCount: Int // 191865
+    val viewerCount: Int
 )

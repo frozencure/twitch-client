@@ -7,31 +7,31 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Clip(
     @SerialName("broadcaster_id")
-    val broadcasterId: String, // 67955580
+    val broadcasterId: String,
     @SerialName("broadcaster_name")
-    val broadcasterName: String, // ChewieMelodies
+    val broadcasterName: String,
     @SerialName("created_at")
-    val createdAt: String, // 2017-11-30T22:34:18Z
+    val createdAt: String,
     @SerialName("creator_id")
-    val creatorId: String, // 53834192
+    val creatorId: String,
     @SerialName("creator_name")
-    val creatorName: String, // BlackNova03
+    val creatorName: String,
     @SerialName("embed_url")
-    val embedUrl: String, // https://clips.twitch.tv/embed?clip=AwkwardHelplessSalamanderSwiftRage
+    val embedUrl: String,
     @SerialName("game_id")
-    val gameId: String, // 488191
+    val gameId: String,
     @SerialName("id")
-    val id: String, // AwkwardHelplessSalamanderSwiftRage
+    val id: String,
     @SerialName("language")
-    val language: String, // en
+    val language: String,
     @SerialName("thumbnail_url")
-    val thumbnailUrl: String, // https://clips-media-assets.twitch.tv/157589949-preview-480x272.jpg
+    val thumbnailUrl: String,
     @SerialName("title")
-    val title: String, // babymetal
+    val title: String,
     @SerialName("url")
-    val url: String, // https://clips.twitch.tv/AwkwardHelplessSalamanderSwiftRage
+    val url: String,
     @SerialName("video_id")
-    val videoId: String, // 205586603
+    val videoId: String,
     @SerialName("view_count")
-    val viewCount: Int // 10
+    val viewCount: Int
 )

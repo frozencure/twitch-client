@@ -1,17 +1,28 @@
-import helix.configuration.DefaultApiSettings
-import helix.service.UserService
+import helix.auth.AuthService
+import helix.auth.model.request.OauthAuthorizeRequestModel
 import io.ktor.client.engine.apache.ApacheEngineConfig
-import io.ktor.client.features.json.serializer.KotlinxSerializer
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.ImplicitReflectionSerializer
 
+@ImplicitReflectionSerializer
 fun main() {
-    val userService = UserService(DefaultApiSettings(), ApacheEngineConfig(), KotlinxSerializer())
+    val authService = AuthService(ApacheEngineConfig())
     runBlocking {
-        println(
-            userService.getUsers(
-                listOf(44322889, 44322888),
-                listOf("frozencure")
-            ).toString()
-        )
+        val response = authService.authorizeApplicationForUser(OauthAuthorizeRequestModel())
+        println(response)
     }
+//    val userService = UserService(
+//        DefaultApiSettings(
+//            Properties.store(DefaultApiCredentials("nyufzvu4k8h80iq0r7ya4zx1fsas7d"))
+//        ), ApacheEngineConfig()
+//    )
+//    runBlocking {
+//        println(
+//            userService.getUsers(
+//                listOf(44322889, 44322888),
+//                listOf("frozencure")
+//            ).toString()
+//        )
+//    }
 }
+

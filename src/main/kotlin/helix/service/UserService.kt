@@ -1,17 +1,16 @@
 package helix.service
 
-import helix.configuration.IApiSettings
+import helix.configuration.ApiSettings
 import helix.exceptions.BadRequestException
 import helix.generic.HelixResponse
 import helix.model.User
 import io.ktor.client.engine.HttpClientEngineConfig
-import io.ktor.client.features.json.JsonSerializer
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 class UserService(
-    apiSettings: IApiSettings, httpClientConfig: HttpClientEngineConfig, jsonSerializer: JsonSerializer
-) : ResourceService(apiSettings, httpClientConfig, jsonSerializer) {
+    apiSettings: ApiSettings, httpClientConfig: HttpClientEngineConfig
+) : ResourceService(apiSettings, httpClientConfig) {
 
     suspend fun getUser(userId: Long): User? {
         return httpClient
@@ -31,7 +30,7 @@ class UserService(
 
     suspend fun getUsers(ids: Collection<Long>? = null, loginNames: Collection<String>? = null): Collection<User> {
         try {
-            if(ids.isNullOrEmpty() && loginNames.isNullOrEmpty()) {
+            if (ids.isNullOrEmpty() && loginNames.isNullOrEmpty()) {
                 throw BadRequestException("Must provide at least one ID, Login or OAuth Token.")
             }
             return httpClient
