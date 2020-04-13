@@ -1,6 +1,6 @@
 package helix.extension
 
-import helix.exceptions.BadRequestException
+import helix.exceptions.InvalidTypeException
 import io.ktor.client.request.HttpRequestBuilder
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.Properties
@@ -15,7 +15,7 @@ inline fun <reified T : Any> HttpRequestBuilder.parametersOfSerializableObject(o
             is Collection<*>? -> {
                 value?.forEach { i -> this.url.parameters.append(key, i.toString()) }
             }
-            else -> throw BadRequestException(
+            else -> throw InvalidTypeException(
                 "Type of $value for $key must a be number, boolean," +
                         " string or collection of strings."
             )
@@ -32,7 +32,7 @@ fun HttpRequestBuilder.headersOfSerializableObject(map: Map<String, Any?>) {
             is Collection<*>? -> {
                 value?.forEach { i -> this.headers.append(key, i.toString()) }
             }
-            else -> throw BadRequestException(
+            else -> throw InvalidTypeException(
                 "Type of $value for $key must a be number, boolean," +
                         " string or collection of strings."
             )

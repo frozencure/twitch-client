@@ -1,15 +1,23 @@
 import helix.auth.AuthService
 import helix.auth.model.request.OauthAuthorizeRequestModel
+import helix.auth.model.request.OauthRevokeRequestModel
+import helix.configuration.DefaultApiCredentials
+import helix.configuration.DefaultApiSettings
+import helix.service.UserService
 import io.ktor.client.engine.apache.ApacheEngineConfig
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.serialization.Properties
 
 @ImplicitReflectionSerializer
 fun main() {
     val authService = AuthService(ApacheEngineConfig())
     runBlocking {
-        val response = authService.authorizeApplicationForUser(OauthAuthorizeRequestModel())
-        println(response)
+        val tokenValidationModel = authService.revokeToken(
+            OauthRevokeRequestModel("client-id",
+            "auth-token")
+        )
+        println(tokenValidationModel)
     }
 //    val userService = UserService(
 //        DefaultApiSettings(

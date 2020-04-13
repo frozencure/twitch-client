@@ -27,7 +27,7 @@ class AuthService(
     }
 
     @ImplicitReflectionSerializer
-    suspend fun authorizeApplicationForUser(requestModel: OauthAuthorizeRequestModel): HttpResponse {
+    suspend fun authorizeAppForUser(requestModel: OauthAuthorizeRequestModel): HttpResponse {
         return httpClient.get("https://id.twitch.tv/oauth2/authorize") {
             parametersOfSerializableObject(requestModel)
         }
@@ -41,8 +41,6 @@ class AuthService(
         }
     }
 
-
-    @ImplicitReflectionSerializer
     suspend fun validateUser(token: String): TokenValidation {
         return httpClient.get("https://id.twitch.tv/oauth2/validate") {
             header("Authorization", "OAuth $token")

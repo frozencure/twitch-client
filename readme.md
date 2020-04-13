@@ -4,49 +4,150 @@ A modern Kotlin library for accessing the newest Twitch Helix API.
 
 ## 1. Getting started
 
-For now, endpoints that require an OAuth token are not supported. Only the ones that client id work.
+### 1.1 Using only a client ID (without OAuth)
+
 
 In order to get a client id for your twitch extension follow [this guide](https://dev.twitch.tv/docs/api).
 
 Example of performing a GET user request
 ```
-val userService = UserService(DefaultApiSettings(), ApacheEngineConfig(), KotlinxSerializer())
+val userService = UserService(
+        DefaultApiSettings(
+            Properties.store(DefaultApiCredentials("<your client id>"))
+        ), ApacheEngineConfig()
+    )
     runBlocking {
-        println(userService.getUser(44322889).toString())
+        println(userService.getUser("frozencure").toString())
     }
 ```
 
-In this case, the client id has to be set in the `DefaultApiSettings` class (you can also write your own implementation of `IApiSettings`):
+In this case, the API credentials are converted to a `Map<String, Any?>` with the help of the `Properties.store()` method. The map is used in turn as the header for every HTTP request.
+
+### 1.2 Using an OAuth token
+
+This library currently supports only the *Implicit OAuth code flow*. It is advised to first go through the [Twitch API reference authentication section](https://dev.twitch.tv/docs/authentication) for a more in depth understanding.
+
+#### 1.2.1 Getting an OAuth token for an user
+
+The first step in the OAuth flow is to register the Twitch user with your app. This means that the user will have to authorize your app to access his private Twitch data or perform requests on his behalf.
+
+Firstly, you will have to create an instance of the `OauthAuthorizeRequestModel` class, which has the following fields:
+
+* **clientId** -> your app's client ID
+* **redirectURI** -> the URI where the user will be redirected after authorization, you can find it in the Twitch Developer console. It has to be the same as the one mentioned in your Twitch app settings, otherwise the authorization will not work
+* **responseType** -> for the implicit OAuth code flow the only available option is "token"
+* **scope** -> the scopes that the user will be asked to authorize
+* **forceVerify** -> when true, (re)authorization will be required for every single request (optional)
+* **state** -> variable used to mitigate CSFR attacks (optional)
+
+Here is an example of a valid `OauthAuthorizeRequestModel` instance:
+```
+val requestModel = OauthAuthorizeRequestModel(
+    "nsfsgvu4k8h80iq0r7ya4zx1fasfa", // client-id
+    "http://localhost", // redirect-URI
+    "token", // response type
+    "user:read:email user:read:broadcast" // scopes
+)
+```
+
+Next, we will use the `AuthService` to retrieve URL where the user will be directed to login. This can be done in the following way:
+```
+val authService = AuthService(ApacheEngineConfig())
+runBlocking {
+        val response = authService.authorizeAppForUser(requestModel)
+        println(response)
+    }
+```
+
+The code snippet from above will return the following response with URL:
+```
+https://www.twitch.tv/login?client_id=<your client id>&redirect_params=<scopes + other parameters>
+```
+
+Next, the user will authorize the app by accepting the requested permissions and loging in to Twitch. After the login completes successfully, he will be redirected to the `redirectURI` mentioned above:
+```
+http://localhost/#access_token=1abcgtpzp1iwrsiiqlr0tvfvkiawy3&scope=<accepted scopes>&token_type=bearer
+```
+
+Inside the redirect URL you will be able to find the OAuth user token.
+
+From now on, you will be able to use this token to make request on the user behalf. For example:
+```
+val userService = UserService(
+        DefaultApiSettings(
+            Properties.store(OautApiCredentials("<your usert token>"))
+        ), ApacheEngineConfig()
+    )
+    runBlocking {
+        println(userService.getUser("frozencure").toString())
+    }
+```
+
+### 1.2.2 OAuth token validation
+
+When using OAuth tokens to perform requests, it is advised to periodically validate the token, to make sure that the user didn't revoke access of the app to his data. The Twitch team mentions that failure of doing this can lead revoking the developer API key or throttling of the application.
+
+The `AuthService` also supports validation:
+```
+val authService = AuthService(ApacheEngineConfig())
+    runBlocking {
+        val tokenValidationModel = authService.validateUser("<the auth token>")
+        println(tokenValidationModel)
+    }
+```
+This will retrieve the following `TokenValidation` instance:
 
 ```
-class DefaultApiSettings : IApiSettings {
-
-    override val clientId: Pair<String, String> = Pair("Client-ID", "<insert client id here>")
-}
+TokenValidation(
+    clientId=nyufzabdsf8h80iq0r7ya4zx1fsas7d, userLogin=frozencure, 
+    scopes=[ANALYTICS_READ_EXTENSIONS, ANALYTICS_READ_GAMES, BITS_READ, CHANNEL_READ_SUBSCRIPTIONS, ...], userId=83035654, 
+    expirationTime=5662299
+)
 ```
+
+### 1.2.3 Revoking a token
+
+To clean up previously obtained access tokens, the `AuthService` offers support for programatically revoking the OAuth tokens:
+```
+    val authService = AuthService(ApacheEngineConfig())
+    runBlocking {
+        val response = authService.revokeToken(
+            OauthRevokeRequestModel("<client-id>",
+            "<auth-token>")
+        )
+        println(response)
+    }
+```
+
 
 ## 2. Currently Supported Endpoints
 
 * GET `helix/users?id=[user id]`
 
-### 2.1 Class diagramm
+### 2.1 Class diagram for resource services
 
 ```plantuml
 @startuml
-interface IApiSettings {
+interface ApiSettings {
+    Map<String, Any?> credentials
+}
+
+class OauthApiCredentials {
+    String authToken
+}
+
+class DefaultApiCredentials {
     String clientId
 }
 
 abstract class ResourceService {
-    settings : IApiSettings
+    settings : ApiSettings
     engineConfig : HttpClientEngineConfig
-    jsonSerialize : JsonSerializer
 }
 
 class HelixResponse {
     data : Collection<AbstractResource>
     pagination : Pagination?
-
 }
 
 class Pagination {
@@ -61,7 +162,7 @@ class UserService {
 
 class User
 
-ResourceService *- IApiSettings : has
+ResourceService *- ApiSettings : has
 
 ResourceService <|-- UserService : implements
 
@@ -71,8 +172,68 @@ AbstractResource <|-- User : implements
 
 ResourceService o-- HelixResponse
 
+ApiSettings o-- OauthApiCredentials
+
+ApiSettings o-- DefaultApiCredentials
+
 HelixResponse o-- AbstractResource
 HelixResponse o-- Pagination
+@enduml
+```
+
+### 2.3 Authentication service class diagram
+
+```plantuml
+@startuml
+
+class AuthService {
+    autherizeAppForUser(OauthAuthorizeRequestModel model) : HttpResponse
+    revokeToken(OauthRevokeRequestModel model) : HttpResponse
+    validateUser(String token) : TokenValidation
+
+}
+
+class TokenValidation {
+    clientId : String
+    userLogin : String
+    scopes : List<AuthScope>
+    userId : String
+    expirationTime : long
+}
+
+class OauthAutherizeRequestModel {
+    clientId : String
+    redirectUri : String
+    responseType : String
+    scope : List<AuthScope>
+    forceVerify : Boolean?
+    state : String?
+}
+
+class OauthRevokeRequestModel {
+    clientId : String
+    authToken : String
+}
+
+enum AuthScope {
+    ANALYTICS_READ_EXTENSIONS
+    ANALYTICS_READ_GAMES
+    BITS_READ
+    CHANNEL_READ_SUBSCRIPTIONS
+    EDIT_CLIPS
+    USER_EDIT
+    USER_EDIT_BROADCAST
+    USER_READ_BROADCAST
+    USER_READ_EMAIL
+}
+
+AuthService o-- TokenValidation
+AuthService o-- OauthAutherizeRequestModel
+AuthService o-- OauthRevokeRequestModel
+
+OauthAutherizeRequestModel o-- AuthScope
+OauthRevokeRequestModel o-- AuthScope
+
 @enduml
 ```
     
@@ -81,9 +242,9 @@ HelixResponse o-- Pagination
 ### 1. Ktor client
 
 - Built on top of the *Ktor* library
-- Resons for choosing *Ktor* over *Spring Boot*:
+- Reasons for choosing *Ktor* over *Spring Boot*:
     - More lightweight, less complexity
-    - Customaziable, doesn't include all of the extra dependencies that are brought with Spring Boot
+    - Customizable, doesn't include all of the extra dependencies that are brought with Spring Boot
 
 ### 2. Kotlinx.serializaiton
 
