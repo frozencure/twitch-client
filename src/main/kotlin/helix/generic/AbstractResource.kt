@@ -1,4 +1,6 @@
 package helix.generic
 
-abstract class AbstractResource {
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+abstract class AbstractResource

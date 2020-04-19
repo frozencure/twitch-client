@@ -23,4 +23,8 @@ abstract class ResourceService(
         }
     }
 
+    companion object {
+        const val BASE_URL = "https://api.twitch.tv/helix"
+    }
+
 }
