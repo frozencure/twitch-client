@@ -1,17 +1,34 @@
 package helix.model
 
+
 import helix.generic.AbstractResource
+import helix.generic.NullableStringSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 
 @Serializable
 data class User(
-    val id: String,
+    @SerialName("id")
+    val id: Long,
+    @SerialName("login")
     val login: String,
-    val display_name: String,
-    val type: String,
-    val broadcaster_type: String,
-    val description: String,
-    val profile_image_url: String,
-    val offline_image_url: String,
-    val view_count: Long
+    @SerialName("display_name")
+    val displayName: String,
+    @SerialName("type")
+    val type: UserType,
+    @SerialName("broadcaster_type")
+    val broadcasterType: BroadcasterType,
+    @SerialName("description")
+    @Serializable(with = NullableStringSerializer::class)
+    val description: String? = null,
+    @SerialName("profile_image_url")
+    val profileImageUrl: String,
+    @SerialName("offline_image_url")
+    @Serializable(with = NullableStringSerializer::class)
+    val offlineImageUrl: String? = null,
+    @SerialName("view_count")
+    val viewCount: Int,
+    @SerialName("email")
+    val email: String? = null
 ) : AbstractResource()
