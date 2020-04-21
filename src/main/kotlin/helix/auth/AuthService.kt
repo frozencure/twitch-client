@@ -3,8 +3,8 @@ package helix.auth
 import helix.auth.model.request.OauthAuthorizeRequestModel
 import helix.auth.model.request.OauthRevokeRequestModel
 import helix.auth.model.response.TokenValidation
-import helix.extension.headersOfSerializableObject
-import helix.extension.parametersOfSerializableObject
+import helix.http.extensions.headersOfSerializableObject
+import helix.http.extensions.parametersOfSerializableObject
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.features.json.JsonFeature

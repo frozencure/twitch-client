@@ -1,11 +1,6 @@
-import helix.auth.AuthService
-import helix.auth.model.request.OauthAuthorizeRequestModel
-import helix.configuration.ApiSettings
-import helix.configuration.DefaultApiCredentials
-import helix.configuration.DefaultApiSettings
-import helix.configuration.OauthApiCredentials
-import helix.service.UserService
-import io.ktor.client.engine.apache.Apache
+import helix.http.credentials.DefaultApiSettings
+import helix.http.credentials.OauthApiCredentials
+import helix.users.UserService
 import io.ktor.client.engine.apache.ApacheEngineConfig
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ImplicitReflectionSerializer
