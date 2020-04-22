@@ -9,18 +9,18 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 
 abstract class ResourceService(
-    private val apiSettings: ApiSettings,
-    private val httpClientConfig: HttpClientEngineConfig
+    protected val httpClient: HttpClient
 ) {
-     var httpClient: HttpClient = HttpClient {
-        engine { httpClientConfig }
+    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
+            : this(HttpClient {
+        engine { httpClientEngineConfig }
         install(JsonFeature) {
             serializer = KotlinxSerializer()
         }
         defaultRequest {
             headersOfSerializableObject(apiSettings.credentials)
         }
-    }
+    })
 
     companion object {
         const val BASE_URL = "https://api.twitch.tv/helix"

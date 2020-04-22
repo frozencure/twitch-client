@@ -7,6 +7,7 @@ import helix.extensions.model.Extension
 import helix.users.model.FollowEvent
 import helix.http.ResourceService
 import helix.users.model.User
+import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -14,9 +15,12 @@ import io.ktor.client.request.put
 import kotlinx.serialization.UnstableDefault
 
 @UnstableDefault
-class UserService(
-    apiSettings: ApiSettings, httpClientConfig: HttpClientEngineConfig
-) : ResourceService(apiSettings, httpClientConfig) {
+class UserService : ResourceService {
+
+    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
+            : super(apiSettings, httpClientEngineConfig)
+
+    constructor(httpClient: HttpClient) : super(httpClient)
 
     companion object {
         const val BASE_URL = "${ResourceService.BASE_URL}/users"

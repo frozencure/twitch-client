@@ -1,7 +1,9 @@
 package users
 
+import helix.http.model.HelixResponse
 import helix.users.UserService
-import io.ktor.client.HttpClient
+import helix.users.model.User
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.UnstableDefault
 import util.HttpClientMockBuilder
 
@@ -10,10 +12,13 @@ object UsersStubEndpoints {
 
     private const val BASE_URL = "https://api.twitch.tv/helix/users"
 
-    fun withUserWithEmail(userService: UserService): UserService {
-        userService.httpClient = HttpClientMockBuilder.withUrl(
-            BASE_URL,
-            """
+    fun getUserWithEmail(function: (HelixResponse<User>) -> Unit) {
+        function(
+            runBlocking {
+                UserService(
+                    HttpClientMockBuilder.withUrl(
+                        BASE_URL,
+                        """
             {
               "data": [{
                 "id": "44322889",
@@ -29,8 +34,9 @@ object UsersStubEndpoints {
               }]
             }
         """.trimIndent()
-        )
-        return userService
+                    )
+                ).getUser()
+            })
     }
 
 }
