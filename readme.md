@@ -17,7 +17,7 @@ val userService = UserService(
         ), ApacheEngineConfig()
     )
     runBlocking {
-        println(userService.getUser("frozencure").toString())
+        println(userService.getUser("frozencure").resource.toString())
     }
 ```
 
@@ -79,7 +79,7 @@ val userService = UserService(
         ), ApacheEngineConfig()
     )
     runBlocking {
-        println(userService.getUser("frozencure").toString())
+        println(userService.getUser("frozencure").resource.toString())
     }
 ```
 

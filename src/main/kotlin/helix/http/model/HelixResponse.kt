@@ -1,12 +1,8 @@
 package helix.http.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import io.ktor.client.statement.HttpResponse
 
-@Serializable
-data class HelixResponse<T : AbstractResource>(
-    val data: Collection<T>,
-    val pagination: Pagination? = null,
-    @SerialName("total")
-    val total: Long? = null
-)
+abstract class HelixResponse<T : AbstractResource>(val httpResponse: HttpResponse) {
+
+    protected abstract val helixDTO: HelixDTO<T>
+}
