@@ -22,7 +22,7 @@ class UsersHelixResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
         httpResponse.receive<HelixDTO<User>>()
     }
 
-    override suspend fun nextPage(): CollectionHelixResponse<User>? =
+    override suspend fun nextPage(): UsersHelixResponse? =
         nextPageHttpResponse()?.let {
             UsersHelixResponse(
                 it, httpClient

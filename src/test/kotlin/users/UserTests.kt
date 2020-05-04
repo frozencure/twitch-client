@@ -118,6 +118,35 @@ class UserTests {
 
     }
 
+    class `Given GET users with pagination is called` {
+
+        val usersResponse = runBlocking<UsersHelixResponse> {
+            UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.MULTIPLE_USERS_WITH_PAGINATION))
+                .getUsers(loginNames = listOf("dallas", "user_2"))
+        }
+
+
+        @Test
+        fun `then pagination exists`() = assert(usersResponse.pagination != null)
+
+        class `And next page of users is quried` {
+
+            private val usersResponse = runBlocking {
+                UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.MULTIPLE_USERS_WITH_PAGINATION))
+                    .getUsers(loginNames = listOf("dallas", "user_2")).nextPage()
+            }
+
+            @Test
+            fun `then users are returned`() = assert(usersResponse!!.data.isNotEmpty())
+
+            @Test
+            fun `then request has cursor as parameter`() =
+                assert(usersResponse!!.httpResponse.request.url.parameters["cursor"] != null)
+
+        }
+
+    }
+
     class `Given GET users with ids is called` {
         private val usersResponse = runBlocking<UsersHelixResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.MULTIPLE_USERS))
