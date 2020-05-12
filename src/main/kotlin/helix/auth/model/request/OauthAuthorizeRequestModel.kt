@@ -7,14 +7,14 @@ import kotlinx.serialization.*
 @Serializable
 data class OauthAuthorizeRequestModel(
     @SerialName("client_id")
-    val clientId: String = "nyufzvu4k8h80iq0r7ya4zx1fsas7d",
+    val clientId: String,
     @SerialName("redirect_uri")
-    val redirectUri: String = "http://localhost",
+    val redirectUri: String,
     @SerialName("response_type")
     val responseType: String = "token",
     @Serializable(with = AuthScopeListSerializer::class)
     @SerialName("scope")
-    val scope: List<AuthScope> = AuthScope.values().toList(),
+    val scope: List<AuthScope>,
     @SerialName("force_verify")
     val forceVerify: Boolean? = null,
     @SerialName("state")

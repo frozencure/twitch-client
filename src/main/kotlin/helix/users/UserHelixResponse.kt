@@ -1,7 +1,7 @@
 package helix.users
 
-import helix.http.model.CollectionHelixResponse
 import helix.http.model.HelixDTO
+import helix.http.model.ScrollableHelixResponse
 import helix.http.model.SingleHelixResponse
 import helix.users.model.User
 import io.ktor.client.HttpClient
@@ -17,7 +17,7 @@ class UserHelixResponse(httpResponse: HttpResponse) : SingleHelixResponse<User>(
 
 
 class UsersHelixResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
-    CollectionHelixResponse<User>(httpResponse, httpClient) {
+    ScrollableHelixResponse<User>(httpResponse, httpClient) {
     override val helixDTO: HelixDTO<User> = runBlocking {
         httpResponse.receive<HelixDTO<User>>()
     }

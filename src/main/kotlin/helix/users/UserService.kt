@@ -87,7 +87,7 @@ class UserService : ResourceService {
 
     // TODO#29: add user:read:broadcast req
     suspend fun getUserExtensions(): ExtensionsHelixResponse =
-        ExtensionsHelixResponse(httpClient.get("$BASE_URL/extensions/list"), httpClient)
+        ExtensionsHelixResponse(httpClient.get("$BASE_URL/extensions/list"))
 
     // TODO#28 : Get user active extensions (auth = user:read:broadcast or user:edit:broadcast)
     //    suspend fun getUserActiveExtensions(): HelixResponse<Extension> =

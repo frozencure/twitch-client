@@ -46,7 +46,7 @@ val requestModel = OauthAuthorizeRequestModel(
     "nsfsgvu4k8h80iq0r7ya4zx1fasfa", // client-id
     "http://localhost", // redirect-URI
     "token", // response type
-    "user:read:email user:read:broadcast" // scopes
+    AuthScope.values().toList()// scopes
 )
 ```
 

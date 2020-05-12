@@ -2,6 +2,7 @@ package helix.users
 
 import helix.http.model.CollectionHelixResponse
 import helix.http.model.HelixDTO
+import helix.http.model.ScrollableHelixResponse
 import helix.http.model.SingleHelixResponse
 import helix.users.model.FollowEvent
 import io.ktor.client.HttpClient
@@ -16,7 +17,7 @@ class FollowHelixResponse(httpResponse: HttpResponse) : SingleHelixResponse<Foll
 }
 
 class FollowsHelixResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
-    CollectionHelixResponse<FollowEvent>(httpResponse, httpClient) {
+    ScrollableHelixResponse<FollowEvent>(httpResponse, httpClient) {
     override val helixDTO: HelixDTO<FollowEvent> = runBlocking {
         httpResponse.receive<HelixDTO<FollowEvent>>()
     }

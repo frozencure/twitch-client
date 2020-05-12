@@ -1,8 +1,10 @@
 package helix.clips.model
 
 
+import helix.util.DateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.util.*
 
 @Serializable
 data class Clip(
@@ -11,7 +13,8 @@ data class Clip(
     @SerialName("broadcaster_name")
     val broadcasterName: String,
     @SerialName("created_at")
-    val createdAt: String,
+    @Serializable(with = DateSerializer::class)
+    val createdAt: Date,
     @SerialName("creator_id")
     val creatorId: String,
     @SerialName("creator_name")

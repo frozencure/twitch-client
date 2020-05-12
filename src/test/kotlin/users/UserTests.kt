@@ -7,6 +7,7 @@ import helix.users.UserHelixResponse
 import helix.users.UserService
 import helix.users.UsersHelixResponse
 import io.ktor.client.statement.request
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.UnstableDefault
 import org.junit.Test

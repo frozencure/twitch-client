@@ -2,8 +2,10 @@ package helix.users.model
 
 
 import helix.http.model.AbstractResource
+import helix.util.DateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.util.*
 
 @Serializable
 data class FollowEvent(
@@ -16,5 +18,6 @@ data class FollowEvent(
     @SerialName("to_name")
     val toUserName: String,
     @SerialName("followed_at")
-    val followedAt: String
+    @Serializable(with = DateSerializer::class)
+    val followedAt: Date
 ) : AbstractResource()

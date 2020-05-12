@@ -1,8 +1,10 @@
 package helix.streams.model
 
 
+import helix.util.DateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.util.*
 
 @Serializable
 data class Stream(
@@ -13,7 +15,8 @@ data class Stream(
     @SerialName("language")
     val language: String,
     @SerialName("started_at")
-    val startedAt: String,
+    @Serializable(with = DateSerializer::class)
+    val startedAt: Date,
     @SerialName("tag_ids")
     val tagIds: List<String>,
     @SerialName("thumbnail_url")

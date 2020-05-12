@@ -1,8 +1,12 @@
 package helix.videos.model
 
 
+import helix.http.model.AbstractResource
+import helix.util.DateSerializer
+import helix.util.NullableStringSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.util.*
 
 @Serializable
 data class Video(
@@ -15,23 +19,26 @@ data class Video(
     @SerialName("title")
     val title: String,
     @SerialName("description")
-    val description: String,
+    @Serializable(with = NullableStringSerializer::class)
+    val description: String? = null,
     @SerialName("created_at")
-    val createdAt: String,
+    @Serializable(with = DateSerializer::class)
+    val createdAt: Date,
     @SerialName("published_at")
-    val publishedAt: String,
+    @Serializable(with = DateSerializer::class)
+    val publishedAt: Date,
     @SerialName("url")
     val url: String,
     @SerialName("thumbnail_url")
     val thumbnailUrl: String,
     @SerialName("viewable")
-    val viewable: String,
+    val viewable: VideoVisibility,
     @SerialName("view_count")
     val viewCount: Int,
     @SerialName("language")
     val language: String,
     @SerialName("type")
-    val type: String,
+    val type: VideoType,
     @SerialName("duration")
     val duration: String
-)
+) : AbstractResource()
