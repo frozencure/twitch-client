@@ -1,10 +1,9 @@
 import helix.auth.AuthService
 import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
+import helix.games.GameService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
-import helix.users.UserService
-import helix.videos.VideoService
 import io.ktor.client.engine.apache.ApacheEngineConfig
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ImplicitReflectionSerializer
@@ -23,14 +22,14 @@ fun main() {
             )
         )
     )
-    val userService = UserService(apiSettings, ApacheEngineConfig())
-    val videoService = VideoService(apiSettings, ApacheEngineConfig())
+    val gameService = GameService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val user = userService.getUser("xQcOW").resource
-        val videos = user?.id?.let { videoService.getVideosByUser(it) }
-
+        val games = gameService.getGames(ids = listOf(509658, 32982))
+        println(games.data)
     }
+
 }
+
 
 @ImplicitReflectionSerializer
 fun authenticateUser() {
