@@ -14,11 +14,11 @@ abstract class ScrollableHelixResponse<T : AbstractResource>(
 ) :
     CollectionHelixResponse<T>(httpResponse) {
 
-    protected suspend fun nextPageHttpResponse(): HttpResponse? =
+    protected suspend fun nextPageHttpResponse(cursorKey: String? = null): HttpResponse? =
         pagination?.let {
             httpClient.request<HttpResponse> {
                 url(httpResponse.request.url)
-                parameter(it.asPair().first, it.asPair().second)
+                parameter(cursorKey ?: it.asPair().first, it.asPair().second)
                 headers { httpResponse.request.headers }
                 method = httpResponse.request.method
             }

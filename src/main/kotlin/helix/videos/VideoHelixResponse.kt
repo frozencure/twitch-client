@@ -7,12 +7,7 @@ import helix.http.model.SingleHelixResponse
 import helix.videos.model.Video
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
-import io.ktor.client.request.headers
-import io.ktor.client.request.parameter
-import io.ktor.client.request.request
-import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 
 
@@ -38,13 +33,10 @@ class ScrollableVideosResponse(
     }
 
     override suspend fun nextPage(): ScrollableVideosResponse? =
-        pagination?.let {
-            ScrollableVideosResponse(httpClient.request<HttpResponse> {
-                url(httpResponse.request.url)
-                parameter("after", it.asPair().second)
-                headers { httpResponse.request.headers }
-                method = httpResponse.request.method
-            }, httpClient)
+        nextPageHttpResponse(cursorKey = "after")?.let {
+            ScrollableVideosResponse(
+                it, httpClient
+            )
         }
 
 }

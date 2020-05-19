@@ -5,6 +5,7 @@ import helix.http.model.CollectionHelixResponse
 import helix.http.model.HelixDTO
 import helix.http.model.ScrollableHelixResponse
 import helix.http.model.SingleHelixResponse
+import helix.webhook.WebhooksHelixResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.request.headers
@@ -38,13 +39,10 @@ class ScrollableGamesResponse(
     }
 
     override suspend fun nextPage(): ScrollableGamesResponse? =
-        pagination?.let {
-            ScrollableGamesResponse(httpClient.request<HttpResponse> {
-                url(httpResponse.request.url)
-                parameter("after", it.asPair().second)
-                headers { httpResponse.request.headers }
-                method = httpResponse.request.method
-            }, httpClient)
+        nextPageHttpResponse(cursorKey = "after")?.let {
+            ScrollableGamesResponse(
+                it, httpClient
+            )
         }
 
 }
