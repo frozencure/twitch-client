@@ -122,7 +122,54 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 
 ## 2. Currently Supported Endpoints
 
-* GET `helix/users?id=[user id]`
+* Users
+    * GET users :heavy_check_mark:
+    * GET followers :heavy_check_mark:
+    * PUT update user :heavy_check_mark:
+    * GET user extensions :heavy_check_mark:
+    * GET user active extensions :x:
+    * PUT update user extensions :x:
+* Videos
+    * GET videos :heavy_check_mark:
+* Clips
+    * GET clips :x:
+    * POST create clip :x:
+* Webhooks
+    * GET subscriptions :heavy_check_mark:
+* Games
+    * GET games :heavy_check_mark:
+    * GET top games :heavy_check_mark:
+* Analytics
+    * GET extension analytics :x:
+    * GET game analytics :x:
+* Bits
+    * GET bits leaderboard :x:
+* Extensions
+    * GET extension transactions :x:
+* Entitlements
+    * POST Create entitlement grants upload URL :x:
+    * GET code status :x:
+    * POST redeem code :x:
+* Moderation
+    * POST check auto-mod status :x:
+    * GET banned events :x:
+    * GET banned users :x:
+    * GET moderators :x:
+    * GET moderator events :x:
+* Streams
+    * POST create stream marker :x:
+    * GET streams :x:
+    * GET stream markers :x:
+    * GET stream metadata :x:
+* Subscriptions
+    * GET broadcaster subscriptions :x:
+* Stream tags
+    * GET all stream tags :x:
+    * GET stream tags :x:
+    * PUT replace stream tags :x:
+
+
+
 
 ### 2.1 Class diagram for resource services
 
