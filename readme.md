@@ -162,7 +162,7 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * GET stream markers :x:
     * GET stream metadata :x:
 * Subscriptions
-    * GET broadcaster subscriptions :x:
+    * GET broadcaster subscriptions :heavy_check_mark:
 * Stream tags
     * GET all stream tags :x:
     * GET stream tags :x:
