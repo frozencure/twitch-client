@@ -1,28 +1,29 @@
 package helix.clips.model
 
 
-import helix.util.DateSerializer
+import helix.http.model.AbstractResource
+import helix.util.InstantSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.*
+import java.time.Instant
 
 @Serializable
 data class Clip(
     @SerialName("broadcaster_id")
-    val broadcasterId: String,
+    val broadcasterId: Long,
     @SerialName("broadcaster_name")
     val broadcasterName: String,
     @SerialName("created_at")
-    @Serializable(with = DateSerializer::class)
-    val createdAt: Date,
+    @Serializable(with = InstantSerializer::class)
+    val createdAt: Instant,
     @SerialName("creator_id")
-    val creatorId: String,
+    val creatorId: Long,
     @SerialName("creator_name")
     val creatorName: String,
     @SerialName("embed_url")
     val embedUrl: String,
     @SerialName("game_id")
-    val gameId: String,
+    val gameId: Long,
     @SerialName("id")
     val id: String,
     @SerialName("language")
@@ -37,4 +38,4 @@ data class Clip(
     val videoId: String,
     @SerialName("view_count")
     val viewCount: Int
-)
+) : AbstractResource()

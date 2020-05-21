@@ -132,8 +132,8 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 * Videos
     * GET videos :heavy_check_mark:
 * Clips
-    * GET clips :x:
-    * POST create clip :x:
+    * GET clips :heavy_check_mark:
+    * POST create clip :heavy_check_mark:
 * Webhooks
     * GET subscriptions :heavy_check_mark:
 * Games

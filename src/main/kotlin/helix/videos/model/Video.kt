@@ -2,11 +2,11 @@ package helix.videos.model
 
 
 import helix.http.model.AbstractResource
-import helix.util.DateSerializer
+import helix.util.InstantSerializer
 import helix.util.NullableStringSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.*
+import java.time.Instant
 
 @Serializable
 data class Video(
@@ -22,11 +22,11 @@ data class Video(
     @Serializable(with = NullableStringSerializer::class)
     val description: String? = null,
     @SerialName("created_at")
-    @Serializable(with = DateSerializer::class)
-    val createdAt: Date,
+    @Serializable(with = InstantSerializer::class)
+    val createdAt: Instant,
     @SerialName("published_at")
-    @Serializable(with = DateSerializer::class)
-    val publishedAt: Date,
+    @Serializable(with = InstantSerializer::class)
+    val publishedAt: Instant,
     @SerialName("url")
     val url: String,
     @SerialName("thumbnail_url")

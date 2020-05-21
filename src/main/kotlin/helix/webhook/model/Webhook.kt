@@ -2,10 +2,10 @@ package helix.webhook.model
 
 
 import helix.http.model.AbstractResource
-import helix.util.DateSerializer
+import helix.util.InstantSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.*
+import java.time.Instant
 
 @Serializable
 data class Webhook(
@@ -14,6 +14,6 @@ data class Webhook(
     @SerialName("callback")
     val callback: String,
     @SerialName("expires_at")
-    @Serializable(with = DateSerializer::class)
-    val expiresAt: Date
+    @Serializable(with = InstantSerializer::class)
+    val expiresAt: Instant
 ) : AbstractResource()

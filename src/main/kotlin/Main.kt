@@ -1,14 +1,17 @@
 import helix.auth.AuthService
 import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
-import helix.games.GameService
+import helix.clips.ClipService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
+import helix.users.UserService
 import io.ktor.client.engine.apache.ApacheEngineConfig
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.Properties
 import kotlinx.serialization.UnstableDefault
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 @OptIn(UnstableDefault::class)
 @ImplicitReflectionSerializer
@@ -22,10 +25,18 @@ fun main() {
             )
         )
     )
-    val gameService = GameService(apiSettings, ApacheEngineConfig())
+    val clipService = ClipService(apiSettings, ApacheEngineConfig())
+    val userService = UserService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val games = gameService.getGames(ids = listOf(509658, 32982))
-        println(games.data)
+        val clips =
+            clipService.getClipsByBroadcaster(
+                71092938,
+                startedAt = Instant.now().minus(1, ChronoUnit.DAYS),
+                endedAt = Instant.now().minus(1, ChronoUnit.DAYS).plusSeconds(3600)
+            )
+        println(clips.data)
+//        val user = userService.getUser("xqcow")
+//        println(user.resource)
     }
 
 }
