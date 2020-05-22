@@ -25,10 +25,22 @@ object HttpClientMockBuilder {
         }
     }
 
-    fun withStatusException(httpStatusCode: HttpStatusCode): HttpClient = HttpClient(MockEngine) {
+
+    fun withStatusResponse(status: HttpStatusCode): HttpClient = HttpClient(MockEngine) {
         engine {
             addHandler {
                 val responseHeaders = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
+                respond("", status = status, headers = responseHeaders)
+            }
+        }
+        install(JsonFeature) {
+            serializer = KotlinxSerializer()
+        }
+    }
+
+    fun withStatusException(httpStatusCode: HttpStatusCode): HttpClient = HttpClient(MockEngine) {
+        engine {
+            addHandler {
                 respondError(httpStatusCode)
             }
         }

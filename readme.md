@@ -164,9 +164,9 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 * Subscriptions
     * GET broadcaster subscriptions :heavy_check_mark:
 * Stream tags
-    * GET all stream tags :x:
-    * GET stream tags :x:
-    * PUT replace stream tags :x:
+    * GET all stream tags :heavy_check_mark:
+    * GET stream tags :heavy_check_mark:
+    * PUT replace stream tags :heavy_check_mark:
 
 
 

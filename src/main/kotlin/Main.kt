@@ -30,11 +30,11 @@ fun main() {
     val streamsService = StreamService(apiSettings, ApacheEngineConfig())
     val userService = UserService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val user = userService.getUser("frozencure").resource
+        val user = userService.getUser("xqcow").resource
         user?.let {
             val streams =
-                streamsService.createStreamMarker(user.id)
-            println(streams.resource)
+                streamsService.updateStreamTags(user.id)
+            println(streams)
         }
     }
 

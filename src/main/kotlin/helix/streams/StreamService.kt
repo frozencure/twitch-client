@@ -7,11 +7,15 @@ import helix.streams.markers.StreamMarkerHelixResponse
 import helix.streams.markers.UserStreamMarkersResponse
 import helix.streams.markers.model.StreamMarkerRequest
 import helix.streams.metadata.StreamsMetadataHelixResponse
+import helix.streams.tags.StreamTagsHelixResponse
+import helix.streams.tags.model.ReplaceTagsRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 
@@ -65,6 +69,39 @@ class StreamService : ResourceService {
             httpClient
         )
     }
+
+    suspend fun getStreamTags(
+        tagIds: Collection<String>? = null, first: Int = 100
+    ): StreamTagsHelixResponse {
+        tagIds?.let {
+            if (it.size > 100) {
+                throw BadRequestException("A maximum of 100 tag IDs can be specified.")
+            }
+        }
+        return StreamTagsHelixResponse(
+            httpClient.get("${ResourceService.BASE_URL}/tags/streams") {
+                parameter("first", first)
+                tagIds?.forEach {
+                    parameter("tag_id", it)
+                }
+            }, httpClient
+        )
+    }
+
+    suspend fun getStreamTags(broadcasterId: Long) = StreamTagsHelixResponse(
+        httpClient.get("$BASE_URL/tags") {
+            parameter("broadcaster_id", broadcasterId)
+        }, httpClient
+    )
+
+    suspend fun updateStreamTags(broadcasterId: Long, tags: Collection<String>? = null) =
+        httpClient.put<HttpResponse>("$BASE_URL/tags") {
+            parameter("broadcaster_id", broadcasterId)
+            tags?.let {
+                contentType(ContentType.Application.Json)
+                body = ReplaceTagsRequest(tags)
+            }
+        }
 
     private suspend fun getStreamMarkersByUserOrVideo(idKey: String, id: Long, first: Int) =
         UserStreamMarkersResponse(
