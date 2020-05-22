@@ -1,6 +1,7 @@
 package helix.streams.model
 
 
+import helix.http.model.AbstractResource
 import helix.util.InstantSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,9 +10,9 @@ import java.time.Instant
 @Serializable
 data class Stream(
     @SerialName("game_id")
-    val gameId: String,
+    val gameId: Long,
     @SerialName("id")
-    val id: String,
+    val id: Long,
     @SerialName("language")
     val language: String,
     @SerialName("started_at")
@@ -26,9 +27,9 @@ data class Stream(
     @SerialName("type")
     val type: String,
     @SerialName("user_id")
-    val userId: String,
+    val userId: Long,
     @SerialName("user_name")
     val userName: String,
     @SerialName("viewer_count")
     val viewerCount: Int
-)
+) : AbstractResource()
