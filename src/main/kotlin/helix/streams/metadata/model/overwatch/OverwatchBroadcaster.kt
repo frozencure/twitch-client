@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class OverwatchBroadcaster(
     @SerialName("hero")
-    val hero: OverwatchHero
+    val hero: OverwatchHero? = null
 )

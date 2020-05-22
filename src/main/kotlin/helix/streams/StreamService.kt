@@ -12,6 +12,8 @@ import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 
 class StreamService : ResourceService {
 
@@ -40,6 +42,7 @@ class StreamService : ResourceService {
     suspend fun createStreamMarker(userId: Long, description: String? = null) =
         StreamMarkerHelixResponse(
             httpClient.post("$BASE_URL/markers") {
+                contentType(ContentType.Application.Json)
                 body = StreamMarkerRequest(userId, description)
             }
         )

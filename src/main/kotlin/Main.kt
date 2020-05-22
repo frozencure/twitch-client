@@ -2,8 +2,10 @@ import helix.auth.AuthService
 import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
 import helix.clips.ClipService
+import helix.games.GameService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
+import helix.streams.StreamService
 import helix.users.UserService
 import io.ktor.client.engine.apache.ApacheEngineConfig
 import kotlinx.coroutines.runBlocking
@@ -25,18 +27,15 @@ fun main() {
             )
         )
     )
-    val clipService = ClipService(apiSettings, ApacheEngineConfig())
+    val streamsService = StreamService(apiSettings, ApacheEngineConfig())
     val userService = UserService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val clips =
-            clipService.getClipsByBroadcaster(
-                71092938,
-                startedAt = Instant.now().minus(1, ChronoUnit.DAYS),
-                endedAt = Instant.now().minus(1, ChronoUnit.DAYS).plusSeconds(3600)
-            )
-        println(clips.data)
-//        val user = userService.getUser("xqcow")
-//        println(user.resource)
+        val user = userService.getUser("frozencure").resource
+        user?.let {
+            val streams =
+                streamsService.createStreamMarker(user.id)
+            println(streams.resource)
+        }
     }
 
 }

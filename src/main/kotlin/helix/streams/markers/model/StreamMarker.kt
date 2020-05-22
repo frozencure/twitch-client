@@ -10,12 +10,14 @@ import java.time.Instant
 @Serializable
 data class StreamMarker(
     @SerialName("id")
-    val id: Long,
+    val id: String,
     @SerialName("created_at")
     @Serializable(with = InstantSerializer::class)
     val createdAt: Instant,
     @SerialName("description")
     val description: String,
     @SerialName("position_seconds")
-    val positionSeconds: Long
+    val positionSeconds: Long,
+    @SerialName("URL")
+    val url: String? = null
 ) : AbstractResource()

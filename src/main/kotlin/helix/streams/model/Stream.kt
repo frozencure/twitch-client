@@ -10,7 +10,7 @@ import java.time.Instant
 @Serializable
 data class Stream(
     @SerialName("game_id")
-    val gameId: Long,
+    val gameId: String,
     @SerialName("id")
     val id: Long,
     @SerialName("language")

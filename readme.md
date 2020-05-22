@@ -157,10 +157,10 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * GET moderators :x:
     * GET moderator events :x:
 * Streams
-    * POST create stream marker :x:
-    * GET streams :x:
-    * GET stream markers :x:
-    * GET stream metadata :x:
+    * POST create stream marker :heavy_check_mark:
+    * GET streams :heavy_check_mark:
+    * GET stream markers :heavy_check_mark:
+    * GET stream metadata :heavy_check_mark:
 * Subscriptions
     * GET broadcaster subscriptions :heavy_check_mark:
 * Stream tags
