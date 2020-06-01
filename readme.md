@@ -120,7 +120,9 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 ```
 
 
-## 2. Currently Supported Endpoints
+## 2. Currently supported features
+
+### 2.1 Endpoints
 
 * Users
     * GET users :heavy_check_mark:
@@ -167,133 +169,31 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * GET all stream tags :heavy_check_mark:
     * GET stream tags :heavy_check_mark:
     * PUT replace stream tags :heavy_check_mark:
+    
+### 2.2 Webhooks
+* Subscribe To/Unsubscribe From Events :x:
+* Topic: User Follows :x:
+* Topic: Stream Changed :x:
+* Topic: User Changed :x:
+* Topic: Topic: Extension Transaction Created :x:
+* Topic: Moderator Change Events :x:
+* Topic: Channel Ban Change Events :x:
+* Topic: Topic: Subscription Events :x:
 
-
-
-
-### 2.1 Class diagram for resource services
-
-```plantuml
-@startuml
-interface ApiSettings {
-    Map<String, Any?> credentials
-}
-
-class OauthApiCredentials {
-    String authToken
-}
-
-class DefaultApiCredentials {
-    String clientId
-}
-
-abstract class ResourceService {
-    settings : ApiSettings
-    engineConfig : HttpClientEngineConfig
-}
-
-class HelixResponse {
-    data : Collection<AbstractResource>
-    pagination : Pagination?
-}
-
-class Pagination {
-    cursor : String
-}
-
-abstract class AbstractResource
-
-class UserService {
-    getUser(id : Long) : User?
-}
-
-class User
-
-ResourceService *- ApiSettings : has
-
-ResourceService <|-- UserService : implements
-
-UserService o-- User : is handled
-
-AbstractResource <|-- User : implements
-
-ResourceService o-- HelixResponse
-
-ApiSettings o-- OauthApiCredentials
-
-ApiSettings o-- DefaultApiCredentials
-
-HelixResponse o-- AbstractResource
-HelixResponse o-- Pagination
-@enduml
-```
-
-### 2.3 Authentication service class diagram
-
-```plantuml
-@startuml
-
-class AuthService {
-    autherizeAppForUser(OauthAuthorizeRequestModel model) : HttpResponse
-    revokeToken(OauthRevokeRequestModel model) : HttpResponse
-    validateUser(String token) : TokenValidation
-
-}
-
-class TokenValidation {
-    clientId : String
-    userLogin : String
-    scopes : List<AuthScope>
-    userId : String
-    expirationTime : long
-}
-
-class OauthAutherizeRequestModel {
-    clientId : String
-    redirectUri : String
-    responseType : String
-    scope : List<AuthScope>
-    forceVerify : Boolean?
-    state : String?
-}
-
-class OauthRevokeRequestModel {
-    clientId : String
-    authToken : String
-}
-
-enum AuthScope {
-    ANALYTICS_READ_EXTENSIONS
-    ANALYTICS_READ_GAMES
-    BITS_READ
-    CHANNEL_READ_SUBSCRIPTIONS
-    EDIT_CLIPS
-    USER_EDIT
-    USER_EDIT_BROADCAST
-    USER_READ_BROADCAST
-    USER_READ_EMAIL
-}
-
-AuthService o-- TokenValidation
-AuthService o-- OauthAutherizeRequestModel
-AuthService o-- OauthRevokeRequestModel
-
-OauthAutherizeRequestModel o-- AuthScope
-OauthRevokeRequestModel o-- AuthScope
-
-@enduml
-```
+### 2.3 Authentication
+* User access token :heavy_check_mark:
+* App access token :x:
     
 ## 3. Dependencies
 
-### 1. Ktor client
+### 3.1 Ktor client
 
 - Built on top of the *Ktor* library
 - Reasons for choosing *Ktor* over *Spring Boot*:
     - More lightweight, less complexity
     - Customizable, doesn't include all of the extra dependencies that are brought with Spring Boot
 
-### 2. Kotlinx.serializaiton
+### 3.2 Kotlinx.serializaiton
 
 - All JSON operations are done using the *Kotlinx Serialization* library
 - Reasons for choosing *Kotlinx* over other libraries:
