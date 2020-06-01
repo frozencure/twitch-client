@@ -58,7 +58,7 @@ class `Given GET videos with IDs is called` {
 
     @Test
     fun `then videos are returned`() =
-        assert(videosResponse.data.size == 2)
+        assert(videosResponse.resources.size == 2)
 
     @Test
     fun `then request ids are parameters`() =
@@ -79,7 +79,7 @@ class `Given GET videos with Game ID is called` {
 
     @Test
     fun `then videos are returned`() =
-        assert(videosResponse.data.size == 2)
+        assert(videosResponse.resources.size == 2)
 
     @Test
     fun `then request game id is a parameter`() =
@@ -96,7 +96,7 @@ class `Given GET videos with Game ID is called` {
 
         @Test
         fun `then videos are retrieved`() =
-            assert(videosResponse?.data?.size == 2)
+            assert(videosResponse?.resources?.size == 2)
 
         @Test
         fun `then after is a parameter`() =
@@ -116,7 +116,7 @@ class `Given GET videos with User ID is called` {
 
     @Test
     fun `then videos are returned`() =
-        assert(videosResponse.data.size == 2)
+        assert(videosResponse.resources.size == 2)
 
     @Test
     fun `then request game id is a parameter`() =
@@ -133,7 +133,7 @@ class `Given GET videos with User ID is called` {
 
         @Test
         fun `then videos are retrieved`() =
-            assert(videosResponse?.data?.size == 2)
+            assert(videosResponse?.resources?.size == 2)
 
         @Test
         fun `then after is a parameter`() =

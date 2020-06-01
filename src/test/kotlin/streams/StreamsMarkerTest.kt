@@ -54,15 +54,15 @@ class `Given GET stream markers is called` {
 
     @Test
     fun `then user stream markers are retrieved`() =
-        assert(userStreamMarkers.data.size == 1)
+        assert(userStreamMarkers.resources.size == 1)
 
     @Test
     fun `then user video is retrieved`() =
-        assert(userStreamMarkers.data.first().videosMarkers.size == 1)
+        assert(userStreamMarkers.resources.first().videosMarkers.size == 1)
 
     @Test
     fun `then user markers are retrived`() =
-        assert(userStreamMarkers.data.first().videosMarkers.first().markers.size == 2)
+        assert(userStreamMarkers.resources.first().videosMarkers.first().markers.size == 2)
 
     @Test
     fun `then pagination exists`() =
@@ -83,7 +83,7 @@ class `Given GET stream markers is called` {
 
         @Test
         fun `then user stream markers are retrieved`() =
-            assert(userStreamMarkers?.data?.size == 1)
+            assert(userStreamMarkers?.resources?.size == 1)
 
         @Test
         fun `then request has pagination cursor as parameter`() =

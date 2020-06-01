@@ -1,4 +1,4 @@
-package helix.util
+package helix.shared
 
 import kotlinx.serialization.*
 

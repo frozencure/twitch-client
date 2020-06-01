@@ -25,7 +25,7 @@ class `Given GET all stream tags is called` {
 
     @Test
     fun `then multiple stream tags are retrieved`() =
-        assert(streamTagsResponse.data.size == 2)
+        assert(streamTagsResponse.resources.size == 2)
 
 
     @Test
@@ -51,7 +51,7 @@ class `Given GET all stream tags is called` {
 
         @Test
         fun `then multiple stream tags are retrieved`() =
-            assert(streamTagsResponse?.data?.size == 2)
+            assert(streamTagsResponse?.resources?.size == 2)
 
 
         @Test
@@ -73,7 +73,7 @@ class `Given GET stream tags for broadcaster is called` {
 
     @Test
     fun `then multiple stream tags are retrieved`() =
-        assert(streamTagsResponse.data.size == 2)
+        assert(streamTagsResponse.resources.size == 2)
 
 
     @Test
@@ -97,7 +97,7 @@ class `Given GET stream tags for broadcaster is called` {
 
         @Test
         fun `then multiple stream tags are retrieved`() =
-            assert(streamTagsResponse?.data?.size == 2)
+            assert(streamTagsResponse?.resources?.size == 2)
 
 
         @Test

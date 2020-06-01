@@ -2,7 +2,7 @@ package helix.streams.markers.model
 
 
 import helix.http.model.AbstractResource
-import helix.util.InstantSerializer
+import helix.shared.InstantSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.Instant

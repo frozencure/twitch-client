@@ -3,7 +3,7 @@ package helix.videos
 import helix.exceptions.BadRequestException
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
-import helix.videos.model.request.Period
+import helix.shared.model.request.Period
 import helix.videos.model.request.VideoSorting
 import helix.videos.model.request.VideoType
 import io.ktor.client.HttpClient

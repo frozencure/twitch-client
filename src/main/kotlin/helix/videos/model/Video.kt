@@ -2,8 +2,8 @@ package helix.videos.model
 
 
 import helix.http.model.AbstractResource
-import helix.util.InstantSerializer
-import helix.util.NullableStringSerializer
+import helix.shared.InstantSerializer
+import helix.shared.NullableStringSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.Instant

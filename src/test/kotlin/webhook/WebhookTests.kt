@@ -16,7 +16,7 @@ class `Given GET webhook subscriptions is called` {
 
     @Test
     fun `then subscriptions are returned`() =
-        assert(webhooksHelixResponse.data.size == 2)
+        assert(webhooksHelixResponse.resources.size == 2)
 
 
     @Test
@@ -41,7 +41,7 @@ class `Given GET webhook subscriptions is called` {
 
         @Test
         fun `then videos are retrieved`() =
-            assert(webhooksHelixResponse?.data?.size == 2)
+            assert(webhooksHelixResponse?.resources?.size == 2)
 
         @Test
         fun `then after is a parameter`() =

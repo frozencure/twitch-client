@@ -1,8 +1,9 @@
-package helix.util
+package helix.shared
 
 import kotlinx.serialization.*
 import java.time.Instant
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 @Serializer(forClass = Instant::class)
 object InstantSerializer : KSerializer<Instant> {

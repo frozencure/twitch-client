@@ -2,7 +2,7 @@ package helix.users.model
 
 
 import helix.http.model.AbstractResource
-import helix.util.NullableStringSerializer
+import helix.shared.NullableStringSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

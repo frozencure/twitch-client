@@ -7,7 +7,6 @@ import helix.users.UserHelixResponse
 import helix.users.UserService
 import helix.users.UsersHelixResponse
 import io.ktor.client.statement.request
-import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.UnstableDefault
 import org.junit.Test
@@ -115,7 +114,7 @@ class UserTests {
 
         @Test
         fun `then users are returned`() =
-            assert(usersResponse.data.size == 2)
+            assert(usersResponse.resources.size == 2)
 
     }
 
@@ -138,7 +137,7 @@ class UserTests {
             }
 
             @Test
-            fun `then users are returned`() = assert(usersResponse!!.data.isNotEmpty())
+            fun `then users are returned`() = assert(usersResponse!!.resources.isNotEmpty())
 
             @Test
             fun `then request has cursor as parameter`() =
@@ -165,7 +164,7 @@ class UserTests {
 
         @Test
         fun `then users are returned`() =
-            assert(usersResponse.data.size == 2)
+            assert(usersResponse.resources.size == 2)
 
     }
 
@@ -185,7 +184,7 @@ class UserTests {
         }
 
         @Test
-        fun `then follows are returned`() = assert(followsResponse.data.isNotEmpty())
+        fun `then follows are returned`() = assert(followsResponse.resources.isNotEmpty())
 
         @Test
         fun `then response has pagination`() = assert(followsResponse.pagination != null)
@@ -211,7 +210,7 @@ class UserTests {
         }
 
         @Test
-        fun `then follows are returned`() = assert(followsResponse.data.isNotEmpty())
+        fun `then follows are returned`() = assert(followsResponse.resources.isNotEmpty())
 
         @Test
         fun `then response has pagination`() = assert(followsResponse.pagination != null)
@@ -259,7 +258,7 @@ class UserTests {
         }
 
         @Test
-        fun `then extensions are returned`() = assert(extensionsResponse.data.isNotEmpty())
+        fun `then extensions are returned`() = assert(extensionsResponse.resources.isNotEmpty())
 
         @Test
         fun `then request has no parameters`() = assert(

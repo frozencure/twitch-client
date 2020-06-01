@@ -49,7 +49,7 @@ class `Given GET clips with ids is called` {
 
     @Test
     fun `then clips are returned`() =
-        assert(clipsResponse.data.size == 2)
+        assert(clipsResponse.resources.size == 2)
 }
 
 
@@ -75,7 +75,7 @@ class `Given GET clips with broadcaster ID is called` {
 
     @Test
     fun `then clips are returned`() =
-        assert(clipsResponse.data.size == 2)
+        assert(clipsResponse.resources.size == 2)
 
     @Test
     fun `then pagination exists`() =
@@ -95,7 +95,7 @@ class `Given GET clips with broadcaster ID is called` {
 
         @Test
         fun `then clips are returned`() =
-            assert(clipsResponse?.data?.size == 2)
+            assert(clipsResponse?.resources?.size == 2)
     }
 }
 
@@ -121,7 +121,7 @@ class `Given GET clips with game ID is called` {
 
     @Test
     fun `then clips are returned`() =
-        assert(clipsResponse.data.size == 2)
+        assert(clipsResponse.resources.size == 2)
 
     @Test
     fun `then pagination exists`() =
@@ -141,7 +141,7 @@ class `Given GET clips with game ID is called` {
 
         @Test
         fun `then clips are returned`() =
-            assert(clipsResponse?.data?.size == 2)
+            assert(clipsResponse?.resources?.size == 2)
     }
 
 }

@@ -7,5 +7,5 @@ abstract class SingleHelixResponse<T : AbstractResource>(httpResponse: HttpRespo
     HelixResponse<T>(httpResponse) {
 
     val resource: T?
-        get() = helixDTO.data.firstOrNull()
+        get() = helixDTO.resources.firstOrNull()
 }

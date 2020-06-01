@@ -16,21 +16,21 @@ class `Given GET streams metadata is called and a Hearthstone stream is retrieve
 
     @Test
     fun `then a stream metadata object is retrieved`() =
-        assert(streamMarkerResponse.data.size == 1)
+        assert(streamMarkerResponse.resources.size == 1)
 
 
     @Test
     fun `then retrieved stream has hearthstone metadata`() =
-        assert(streamMarkerResponse.data.first().hearthstoneMetadata != null)
+        assert(streamMarkerResponse.resources.first().hearthstoneMetadata != null)
 
 
     @Test
     fun `then retrieved stream has metadata for broadcaster hero`() =
-        assert(streamMarkerResponse.data.first().hearthstoneMetadata?.broadcaster?.hero != null)
+        assert(streamMarkerResponse.resources.first().hearthstoneMetadata?.broadcaster?.hero != null)
 
     @Test
     fun `then retrieved stream metadata for opponent hero`() =
-        assert(streamMarkerResponse.data.first().hearthstoneMetadata?.opponent?.hero != null)
+        assert(streamMarkerResponse.resources.first().hearthstoneMetadata?.opponent?.hero != null)
 
 }
 
@@ -44,17 +44,17 @@ class `Given GET streams metadata is called and an Overwatch stream is retrieved
 
     @Test
     fun `then a stream metadata object is retrieved`() =
-        assert(streamMarkerResponse.data.size == 1)
+        assert(streamMarkerResponse.resources.size == 1)
 
 
     @Test
     fun `then retrieved stream has Overwatch metadata`() =
-        assert(streamMarkerResponse.data.first().overwatchMetadata != null)
+        assert(streamMarkerResponse.resources.first().overwatchMetadata != null)
 
 
     @Test
     fun `then retrieved stream has metadata for broadcaster hero`() =
-        assert(streamMarkerResponse.data.first().overwatchMetadata?.broadcaster?.hero != null)
+        assert(streamMarkerResponse.resources.first().overwatchMetadata?.broadcaster?.hero != null)
 
 }
 
@@ -68,21 +68,21 @@ class `Given GET streams metadata is called and a stream without metadata is ret
 
     @Test
     fun `then a stream metadata object is retrieved`() =
-        assert(streamMarkerResponse.data.size == 1)
+        assert(streamMarkerResponse.resources.size == 1)
 
 
     @Test
     fun `then retrieved stream has no Overwatch metadata`() =
-        assert(streamMarkerResponse.data.first().overwatchMetadata == null)
+        assert(streamMarkerResponse.resources.first().overwatchMetadata == null)
 
 
     @Test
     fun `then retrieved stream has no Hearthstone metadata`() =
-        assert(streamMarkerResponse.data.first().hearthstoneMetadata == null)
+        assert(streamMarkerResponse.resources.first().hearthstoneMetadata == null)
 
     @Test
     fun `then retrieved stream has no game ID`() =
-        assert(streamMarkerResponse.data.first().gameId == null)
+        assert(streamMarkerResponse.resources.first().gameId == null)
 }
 
 class `Given GET streams metadata is called and multiple streams are retrieved` {
@@ -97,7 +97,7 @@ class `Given GET streams metadata is called and multiple streams are retrieved` 
 
     @Test
     fun `then a multiple stream metadata objects are retrieved`() =
-        assert(streamMarkerResponse.data.size == 3)
+        assert(streamMarkerResponse.resources.size == 3)
 
 
     @Test
@@ -119,7 +119,7 @@ class `Given GET streams metadata is called and multiple streams are retrieved` 
 
         @Test
         fun `then a multiple stream metadata objects are retrieved`() =
-            assert(streamMarkerResponse?.data?.size == 3)
+            assert(streamMarkerResponse?.resources?.size == 3)
 
         @Test
         fun `then pagination cursor is a parameter`() =

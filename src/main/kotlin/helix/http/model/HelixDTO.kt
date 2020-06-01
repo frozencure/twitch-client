@@ -5,8 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class HelixDTO<T : AbstractResource>(
-    val data: Collection<T>,
+    @SerialName("data")
+    val resources: Collection<T>,
+    @SerialName("pagination")
     val pagination: Pagination? = null,
     @SerialName("total")
-    val total: Long? = null
+    val total: Long? = null,
+    @SerialName("date_range")
+    val dateRange: DateRange? = null
 )

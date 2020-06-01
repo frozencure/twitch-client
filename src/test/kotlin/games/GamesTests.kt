@@ -68,7 +68,7 @@ class `Given GET games with ids is called` {
 
     @Test
     fun `then users are returned`() =
-        assert(gamesResponse.data.size == 2)
+        assert(gamesResponse.resources.size == 2)
 }
 
 class `Given GET games with names is called` {
@@ -91,7 +91,7 @@ class `Given GET games with names is called` {
 
     @Test
     fun `then users are returned`() =
-        assert(gamesResponse.data.size == 2)
+        assert(gamesResponse.resources.size == 2)
 
 }
 
@@ -109,7 +109,7 @@ class `Given GET top games is called` {
 
     @Test
     fun `then games are returned`() =
-        assert(gamesResponse.data.size == 2)
+        assert(gamesResponse.resources.size == 2)
 
     @Test
     fun `then pagination exists`() =
@@ -128,7 +128,7 @@ class `Given GET top games is called` {
 
         @Test
         fun `then games are returned`() =
-            assert(gamesResponse?.data?.size == 2)
+            assert(gamesResponse?.resources?.size == 2)
 
     }
 

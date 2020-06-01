@@ -7,13 +7,16 @@ abstract class CollectionHelixResponse<T : AbstractResource>(
 ) :
     HelixResponse<T>(httpResponse) {
 
-    val data: Collection<T>
-        get() = helixDTO.data
+    val resources: Collection<T>
+        get() = helixDTO.resources
 
     val pagination: Pagination?
         get() = helixDTO.pagination
 
     val total: Long?
         get() = helixDTO.total
+
+    val dateRange: DateRange?
+        get() = helixDTO.dateRange
 
 }

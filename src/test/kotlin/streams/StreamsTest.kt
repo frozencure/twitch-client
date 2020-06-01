@@ -19,7 +19,7 @@ class `Given GET streams is called and multiple streams are retrieved` {
 
     @Test
     fun `then a multiple stream objects are retrieved`() =
-        assert(streamsResponse.data.size == 2)
+        assert(streamsResponse.resources.size == 2)
 
 
     @Test
@@ -41,7 +41,7 @@ class `Given GET streams is called and multiple streams are retrieved` {
 
         @Test
         fun `then a multiple stream metadata objects are retrieved`() =
-            assert(streamsResponse?.data?.size == 2)
+            assert(streamsResponse?.resources?.size == 2)
 
         @Test
         fun `then pagination cursor is a parameter`() =

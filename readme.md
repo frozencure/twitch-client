@@ -143,7 +143,7 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * GET extension analytics :x:
     * GET game analytics :x:
 * Bits
-    * GET bits leaderboard :x:
+    * GET bits leaderboard :heavy_check_mark:
 * Extensions
     * GET extension transactions :x:
 * Entitlements

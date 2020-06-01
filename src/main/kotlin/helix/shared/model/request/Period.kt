@@ -1,4 +1,4 @@
-package helix.videos.model.request
+package helix.shared.model.request
 
 enum class Period(val asString: String) {
 

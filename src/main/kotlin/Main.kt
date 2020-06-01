@@ -1,6 +1,7 @@
 import helix.auth.AuthService
 import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
+import helix.bits.BitsService
 import helix.clips.ClipService
 import helix.games.GameService
 import helix.http.credentials.DefaultApiSettings
@@ -29,13 +30,10 @@ fun main() {
     )
     val streamsService = StreamService(apiSettings, ApacheEngineConfig())
     val userService = UserService(apiSettings, ApacheEngineConfig())
+    val bitsService = BitsService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val user = userService.getUser("xqcow").resource
-        user?.let {
-            val streams =
-                streamsService.updateStreamTags(user.id)
-            println(streams)
-        }
+        val result = bitsService.getBitsLeaderboard().resources
+        print(result)
     }
 
 }
