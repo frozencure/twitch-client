@@ -3,6 +3,7 @@ import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
 import helix.bits.BitsService
 import helix.clips.ClipService
+import helix.extensions.ExtensionService
 import helix.games.GameService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
@@ -28,11 +29,10 @@ fun main() {
             )
         )
     )
-    val streamsService = StreamService(apiSettings, ApacheEngineConfig())
-    val userService = UserService(apiSettings, ApacheEngineConfig())
+    val extensionsService = ExtensionService(apiSettings, ApacheEngineConfig())
     val bitsService = BitsService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val result = bitsService.getBitsLeaderboard().resources
+        val result = extensionsService.getTransactions("tw-client-test-ext").resources
         print(result)
     }
 

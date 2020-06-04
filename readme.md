@@ -147,7 +147,7 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 * Bits
     * GET bits leaderboard :heavy_check_mark:
 * Extensions
-    * GET extension transactions :x:
+    * GET extension transactions :heavy_check_mark:
 * Entitlements
     * POST Create entitlement grants upload URL :x:
     * GET code status :x:
