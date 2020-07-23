@@ -59,5 +59,12 @@ enum class AuthScope(val scope: String) {
      * Read authorized user’s email address.
      */
     @SerialName("user:read:email")
-    USER_READ_EMAIL("user:read:email")
+    USER_READ_EMAIL("user:read:email"),
+
+
+    /**
+     * Access auto-mod messages, banned users, ban events, channel moderators, moderator events.
+     */
+    @SerialName("moderation:read")
+    MODERATION_READ("moderation:read")
 }

@@ -7,6 +7,8 @@ import helix.extensions.ExtensionService
 import helix.games.GameService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
+import helix.moderation.ModerationService
+import helix.moderation.model.AutoModMessage
 import helix.streams.StreamService
 import helix.users.UserService
 import io.ktor.client.engine.apache.ApacheEngineConfig
@@ -24,16 +26,24 @@ fun main() {
     val apiSettings = DefaultApiSettings(
         Properties.store(
             OauthApiCredentials(
-                "kyoim5wj84e8m9ujeqa04b8wlyizkg",
+                "qb1jtzk17wvcd1fwcbkcr4ckiroezm",
                 "nyufzvu4k8h80iq0r7ya4zx1fsas7d"
             )
         )
     )
-    val extensionsService = ExtensionService(apiSettings, ApacheEngineConfig())
-    val bitsService = BitsService(apiSettings, ApacheEngineConfig())
+    val moderationService = ModerationService(apiSettings, ApacheEngineConfig())
+    val userService = UserService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val result = extensionsService.getTransactions("tw-client-test-ext").resources
-        print(result)
+        val currentUser = userService.getUser().resource
+        currentUser?.let {
+            val result = moderationService.checkMessagesWithAutoMod(
+                currentUser.id, listOf(
+                    AutoModMessage("12", "test message", currentUser.id),
+                    AutoModMessage("23", "fuck", currentUser.id)
+                )
+            )
+            print(result.resources)
+        }
     }
 
 }
