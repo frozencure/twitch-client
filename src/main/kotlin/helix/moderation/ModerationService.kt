@@ -58,10 +58,11 @@ class ModerationService : ResourceService {
             }, httpClient
         )
 
-    suspend fun getBanEvents(broadcasterId: Long, userIds: Collection<Long>? = null) =
+    suspend fun getBanEvents(broadcasterId: Long, userIds: Collection<Long>? = null, first: Int = 100) =
         BanEventsScrollableResponse(
             httpClient.get("${BASE_URL}/banned/events") {
                 parameter("broadcaster_id", broadcasterId)
+                parameter("first", first)
                 userIds?.let {
                     if (userIds.size > 100) {
                         throw BadRequestException("A maximum of 100 user IDs can be specified.")
