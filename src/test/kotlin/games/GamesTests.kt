@@ -131,6 +131,54 @@ class `Given GET top games is called` {
             assert(gamesResponse?.resources?.size == 2)
 
     }
+}
+
+class `Given GET games with search query is callled` {
+
+    private val searchQuery = "league of legends battlegrounds"
+
+    private val gamesResponse = runBlocking<ScrollableGamesResponse> {
+        GameService(HttpClientMockBuilder.withJsonContent(GamesTestData.MULTIPLE_GAMES_WITH_PAGINATION))
+            .getGames(searchQuery)
+    }
+
+
+    @Test
+    fun `then request has first as parameter`() =
+        assert(gamesResponse.httpResponse.request.url.parameters["first"] != null)
+
+    @Test
+    fun `then request has query as parameter`() =
+        assert(gamesResponse.httpResponse.request.url.parameters["query"] == searchQuery)
+
+    @Test
+    fun `then games are returned`() =
+        assert(gamesResponse.resources.size == 2)
+
+    @Test
+    fun `then pagination exists`() =
+        assert(gamesResponse.pagination != null)
+
+
+    class `And next page is retrieved` {
+
+        private val searchQuery = "league of legends battlegrounds"
+
+        private val gamesResponse = runBlocking<ScrollableGamesResponse?> {
+            GameService(HttpClientMockBuilder.withJsonContent(GamesTestData.MULTIPLE_GAMES_WITH_PAGINATION))
+                .getGames(searchQuery).nextPage()
+        }
+
+        @Test
+        fun `then request has after as parameter`() =
+            assert(gamesResponse?.httpResponse?.request?.url?.parameters?.get("after") != null)
+
+        @Test
+        fun `then games are returned`() =
+            assert(gamesResponse?.resources?.size == 2)
+
+
+    }
 
 }
 

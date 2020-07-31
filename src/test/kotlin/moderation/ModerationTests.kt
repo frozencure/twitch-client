@@ -84,6 +84,10 @@ class `Given GET banned user with broadcaster and user ids is called` {
         @Test
         fun `then two banned users are returned`() =
             assert(bannedUsersResponse?.resources?.size == 2)
+
+        @Test
+        fun `then request has after as parameter`() =
+            assert(bannedUsersResponse?.httpResponse?.request?.url?.parameters?.get("after") != null)
     }
 }
 
@@ -126,6 +130,13 @@ class `Given GET moderators with broadcaster and user ids is called` {
         @Test
         fun `then two moderators are returned`() =
             assert(moderatorsResponse?.resources?.size == 2)
+
+
+        @Test
+        fun `then request has after as parameter`() =
+            assert(moderatorsResponse?.httpResponse?.request?.url?.parameters?.get("after") != null)
+
+
     }
 }
 
@@ -180,6 +191,10 @@ class `Given GET ban events with broadcaster and user ids is called` {
         @Test
         fun `then three ban events are returned`() =
             assert(banEventsResponse?.resources?.size == 3)
+
+        @Test
+        fun `then request has after as parameter`() =
+            assert(banEventsResponse?.httpResponse?.request?.url?.parameters?.get("after") != null)
     }
 }
 
@@ -229,5 +244,9 @@ class `Given GET moderator events with broadcaster id and user ids is called` {
         @Test
         fun `then three moderator events are returned`() =
             assert(moderatorEventsResponse?.resources?.size == 3)
+
+        @Test
+        fun `then request has after as parameter`() =
+            assert(moderatorEventsResponse?.httpResponse?.request?.url?.parameters?.get("after") != null)
     }
 }

@@ -58,4 +58,11 @@ class GameService : ResourceService {
                 }
         )
     }
+
+    suspend fun getGames(query: String, first: Int = 100): ScrollableGamesResponse = ScrollableGamesResponse(
+        httpClient.get("${ResourceService.BASE_URL}/search/categories") {
+            parameter("query", query)
+            parameter("first", first)
+        }, httpClient
+    )
 }

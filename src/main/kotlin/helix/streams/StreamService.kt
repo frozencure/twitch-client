@@ -103,6 +103,15 @@ class StreamService : ResourceService {
             }
         }
 
+    suspend fun getChannels(query: String, liveOnly: Boolean = false, first: Int = 100) =
+        ChannelsHelixResponse(
+            httpClient.get("${ResourceService.BASE_URL}/search/channels") {
+                parameter("query", query)
+                parameter("live_only", liveOnly)
+                parameter("first", first)
+            }, httpClient
+        )
+
     private suspend fun getStreamMarkersByUserOrVideo(idKey: String, id: Long, first: Int) =
         UserStreamMarkersResponse(
             httpClient.post("$BASE_URL/markers") {
