@@ -1,4 +1,4 @@
-package helix.channel
+package helix.channels
 
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings

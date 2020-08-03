@@ -49,6 +49,12 @@ enum class AuthScope(val scope: String) {
     USER_EDIT_BROADCAST("user:edit:broadcast"),
 
     /**
+     * Add or remove channels from your follower list.
+     */
+    @SerialName("user:edit:follows")
+    USER_EDIT_FOLLOWS("user:edit:follows"),
+
+    /**
      * View your broadcasting configuration,
      * including extension configurations.
      */

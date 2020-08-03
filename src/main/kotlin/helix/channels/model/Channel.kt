@@ -1,4 +1,4 @@
-package helix.channel.model
+package helix.channels.model
 
 
 import helix.http.model.AbstractResource

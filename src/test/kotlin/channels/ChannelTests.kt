@@ -1,7 +1,7 @@
 package channels
 
-import helix.channel.ChannelService
-import helix.channel.ChannelsHelixResponse
+import helix.channels.ChannelService
+import helix.channels.ChannelsHelixResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

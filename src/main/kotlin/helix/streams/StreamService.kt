@@ -1,6 +1,5 @@
 package helix.streams
 
-import helix.channel.ChannelsHelixResponse
 import helix.exceptions.BadRequestException
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings

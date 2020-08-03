@@ -6,9 +6,15 @@ import helix.users.FollowsHelixResponse
 import helix.users.UserHelixResponse
 import helix.users.UserService
 import helix.users.UsersHelixResponse
+import helix.users.model.ChangeFollowRequest
+import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
+import io.ktor.content.TextContent
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
 import org.junit.Test
 import util.HttpClientMockBuilder
 
@@ -265,9 +271,53 @@ class UserTests {
             extensionsResponse.httpResponse.request.url.toString()
                     == UserService.BASE_URL + "/extensions/list"
         )
+    }
 
+    class `Given POST create follow is called` {
+
+        private val fromId = 1L
+
+        private val toId = 2L
+
+        private val createFollowResponse = runBlocking<HttpResponse> {
+            UserService(HttpClientMockBuilder.withStatusResponse(HttpStatusCode.NoContent)).createFollow(fromId, toId)
+        }
+
+        @ImplicitReflectionSerializer
+        @Test
+        fun `then request has from id and to id as body`() = assert(
+            (createFollowResponse.request.content as TextContent).text == Json.toJson(
+                ChangeFollowRequest(
+                    fromId,
+                    toId,
+                    false
+                )
+            ).toString()
+        )
 
     }
 
 
+    class `Given DELETE follow is called` {
+
+        private val fromId = 1L
+
+        private val toId = 2L
+
+        private val createFollowResponse = runBlocking<HttpResponse> {
+            UserService(HttpClientMockBuilder.withStatusResponse(HttpStatusCode.NoContent)).deleteFollow(fromId, toId)
+        }
+
+        @ImplicitReflectionSerializer
+        @Test
+        fun `then request has from id and to id as body`() = assert(
+            (createFollowResponse.request.content as TextContent).text == Json.toJson(
+                ChangeFollowRequest(
+                    fromId,
+                    toId
+                )
+            ).toString()
+        )
+
+    }
 }
