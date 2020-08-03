@@ -127,6 +127,8 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 * Users
     * GET users :heavy_check_mark:
     * GET followers :heavy_check_mark:
+    * POST create user follow :x:
+    * DELETE delete user follow :x:
     * PUT update user :heavy_check_mark:
     * GET user extensions :heavy_check_mark:
     * GET user active extensions :x:
@@ -141,11 +143,13 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 * Games
     * GET games :heavy_check_mark:
     * GET top games :heavy_check_mark:
+    * GET search categories :heavy_check_mark:
 * Analytics
     * GET extension analytics :x:
     * GET game analytics :x:
 * Bits
     * GET bits leaderboard :heavy_check_mark:
+    * GET cheermotes :x:
 * Extensions
     * GET extension transactions :heavy_check_mark:
 * Entitlements
@@ -153,22 +157,27 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * GET code status :x:
     * POST redeem code :x:
 * Moderation
-    * POST check auto-mod status :x:
-    * GET banned events :x:
-    * GET banned users :x:
-    * GET moderators :x:
-    * GET moderator events :x:
+    * POST check auto-mod status :heavy_check_mark:
+    * GET banned events :heavy_check_mark:
+    * GET banned users :heavy_check_mark:
+    * GET moderators :heavy_check_mark:
+    * GET moderator events :heavy_check_mark:
 * Streams
     * POST create stream marker :heavy_check_mark:
     * GET streams :heavy_check_mark:
     * GET stream markers :heavy_check_mark:
     * GET stream metadata :heavy_check_mark:
+    * GET stream key :x:
 * Subscriptions
     * GET broadcaster subscriptions :heavy_check_mark:
 * Stream tags
     * GET all stream tags :heavy_check_mark:
     * GET stream tags :heavy_check_mark:
     * PUT replace stream tags :heavy_check_mark:
+* Channels
+    * GET search channels :heavy_check_mark:
+    * POST start commercial :x:
+    * GET hype train events :x:
     
 ### 2.2 Webhooks
 * Subscribe To/Unsubscribe From Events :x:
