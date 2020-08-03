@@ -1,9 +1,8 @@
-package helix.streams
+package helix.channel
 
 import helix.http.model.HelixDTO
 import helix.http.model.ScrollableHelixResponse
-import helix.streams.model.Channel
-import helix.streams.model.Stream
+import helix.channel.model.Channel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.statement.HttpResponse

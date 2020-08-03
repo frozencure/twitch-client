@@ -1,4 +1,4 @@
-package helix.streams.model
+package helix.channel.model
 
 
 import helix.http.model.AbstractResource
@@ -19,8 +19,8 @@ data class Channel(
     val id: Long,
     @SerialName("is_live")
     val isLive: Boolean,
-    @SerialName("tags_ids")
-    val tagsIds: List<String>,
+    @SerialName("tag_ids")
+    val tagsIds: Collection<String>,
     @SerialName("thumbnail_url")
     val thumbnailUrl: String,
     @SerialName("title")

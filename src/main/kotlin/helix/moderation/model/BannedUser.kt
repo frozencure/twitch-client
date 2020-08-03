@@ -3,6 +3,7 @@ package helix.moderation.model
 
 import helix.http.model.AbstractResource
 import helix.shared.InstantSerializer
+import helix.shared.NullableInstantSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.Instant
@@ -14,6 +15,6 @@ data class BannedUser(
     @SerialName("user_name")
     val userName: String,
     @SerialName("expires_at")
-    @Serializable(with = InstantSerializer::class)
-    val expiresAt: Instant
+    @Serializable(with = NullableInstantSerializer::class)
+    val expiresAt: Instant? = null
 ) : AbstractResource()

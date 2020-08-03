@@ -2,6 +2,7 @@ import helix.auth.AuthService
 import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
 import helix.bits.BitsService
+import helix.channel.ChannelService
 import helix.clips.ClipService
 import helix.extensions.ExtensionService
 import helix.games.GameService
@@ -33,17 +34,14 @@ fun main() {
     )
     val moderationService = ModerationService(apiSettings, ApacheEngineConfig())
     val userService = UserService(apiSettings, ApacheEngineConfig())
+    val gameService = ChannelService(apiSettings, ApacheEngineConfig())
     runBlocking {
-        val currentUser = userService.getUser().resource
-        currentUser?.let {
-            val result = moderationService.checkMessagesWithAutoMod(
-                currentUser.id, listOf(
-                    AutoModMessage("12", "test message", currentUser.id),
-                    AutoModMessage("23", "fuck", currentUser.id)
-                )
-            )
-            print(result.resources)
-        }
+//        val currentUser = userService.getUser().resource
+//        currentUser?.let {
+//            val result = moderationService.getModerators(currentUser.id)
+//            print(result.resources)
+//        }
+        print(gameService.getChannels("xqc").resources)
     }
 
 }

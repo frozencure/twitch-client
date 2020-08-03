@@ -8,7 +8,7 @@ abstract class CollectionHelixResponse<T : AbstractResource>(
     HelixResponse<T>(httpResponse) {
 
     val resources: Collection<T>
-        get() = helixDTO.resources
+        get() = helixDTO.resources.orEmpty()
 
     val pagination: Pagination?
         get() = helixDTO.pagination

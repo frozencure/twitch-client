@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HelixDTO<T : AbstractResource>(
     @SerialName("data")
-    val resources: Collection<T>,
+    val resources: Collection<T>? = emptyList(),
     @SerialName("pagination")
     val pagination: Pagination? = null,
     @SerialName("total")
