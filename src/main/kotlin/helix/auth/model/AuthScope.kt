@@ -72,5 +72,17 @@ enum class AuthScope(val scope: String) {
      * Access auto-mod messages, banned users, ban events, channel moderators, moderator events.
      */
     @SerialName("moderation:read")
-    MODERATION_READ("moderation:read")
+    MODERATION_READ("moderation:read"),
+
+    /**
+     * Access hype train events that happened in the past on the given channel.
+     */
+    @SerialName("channel:read:hype_train")
+    CHANNEL_READ_HYPE_TRAIN("channel:read:hype_train"),
+
+    /**
+     * Start a commercial programmatically on the given channel.
+     */
+    @SerialName("channel:edit:commercial")
+    CHANNEL_EDIT_COMMERCIAL("channel:edit:commercial")
 }

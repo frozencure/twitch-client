@@ -127,8 +127,8 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
 * Users
     * GET users :heavy_check_mark:
     * GET followers :heavy_check_mark:
-    * POST create user follow :x:
-    * DELETE delete user follow :x:
+    * POST create user follow :heavy_check_mark:
+    * DELETE delete user follow :heavy_check_mark:
     * PUT update user :heavy_check_mark:
     * GET user extensions :heavy_check_mark:
     * GET user active extensions :x:
@@ -176,8 +176,8 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * PUT replace stream tags :heavy_check_mark:
 * Channels
     * GET search channels :heavy_check_mark:
-    * POST start commercial :x:
-    * GET hype train events :x:
+    * POST start commercial :heavy_check_mark:
+    * GET hype train events :heavy_check_mark:
     
 ### 2.2 Webhooks
 * Subscribe To/Unsubscribe From Events :x:
