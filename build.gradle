@@ -27,7 +27,7 @@ dependencies {
 }
 
 dokka {
-    outputFormat = 'html'
+    outputFormat = 'jekyll'
     outputDirectory = 'docs/'
 }
 

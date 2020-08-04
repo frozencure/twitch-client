@@ -1,0 +1,22 @@
+---
+title: HypeTrain - twitch-client
+---
+
+[twitch-client](../../index.html) / [helix.channels.model.hypetrain](../index.html) / [HypeTrain](./index.html)
+
+# HypeTrain
+
+`data class HypeTrain : `[`AbstractResource`](../../helix.http.model/-abstract-resource/index.html)
+
+### Constructors
+
+| [&lt;init&gt;](-init-.html) | `HypeTrain(id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, eventType: `[`HypeTrainType`](../-hype-train-type/index.html)`, eventTimestamp: Instant, version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, eventData: `[`HypeTrainData`](../-hype-train-data/index.html)`)` |
+
+### Properties
+
+| [eventData](event-data.html) | `val eventData: `[`HypeTrainData`](../-hype-train-data/index.html) |
+| [eventTimestamp](event-timestamp.html) | `val eventTimestamp: Instant` |
+| [eventType](event-type.html) | `val eventType: `[`HypeTrainType`](../-hype-train-type/index.html) |
+| [id](id.html) | `val id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [version](version.html) | `val version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+
