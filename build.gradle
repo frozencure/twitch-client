@@ -37,3 +37,13 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+task copyDocs(type: Copy) {
+    from 'docs/twich-client/'
+    into 'docs/'
+    include '**'
+}
+
+task removeDocs(type: Delete) {
+    delete 'docs/twitch-client'
+}
