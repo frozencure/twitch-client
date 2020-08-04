@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ClipService - twitch-client</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">twitch-client</a>&nbsp;/&nbsp;<a href="../index.html">helix.clips</a>&nbsp;/&nbsp;<a href="./index.html">ClipService</a><br/>
+<br/>
+<h1>ClipService</h1>
+<code><span class="keyword">class </span><span class="identifier">ClipService</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../helix.http/-resource-service/index.html"><span class="identifier">ResourceService</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">ClipService</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$<init>(helix.http.credentials.ApiSettings, io.ktor.client.engine.HttpClientEngineConfig)/apiSettings">apiSettings</span><span class="symbol">:</span>&nbsp;<a href="../../helix.http.credentials/-api-settings/index.html"><span class="identifier">ApiSettings</span></a><span class="symbol">, </span><span class="identifier" id="helix.clips.ClipService$<init>(helix.http.credentials.ApiSettings, io.ktor.client.engine.HttpClientEngineConfig)/httpClientEngineConfig">httpClientEngineConfig</span><span class="symbol">:</span>&nbsp;<span class="identifier">HttpClientEngineConfig</span><span class="symbol">)</span></code><br/>
+<code><span class="identifier">ClipService</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$<init>(io.ktor.client.HttpClient)/httpClient">httpClient</span><span class="symbol">:</span>&nbsp;<span class="identifier">HttpClient</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="create-clip.html">createClip</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">createClip</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$createClip(kotlin.Long, kotlin.Boolean)/broadcasterId">broadcasterId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="helix.clips.ClipService$createClip(kotlin.Long, kotlin.Boolean)/hasDelay">hasDelay</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="../-clip-creation-helix-response/index.html"><span class="identifier">ClipCreationHelixResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-clip.html">getClip</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getClip</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$getClip(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-clip-helix-response/index.html"><span class="identifier">ClipHelixResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-clips.html">getClips</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getClips</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$getClips(kotlin.collections.Collection((kotlin.String)))/ids">ids</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-clips-helix-response/index.html"><span class="identifier">ClipsHelixResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-clips-by-broadcaster.html">getClipsByBroadcaster</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getClipsByBroadcaster</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$getClipsByBroadcaster(kotlin.Long, java.time.Instant, java.time.Instant)/broadcasterId">broadcasterId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="helix.clips.ClipService$getClipsByBroadcaster(kotlin.Long, java.time.Instant, java.time.Instant)/startedAt">startedAt</span><span class="symbol">:</span>&nbsp;<span class="identifier">Instant</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="helix.clips.ClipService$getClipsByBroadcaster(kotlin.Long, java.time.Instant, java.time.Instant)/endedAt">endedAt</span><span class="symbol">:</span>&nbsp;<span class="identifier">Instant</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="../-scrollable-clips-response/index.html"><span class="identifier">ScrollableClipsResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-clips-by-game.html">getClipsByGame</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getClipsByGame</span><span class="symbol">(</span><span class="identifier" id="helix.clips.ClipService$getClipsByGame(kotlin.Long, java.time.Instant, java.time.Instant)/gameId">gameId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="helix.clips.ClipService$getClipsByGame(kotlin.Long, java.time.Instant, java.time.Instant)/startedAt">startedAt</span><span class="symbol">:</span>&nbsp;<span class="identifier">Instant</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="helix.clips.ClipService$getClipsByGame(kotlin.Long, java.time.Instant, java.time.Instant)/endedAt">endedAt</span><span class="symbol">:</span>&nbsp;<span class="identifier">Instant</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="../-scrollable-clips-response/index.html"><span class="identifier">ScrollableClipsResponse</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-b-a-s-e_-u-r-l.html">BASE_URL</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">BASE_URL</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

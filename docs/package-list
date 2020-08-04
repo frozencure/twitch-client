@@ -1,4 +1,4 @@
-$dokka.format:jekyll
+$dokka.format:html
 $dokka.linkExtension:html
 $dokka.location:helix.http.extensions$headersOfSerializableObject(io.ktor.client.request.HttpRequestBuilder, kotlin.collections.Map((kotlin.String, kotlin.Any)))helix.http.extensions/io.ktor.client.request.-http-request-builder/headers-of-serializable-object.html
 $dokka.location:helix.http.extensions$parametersOfSerializableObject(io.ktor.client.request.HttpRequestBuilder, helix.http.extensions.parametersOfSerializableObject.T)helix.http.extensions/io.ktor.client.request.-http-request-builder/parameters-of-serializable-object.html

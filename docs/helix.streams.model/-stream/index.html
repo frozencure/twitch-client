@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Stream - twitch-client</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">twitch-client</a>&nbsp;/&nbsp;<a href="../index.html">helix.streams.model</a>&nbsp;/&nbsp;<a href="./index.html">Stream</a><br/>
+<br/>
+<h1>Stream</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Stream</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../helix.http.model/-abstract-resource/index.html"><span class="identifier">AbstractResource</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">Stream</span><span class="symbol">(</span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/gameId">gameId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/language">language</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/startedAt">startedAt</span><span class="symbol">:</span>&nbsp;<span class="identifier">Instant</span><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/tagIds">tagIds</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/thumbnailUrl">thumbnailUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/userId">userId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/userName">userName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="helix.streams.model.Stream$<init>(kotlin.String, kotlin.Long, kotlin.String, java.time.Instant, kotlin.collections.List((kotlin.String)), kotlin.String, kotlin.String, kotlin.String, kotlin.Long, kotlin.String, kotlin.Int)/viewerCount">viewerCount</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="game-id.html">gameId</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">gameId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="id.html">id</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="language.html">language</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">language</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="started-at.html">startedAt</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">startedAt</span><span class="symbol">: </span><span class="identifier">Instant</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="tag-ids.html">tagIds</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">tagIds</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="thumbnail-url.html">thumbnailUrl</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">thumbnailUrl</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="title.html">title</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">title</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="type.html">type</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="user-id.html">userId</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">userId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="user-name.html">userName</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">userName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="viewer-count.html">viewerCount</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">viewerCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

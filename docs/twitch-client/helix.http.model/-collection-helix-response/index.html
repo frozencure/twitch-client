@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CollectionHelixResponse - twitch-client</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">twitch-client</a>&nbsp;/&nbsp;<a href="../index.html">helix.http.model</a>&nbsp;/&nbsp;<a href="./index.html">CollectionHelixResponse</a><br/>
+<br/>
+<h1>CollectionHelixResponse</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CollectionHelixResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-resource/index.html"><span class="identifier">AbstractResource</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-helix-response/index.html"><span class="identifier">HelixResponse</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">CollectionHelixResponse</span><span class="symbol">(</span><span class="identifier" id="helix.http.model.CollectionHelixResponse$<init>(io.ktor.client.statement.HttpResponse)/httpResponse">httpResponse</span><span class="symbol">:</span>&nbsp;<span class="identifier">HttpResponse</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="date-range.html">dateRange</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">dateRange</span><span class="symbol">: </span><a href="../-date-range/index.html"><span class="identifier">DateRange</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="pagination.html">pagination</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">pagination</span><span class="symbol">: </span><a href="../-pagination/index.html"><span class="identifier">Pagination</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="resources.html">resources</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="total.html">total</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">total</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../../helix.moderation/-auto-mod-helix-response/index.html">AutoModHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AutoModHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.moderation.model/-auto-mod-message-status/index.html"><span class="identifier">AutoModMessageStatus</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.bits/-bits-leaderboard-response/index.html">BitsLeaderboardResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BitsLeaderboardResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.bits.model/-bits-leaderboard-entry/index.html"><span class="identifier">BitsLeaderboardEntry</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.clips/-clips-helix-response/index.html">ClipsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ClipsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.clips.model/-clip/index.html"><span class="identifier">Clip</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.extensions/-extensions-helix-response/index.html">ExtensionsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ExtensionsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.extensions.model/-extension/index.html"><span class="identifier">Extension</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.games/-games-helix-response/index.html">GamesHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">GamesHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.games.model/-game/index.html"><span class="identifier">Game</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../-scrollable-helix-response/index.html">ScrollableHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">ScrollableHelixResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-resource/index.html"><span class="identifier">AbstractResource</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.videos/-videos-helix-response/index.html">VideosHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">VideosHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.videos.model/-video/index.html"><span class="identifier">Video</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

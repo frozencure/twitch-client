@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AuthService - twitch-client</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">twitch-client</a>&nbsp;/&nbsp;<a href="../index.html">helix.auth</a>&nbsp;/&nbsp;<a href="./index.html">AuthService</a><br/>
+<br/>
+<h1>AuthService</h1>
+<code><span class="keyword">class </span><span class="identifier">AuthService</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">AuthService</span><span class="symbol">(</span><span class="identifier" id="helix.auth.AuthService$<init>(io.ktor.client.engine.HttpClientEngineConfig)/httpClientConfig">httpClientConfig</span><span class="symbol">:</span>&nbsp;<span class="identifier">HttpClientEngineConfig</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="authorize-app-for-user.html">authorizeAppForUser</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">authorizeAppForUser</span><span class="symbol">(</span><span class="identifier" id="helix.auth.AuthService$authorizeAppForUser(helix.auth.model.request.OauthAuthorizeRequestModel)/requestModel">requestModel</span><span class="symbol">:</span>&nbsp;<a href="../../helix.auth.model.request/-oauth-authorize-request-model/index.html"><span class="identifier">OauthAuthorizeRequestModel</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">HttpResponse</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="revoke-token.html">revokeToken</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">revokeToken</span><span class="symbol">(</span><span class="identifier" id="helix.auth.AuthService$revokeToken(helix.auth.model.request.OauthRevokeRequestModel)/revokeModel">revokeModel</span><span class="symbol">:</span>&nbsp;<a href="../../helix.auth.model.request/-oauth-revoke-request-model/index.html"><span class="identifier">OauthRevokeRequestModel</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">HttpResponse</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="validate-user.html">validateUser</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">validateUser</span><span class="symbol">(</span><span class="identifier" id="helix.auth.AuthService$validateUser(kotlin.String)/token">token</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../helix.auth.model.response/-token-validation/index.html"><span class="identifier">TokenValidation</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

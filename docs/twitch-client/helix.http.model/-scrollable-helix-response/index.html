@@ -1,0 +1,187 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ScrollableHelixResponse - twitch-client</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">twitch-client</a>&nbsp;/&nbsp;<a href="../index.html">helix.http.model</a>&nbsp;/&nbsp;<a href="./index.html">ScrollableHelixResponse</a><br/>
+<br/>
+<h1>ScrollableHelixResponse</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">ScrollableHelixResponse</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-resource/index.html"><span class="identifier">AbstractResource</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-collection-helix-response/index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">ScrollableHelixResponse</span><span class="symbol">(</span><span class="identifier" id="helix.http.model.ScrollableHelixResponse$<init>(io.ktor.client.statement.HttpResponse, io.ktor.client.HttpClient)/httpResponse">httpResponse</span><span class="symbol">:</span>&nbsp;<span class="identifier">HttpResponse</span><span class="symbol">, </span><span class="identifier" id="helix.http.model.ScrollableHelixResponse$<init>(io.ktor.client.statement.HttpResponse, io.ktor.client.HttpClient)/httpClient">httpClient</span><span class="symbol">:</span>&nbsp;<span class="identifier">HttpClient</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="http-client.html">httpClient</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">httpClient</span><span class="symbol">: </span><span class="identifier">HttpClient</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="next-page.html">nextPage</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">nextPage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-collection-helix-response/index.html"><span class="identifier">CollectionHelixResponse</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="next-page-http-response.html">nextPageHttpResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">nextPageHttpResponse</span><span class="symbol">(</span><span class="identifier" id="helix.http.model.ScrollableHelixResponse$nextPageHttpResponse(kotlin.String)/cursorKey">cursorKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">HttpResponse</span><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../../helix.moderation/-ban-events-scrollable-response/index.html">BanEventsScrollableResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BanEventsScrollableResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.moderation.model/-ban-event/index.html"><span class="identifier">BanEvent</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.moderation/-banned-users-scrollable-response/index.html">BannedUsersScrollableResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BannedUsersScrollableResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.moderation.model/-banned-user/index.html"><span class="identifier">BannedUser</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.channels/-channels-helix-response/index.html">ChannelsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ChannelsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.channels.model/-channel/index.html"><span class="identifier">Channel</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.users/-follows-helix-response/index.html">FollowsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FollowsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.users.model/-follow-event/index.html"><span class="identifier">FollowEvent</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.channels/-hype-train-scrollable-response/index.html">HypeTrainScrollableResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">HypeTrainScrollableResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.channels.model.hypetrain/-hype-train/index.html"><span class="identifier">HypeTrain</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.moderation/-moderator-events-scrollable-response/index.html">ModeratorEventsScrollableResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ModeratorEventsScrollableResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.moderation.model/-moderator-event/index.html"><span class="identifier">ModeratorEvent</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.moderation/-moderators-scrollable-helix-response/index.html">ModeratorsScrollableHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ModeratorsScrollableHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.moderation.model/-moderator/index.html"><span class="identifier">Moderator</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.clips/-scrollable-clips-response/index.html">ScrollableClipsResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ScrollableClipsResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.clips.model/-clip/index.html"><span class="identifier">Clip</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.games/-scrollable-games-response/index.html">ScrollableGamesResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ScrollableGamesResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.games.model/-game/index.html"><span class="identifier">Game</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.videos/-scrollable-videos-response/index.html">ScrollableVideosResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ScrollableVideosResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.videos.model/-video/index.html"><span class="identifier">Video</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.streams/-streams-helix-response/index.html">StreamsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StreamsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.streams.model/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.streams.metadata/-streams-metadata-helix-response/index.html">StreamsMetadataHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StreamsMetadataHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.streams.metadata.model/-stream-metadata/index.html"><span class="identifier">StreamMetadata</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.streams.tags/-stream-tags-helix-response/index.html">StreamTagsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StreamTagsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.streams.tags.model/-stream-tag/index.html"><span class="identifier">StreamTag</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.subscriptions/-subscriptions-helix-response/index.html">SubscriptionsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SubscriptionsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.subscriptions.model/-subscription/index.html"><span class="identifier">Subscription</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.extensions/-transactions-helix-response/index.html">TransactionsHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TransactionsHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.extensions.model/-extension-transaction/index.html"><span class="identifier">ExtensionTransaction</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.users/-users-helix-response/index.html">UsersHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UsersHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.users.model/-user/index.html"><span class="identifier">User</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.streams.markers/-user-stream-markers-response/index.html">UserStreamMarkersResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UserStreamMarkersResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.streams.markers.model/-user-stream-markers/index.html"><span class="identifier">UserStreamMarkers</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../../helix.webhook/-webhooks-helix-response/index.html">WebhooksHelixResponse</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">WebhooksHelixResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ScrollableHelixResponse</span></a><span class="symbol">&lt;</span><a href="../../helix.webhook.model/-webhook/index.html"><span class="identifier">Webhook</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
