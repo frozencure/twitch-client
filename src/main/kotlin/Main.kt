@@ -5,6 +5,7 @@ import helix.channels.ChannelService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
 import helix.moderation.ModerationService
+import helix.streams.StreamService
 import helix.users.UserService
 import io.ktor.client.engine.apache.ApacheEngineConfig
 import kotlinx.coroutines.runBlocking
@@ -19,20 +20,19 @@ fun main() {
     val apiSettings = DefaultApiSettings(
         Properties.store(
             OauthApiCredentials(
-                "r86kdnn8k2mgulewhrlnvktq997nev",
+                "7omkmgbiz7ynbx5cwxod8263tysjmu",
                 "nyufzvu4k8h80iq0r7ya4zx1fsas7d"
             )
         )
     )
-    val moderationService = ModerationService(apiSettings, ApacheEngineConfig())
+    val streamService = StreamService(apiSettings, ApacheEngineConfig())
     val userService = UserService(apiSettings, ApacheEngineConfig())
     val channelService = ChannelService(apiSettings, ApacheEngineConfig())
     runBlocking {
         val currentUser = userService.getUser().resource
-        val to = channelService.getChannels("Nmplol").resources.first().id
         currentUser?.let {
-            val result = userService.deleteFollow(currentUser.id, to)
-            print(result)
+            val result = streamService.getStreamKey(currentUser.id)
+            print(result.resource?.streamKey)
         }
     }
 

@@ -103,6 +103,12 @@ class StreamService : ResourceService {
             }
         }
 
+    suspend fun getStreamKey(broadcasterId: Long) = StreamKeyResponse(
+        httpClient.get("$BASE_URL/key") {
+            parameter("broadcaster_id", broadcasterId)
+        }
+    )
+
     private suspend fun getStreamMarkersByUserOrVideo(idKey: String, id: Long, first: Int) =
         UserStreamMarkersResponse(
             httpClient.post("$BASE_URL/markers") {

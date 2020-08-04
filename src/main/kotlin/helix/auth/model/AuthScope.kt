@@ -81,6 +81,12 @@ enum class AuthScope(val scope: String) {
     CHANNEL_READ_HYPE_TRAIN("channel:read:hype_train"),
 
     /**
+     * Access the stream key for the given channel.
+     */
+    @SerialName("channel:read:stream_key")
+    CHANNEL_READ_STREAM_KEY("channel:read:stream_key"),
+
+    /**
      * Start a commercial programmatically on the given channel.
      */
     @SerialName("channel:edit:commercial")

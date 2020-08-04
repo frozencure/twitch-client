@@ -348,4 +348,14 @@ object StreamsTestData {
     }
     """
 
+    const val SINGLE_STREAM_KEY = """
+    {
+        "data": [
+            {
+                "stream_key": "live_44322889_a34ub37c8ajv98a0"
+            }
+        ]
+    }
+    """
+
 }
