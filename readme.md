@@ -178,6 +178,7 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     * GET search channels :heavy_check_mark:
     * POST start commercial :heavy_check_mark:
     * GET hype train events :heavy_check_mark:
+    * PATCH modify channel information :heavy_check_mark:
     
 ### 2.2 Webhooks
 * Subscribe To/Unsubscribe From Events :x:

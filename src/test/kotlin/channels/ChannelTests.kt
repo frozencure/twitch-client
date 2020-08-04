@@ -4,10 +4,13 @@ import helix.channels.ChannelService
 import helix.channels.ChannelsHelixResponse
 import helix.channels.CommercialResponse
 import helix.channels.HypeTrainScrollableResponse
+import helix.channels.model.ModifyChannelBody
 import helix.channels.model.commercial.CommercialLength
 import helix.channels.model.commercial.CommercialRequest
+import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
 import io.ktor.content.TextContent
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.UnstableDefault
@@ -145,4 +148,38 @@ class `Given POST start commercial with broadcaster id and length is called` {
     @Test
     fun `then one commercial is retrieved`() =
         assert(commercialResponse.resource != null)
+}
+
+class `Given PATCH modify channel information is called` {
+
+    private val broadcasterId = 1L
+    private val gameId = 123L
+
+    private val title = "new title"
+
+    private val language = "en"
+
+    private val modifyInfoResponse = runBlocking<HttpResponse> {
+        ChannelService(HttpClientMockBuilder.withStatusResponse(HttpStatusCode.NoContent))
+            .modifyChannelInfo(broadcasterId, title, gameId, language)
+    }
+
+    @OptIn(UnstableDefault::class)
+    @ImplicitReflectionSerializer
+    @Test
+    fun `then request has broadcaster id, game id, title, language in body`() = assert(
+        (modifyInfoResponse.request.content as TextContent).text == Json.toJson(
+            ModifyChannelBody(
+                gameId.toString(),
+                title,
+                language
+            )
+        ).toString()
+    )
+
+    @Test
+    fun `then request has broadcaster id as parameter`() =
+        assert(modifyInfoResponse.request.url.parameters["broadcaster_id"] == broadcasterId.toString())
+
+
 }
