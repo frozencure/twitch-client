@@ -1,7 +1,7 @@
-$dokka.format:html
-$dokka.linkExtension:html
-$dokka.location://authenticateUser/#/PointingToDeclaration/twitch-client/[jvm root]/authenticate-user.html
-$dokka.location://main/#/PointingToDeclaration/twitch-client/[jvm root]/main.html
+$dokka.format:jekyll
+$dokka.linkExtension:md
+$dokka.location://authenticateUser/#/PointingToDeclaration/twitch-client/[jvm root]/authenticate-user.md
+$dokka.location://main/#/PointingToDeclaration/twitch-client/[jvm root]/main.md
 [jvm root]
 helix.auth
 helix.auth.model
