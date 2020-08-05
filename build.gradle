@@ -27,6 +27,12 @@ dependencies {
 }
 
 dokkaHtml {
+    dokkaSourceSets {
+        configureEach {
+            moduleDisplayName = "Twitch Client"
+            includes = ['readme.md']
+        }
+    }
 }
 
 compileKotlin {
