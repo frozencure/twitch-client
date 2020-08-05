@@ -1,7 +1,8 @@
 $dokka.format:html
 $dokka.linkExtension:html
-$dokka.location:helix.http.extensions$headersOfSerializableObject(io.ktor.client.request.HttpRequestBuilder, kotlin.collections.Map((kotlin.String, kotlin.Any)))helix.http.extensions/io.ktor.client.request.-http-request-builder/headers-of-serializable-object.html
-$dokka.location:helix.http.extensions$parametersOfSerializableObject(io.ktor.client.request.HttpRequestBuilder, helix.http.extensions.parametersOfSerializableObject.T)helix.http.extensions/io.ktor.client.request.-http-request-builder/parameters-of-serializable-object.html
+$dokka.location://authenticateUser/#/PointingToDeclaration/twitch-client/[jvm root]/authenticate-user.html
+$dokka.location://main/#/PointingToDeclaration/twitch-client/[jvm root]/main.html
+[jvm root]
 helix.auth
 helix.auth.model
 helix.auth.model.request
@@ -47,3 +48,4 @@ helix.videos.model
 helix.videos.model.request
 helix.webhook
 helix.webhook.model
+
