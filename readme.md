@@ -1,3 +1,4 @@
+# Module twitch-client
 # Kotlin Twitch API Client
 
 A modern Kotlin library for accessing the newest Twitch Helix API. 
