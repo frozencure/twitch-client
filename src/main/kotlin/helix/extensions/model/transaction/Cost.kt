@@ -1,4 +1,4 @@
-package helix.extensions.model
+package helix.extensions.model.transaction
 
 
 import kotlinx.serialization.SerialName

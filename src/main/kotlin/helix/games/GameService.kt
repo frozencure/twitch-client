@@ -19,15 +19,15 @@ class GameService : ResourceService {
         const val BASE_URL = "${ResourceService.BASE_URL}/games"
     }
 
-    suspend fun getGame(name: String): GameHelixResponse =
-        GameHelixResponse(
+    suspend fun getGame(name: String): GameResponse =
+        GameResponse(
             httpClient.get(BASE_URL) {
                 parameter("name", name)
             }
         )
 
-    suspend fun getGame(id: Long): GameHelixResponse =
-        GameHelixResponse(
+    suspend fun getGame(id: Long): GameResponse =
+        GameResponse(
             httpClient.get(BASE_URL) {
                 parameter("id", id)
             }
@@ -42,11 +42,11 @@ class GameService : ResourceService {
                 }, httpClient
         )
 
-    suspend fun getGames(names: Collection<String>? = null, ids: Collection<Long>? = null): GamesHelixResponse {
+    suspend fun getGames(names: Collection<String>? = null, ids: Collection<Long>? = null): GamesResponse {
         if (ids.isNullOrEmpty() && names.isNullOrEmpty()) {
             throw BadRequestException("Must provide at least one game ID or name")
         }
-        return GamesHelixResponse(
+        return GamesResponse(
             httpClient
                 .get(BASE_URL) {
                     ids?.forEach {

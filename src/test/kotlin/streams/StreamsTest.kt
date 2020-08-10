@@ -1,7 +1,7 @@
 package streams
 
 import helix.streams.StreamService
-import helix.streams.StreamsHelixResponse
+import helix.streams.StreamsResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -11,7 +11,7 @@ class `Given GET streams is called and multiple streams are retrieved` {
 
     private val userIds = listOf<Long>(1234, 12345)
 
-    private val streamsResponse = runBlocking<StreamsHelixResponse> {
+    private val streamsResponse = runBlocking<StreamsResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAMS_WITH_PAGINATION))
             .getStreams(userIds = userIds)
     }
@@ -34,7 +34,7 @@ class `Given GET streams is called and multiple streams are retrieved` {
 
     class `And next page is retreived` {
 
-        private val streamsResponse = runBlocking<StreamsHelixResponse?> {
+        private val streamsResponse = runBlocking<StreamsResponse?> {
             StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAMS_WITH_PAGINATION))
                 .getStreams().nextPage()
         }

@@ -19,7 +19,7 @@ class WebhookService : ResourceService {
         const val BASE_URL = "${ResourceService.BASE_URL}/webhooks"
     }
 
-    suspend fun getSubscriptions(first: Int = 100) = WebhooksHelixResponse(
+    suspend fun getSubscriptions(first: Int = 100) = WebhooksResponse(
         httpClient.get("$BASE_URL/subscriptions") {
             parameter("first", first)
         }, httpClient

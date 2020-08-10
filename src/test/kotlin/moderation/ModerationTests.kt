@@ -22,7 +22,7 @@ class `Given auto mod check with messages and broadcaster id is called` {
         AutoModMessage("2", "Boooooo!", userId)
     )
 
-    private val autoModResponse = runBlocking<AutoModHelixResponse> {
+    private val autoModResponse = runBlocking<AutoModResponse> {
         ModerationService(HttpClientMockBuilder.withJsonContent(ModerationTestData.AUTO_MOD))
             .checkMessagesWithAutoMod(userId, messages)
     }
@@ -96,7 +96,7 @@ class `Given GET moderators with broadcaster and user ids is called` {
 
     private val userIds: Collection<Long> = listOf(423374343, 424596340)
 
-    private val moderatorsResponse = runBlocking<ModeratorsScrollableHelixResponse> {
+    private val moderatorsResponse = runBlocking<ModeratorsScrollableResponse> {
         ModerationService(HttpClientMockBuilder.withJsonContent(ModerationTestData.MODERATORS_WITH_CURSOR))
             .getModerators(broadcasterId, userIds)
     }
@@ -122,7 +122,7 @@ class `Given GET moderators with broadcaster and user ids is called` {
 
         private val userIds: Collection<Long> = listOf(423374343, 424596340)
 
-        private val moderatorsResponse = runBlocking<ModeratorsScrollableHelixResponse?> {
+        private val moderatorsResponse = runBlocking<ModeratorsScrollableResponse?> {
             ModerationService(HttpClientMockBuilder.withJsonContent(ModerationTestData.MODERATORS_WITH_CURSOR))
                 .getModerators(broadcasterId, userIds).nextPage()
         }

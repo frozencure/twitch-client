@@ -1,4 +1,4 @@
-package helix.http.model
+package helix.http.model.array
 
 import kotlinx.serialization.Serializable
 

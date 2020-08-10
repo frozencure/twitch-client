@@ -20,13 +20,13 @@ class ExtensionService : ResourceService {
     }
 
     suspend fun getTransactions(extensionId: String, first: Int = 100, transactionIds: Collection<String>? = null)
-            : TransactionsHelixResponse {
+            : TransactionsResponse {
         transactionIds?.let {
             if (transactionIds.size > 100) {
                 throw BadRequestException("A maximum of 100 transaction IDs can be provided.")
             }
         }
-        return TransactionsHelixResponse(
+        return TransactionsResponse(
             httpClient.get("$BASE_URL/transactions") {
                 parameter("extension_id", extensionId)
                 parameter("first", first)

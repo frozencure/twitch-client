@@ -1,9 +1,9 @@
 package videos
 
 import helix.videos.ScrollableVideosResponse
-import helix.videos.VideoHelixResponse
+import helix.videos.VideoResponse
 import helix.videos.VideoService
-import helix.videos.VideosHelixResponse
+import helix.videos.VideosResponse
 import helix.videos.model.VideoType
 import helix.videos.model.VideoVisibility
 import io.ktor.client.statement.request
@@ -15,7 +15,7 @@ class `Given GET video with id is called` {
 
     private val inputId: Long = 234482848
 
-    private val videoResponse = runBlocking<VideoHelixResponse> {
+    private val videoResponse = runBlocking<VideoResponse> {
         VideoService(HttpClientMockBuilder.withJsonContent(VideosTestData.SINGLE_VIDEO))
             .getVideo(inputId)
     }
@@ -50,7 +50,7 @@ class `Given GET videos with IDs is called` {
 
     private val inputIds = listOf<Long>(234482848, 234482849)
 
-    private val videosResponse = runBlocking<VideosHelixResponse> {
+    private val videosResponse = runBlocking<VideosResponse> {
         VideoService(HttpClientMockBuilder.withJsonContent(VideosTestData.MULTIPLE_VIDEOS))
             .getVideos(inputIds)
     }

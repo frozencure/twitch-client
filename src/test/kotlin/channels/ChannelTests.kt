@@ -1,7 +1,7 @@
 package channels
 
 import helix.channels.ChannelService
-import helix.channels.ChannelsHelixResponse
+import helix.channels.ChannelsResponse
 import helix.channels.CommercialResponse
 import helix.channels.HypeTrainScrollableResponse
 import helix.channels.model.ModifyChannelBody
@@ -22,7 +22,7 @@ class `Given GET channels is called with query and multiple streams are returned
 
     private val query = "lirik loserfruit"
 
-    private val channelsResponse = runBlocking<ChannelsHelixResponse> {
+    private val channelsResponse = runBlocking<ChannelsResponse> {
         ChannelService(HttpClientMockBuilder.withJsonContent(ChannelsTestData.MULTIPLE_CHANNELS_WITH_PAGINATION))
             .getChannels(query)
     }
@@ -53,7 +53,7 @@ class `Given GET channels is called with query and multiple streams are returned
 
         private val query = "lirik loserfruit"
 
-        private val channelsResponse = runBlocking<ChannelsHelixResponse?> {
+        private val channelsResponse = runBlocking<ChannelsResponse?> {
             ChannelService(HttpClientMockBuilder.withJsonContent(ChannelsTestData.MULTIPLE_CHANNELS_WITH_PAGINATION))
                 .getChannels(query).nextPage()
         }

@@ -22,19 +22,19 @@ class VideoService : ResourceService {
         const val BASE_URL = "${ResourceService.BASE_URL}/videos"
     }
 
-    suspend fun getVideo(id: Long): VideoHelixResponse =
-        VideoHelixResponse(
+    suspend fun getVideo(id: Long) =
+        VideoResponse(
             httpClient
                 .get(BASE_URL) {
                     parameter("id", id)
                 }
         )
 
-    suspend fun getVideos(ids: Collection<Long>): VideosHelixResponse {
+    suspend fun getVideos(ids: Collection<Long>): VideosResponse {
         if (ids.size > 100) {
             throw BadRequestException("A maximum of 100 IDs can be provided for this request.")
         }
-        return VideosHelixResponse(
+        return VideosResponse(
             httpClient
                 .get(BASE_URL) {
                     ids.forEach {

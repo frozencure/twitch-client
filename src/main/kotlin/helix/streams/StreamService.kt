@@ -3,11 +3,11 @@ package helix.streams
 import helix.exceptions.BadRequestException
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
-import helix.streams.markers.StreamMarkerHelixResponse
+import helix.streams.markers.StreamMarkerResponse
 import helix.streams.markers.UserStreamMarkersResponse
 import helix.streams.markers.model.StreamMarkerRequest
-import helix.streams.metadata.StreamsMetadataHelixResponse
-import helix.streams.tags.StreamTagsHelixResponse
+import helix.streams.metadata.StreamsMetadataResponse
+import helix.streams.tags.StreamTagsResponse
 import helix.streams.tags.model.ReplaceTagsRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
@@ -35,16 +35,16 @@ class StreamService : ResourceService {
         languages: Collection<String>? = null,
         userIds: Collection<Long>? = null,
         userLoginNames: Collection<String>? = null
-    ): StreamsHelixResponse {
+    ): StreamsResponse {
         checkForBadRequest(gameIds, languages, userIds, userLoginNames)
-        return StreamsHelixResponse(
+        return StreamsResponse(
             httpGetWithNullables(BASE_URL, first, gameIds, languages, userIds, userLoginNames),
             httpClient
         )
     }
 
     suspend fun createStreamMarker(userId: Long, description: String? = null) =
-        StreamMarkerHelixResponse(
+        StreamMarkerResponse(
             httpClient.post("$BASE_URL/markers") {
                 contentType(ContentType.Application.Json)
                 body = StreamMarkerRequest(userId, description)
@@ -62,9 +62,9 @@ class StreamService : ResourceService {
         languages: Collection<String>? = null,
         userIds: Collection<Long>? = null,
         userLoginNames: Collection<String>? = null
-    ): StreamsMetadataHelixResponse {
+    ): StreamsMetadataResponse {
         checkForBadRequest(gameIds, languages, userIds, userLoginNames)
-        return StreamsMetadataHelixResponse(
+        return StreamsMetadataResponse(
             httpGetWithNullables("$BASE_URL/metadata", first, gameIds, languages, userIds, userLoginNames),
             httpClient
         )
@@ -72,13 +72,13 @@ class StreamService : ResourceService {
 
     suspend fun getStreamTags(
         tagIds: Collection<String>? = null, first: Int = 100
-    ): StreamTagsHelixResponse {
+    ): StreamTagsResponse {
         tagIds?.let {
             if (it.size > 100) {
                 throw BadRequestException("A maximum of 100 tag IDs can be specified.")
             }
         }
-        return StreamTagsHelixResponse(
+        return StreamTagsResponse(
             httpClient.get("${ResourceService.BASE_URL}/tags/streams") {
                 parameter("first", first)
                 tagIds?.forEach {
@@ -88,7 +88,7 @@ class StreamService : ResourceService {
         )
     }
 
-    suspend fun getStreamTags(broadcasterId: Long) = StreamTagsHelixResponse(
+    suspend fun getStreamTags(broadcasterId: Long) = StreamTagsResponse(
         httpClient.get("$BASE_URL/tags") {
             parameter("broadcaster_id", broadcasterId)
         }, httpClient

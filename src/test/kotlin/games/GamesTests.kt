@@ -1,8 +1,8 @@
 package games
 
-import helix.games.GameHelixResponse
+import helix.games.GameResponse
 import helix.games.GameService
-import helix.games.GamesHelixResponse
+import helix.games.GamesResponse
 import helix.games.ScrollableGamesResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
@@ -13,7 +13,7 @@ class `Given GET game with id is called` {
 
     private val id: Long = 493057
 
-    private val gameResponse = runBlocking<GameHelixResponse> {
+    private val gameResponse = runBlocking<GameResponse> {
         GameService(HttpClientMockBuilder.withJsonContent(GamesTestData.SINGLE_GAME))
             .getGame(id)
     }
@@ -32,7 +32,7 @@ class `Given GET game with name is called` {
 
     private val name: String = "PLAYERUNKNOWN'S BATTLEGROUNDS"
 
-    private val gameResponse = runBlocking<GameHelixResponse> {
+    private val gameResponse = runBlocking<GameResponse> {
         GameService(HttpClientMockBuilder.withJsonContent(GamesTestData.SINGLE_GAME))
             .getGame(name)
     }
@@ -52,7 +52,7 @@ class `Given GET games with ids is called` {
 
     private val ids = listOf<Long>(493057, 493242)
 
-    private val gamesResponse = runBlocking<GamesHelixResponse> {
+    private val gamesResponse = runBlocking<GamesResponse> {
         GameService(HttpClientMockBuilder.withJsonContent(GamesTestData.MULTIPLE_GAMES))
             .getGames(ids = ids)
     }
@@ -75,7 +75,7 @@ class `Given GET games with names is called` {
 
     private val names = listOf<String>("PLAYERUNKNOWN'S BATTLEGROUNDS", "League of Legends")
 
-    private val gamesResponse = runBlocking<GamesHelixResponse> {
+    private val gamesResponse = runBlocking<GamesResponse> {
         GameService(HttpClientMockBuilder.withJsonContent(GamesTestData.MULTIPLE_GAMES))
             .getGames(names = names)
     }

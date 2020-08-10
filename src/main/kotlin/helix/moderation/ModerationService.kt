@@ -25,7 +25,7 @@ class ModerationService : ResourceService {
     }
 
     suspend fun checkMessagesWithAutoMod(broadcasterId: Long, messages: Collection<AutoModMessage>) =
-        AutoModHelixResponse(
+        AutoModResponse(
             httpClient.post("${BASE_URL}/enforcements/status") {
                 contentType(ContentType.Application.Json)
                 parameter("broadcaster_id", broadcasterId)
@@ -46,7 +46,7 @@ class ModerationService : ResourceService {
     )
 
     suspend fun getModerators(broadcasterId: Long, userIds: Collection<Long>? = null) =
-        ModeratorsScrollableHelixResponse(
+        ModeratorsScrollableResponse(
             httpClient.get("${BASE_URL}/moderators") {
                 parameter("broadcaster_id", broadcasterId)
                 userIds?.let {

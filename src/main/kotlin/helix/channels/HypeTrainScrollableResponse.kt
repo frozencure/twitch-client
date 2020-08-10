@@ -1,17 +1,17 @@
 package helix.channels
 
 import helix.channels.model.hypetrain.HypeTrain
-import helix.http.model.HelixDTO
-import helix.http.model.ScrollableHelixResponse
+import helix.http.model.array.HelixArrayDTO
+import helix.http.model.array.ScrollableResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.runBlocking
 
 class HypeTrainScrollableResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
-    ScrollableHelixResponse<HypeTrain>(httpResponse, httpClient) {
-    override val helixDTO: HelixDTO<HypeTrain> = runBlocking {
-        httpResponse.receive<HelixDTO<HypeTrain>>()
+    ScrollableResponse<HypeTrain>(httpResponse, httpClient) {
+    override val helixArrayDTO: HelixArrayDTO<HypeTrain> = runBlocking {
+        httpResponse.receive<HelixArrayDTO<HypeTrain>>()
     }
 
     override suspend fun nextPage(): HypeTrainScrollableResponse? =

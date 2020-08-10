@@ -1,7 +1,7 @@
 package subscriptions
 
 import helix.subscriptions.SubscriptionService
-import helix.subscriptions.SubscriptionsHelixResponse
+import helix.subscriptions.SubscriptionsResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -11,7 +11,7 @@ class `Given GET subscriptions is called and single subscription is retrieved` {
 
     private val broadcasterId: Long = 123
 
-    private val subscriptionResponse = runBlocking<SubscriptionsHelixResponse> {
+    private val subscriptionResponse = runBlocking<SubscriptionsResponse> {
         SubscriptionService(HttpClientMockBuilder.withJsonContent(SubscriptionsTestData.SINGLE_SUBSCRIPTION))
             .getSubscriptions(broadcasterId)
     }
@@ -40,7 +40,7 @@ class `Given GET subscriptions is called and single subscription with gifter is 
 
     private val broadcasterId: Long = 123
 
-    private val subscriptionResponse = runBlocking<SubscriptionsHelixResponse> {
+    private val subscriptionResponse = runBlocking<SubscriptionsResponse> {
         SubscriptionService(HttpClientMockBuilder.withJsonContent(SubscriptionsTestData.SINGLE_SUBSCRIPTION_WITH_GIFTER))
             .getSubscriptions(broadcasterId)
     }
@@ -69,7 +69,7 @@ class `Given GET subscriptions is called and multiple subscriptions are retrieve
 
     private val broadcasterId: Long = 123
 
-    private val subscriptionResponse = runBlocking<SubscriptionsHelixResponse> {
+    private val subscriptionResponse = runBlocking<SubscriptionsResponse> {
         SubscriptionService(HttpClientMockBuilder.withJsonContent(SubscriptionsTestData.MULTIPLE_SUBSCRIPTIONS))
             .getSubscriptions(broadcasterId)
     }
@@ -91,7 +91,7 @@ class `Given GET subscriptions is called and multiple subscriptions are retrieve
 
         private val broadcasterId: Long = 123
 
-        private val subscriptionResponse = runBlocking<SubscriptionsHelixResponse?> {
+        private val subscriptionResponse = runBlocking<SubscriptionsResponse?> {
             SubscriptionService(HttpClientMockBuilder.withJsonContent(SubscriptionsTestData.MULTIPLE_SUBSCRIPTIONS))
                 .getSubscriptions(broadcasterId).nextPage()
         }

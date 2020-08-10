@@ -1,7 +1,7 @@
 import clips.ClipsTestData
-import helix.clips.ClipHelixResponse
+import helix.clips.ClipResponse
 import helix.clips.ClipService
-import helix.clips.ClipsHelixResponse
+import helix.clips.ClipsResponse
 import helix.clips.ScrollableClipsResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
@@ -14,7 +14,7 @@ class `Given GET clip with id is called` {
 
     private val id: String = "AwkwardHelplessSalamanderSwiftRage"
 
-    private val clipResponse = runBlocking<ClipHelixResponse> {
+    private val clipResponse = runBlocking<ClipResponse> {
         ClipService(HttpClientMockBuilder.withJsonContent(ClipsTestData.SINGLE_CLIP))
             .getClip(id)
     }
@@ -33,7 +33,7 @@ class `Given GET clips with ids is called` {
 
     private val ids = listOf<String>("AwkwardHelplessSalamanderSwiftRage", "AwkwardHelplessSalamanderPogChamp")
 
-    private val clipsResponse = runBlocking<ClipsHelixResponse> {
+    private val clipsResponse = runBlocking<ClipsResponse> {
         ClipService(HttpClientMockBuilder.withJsonContent(ClipsTestData.MULTIPLE_CLIPS))
             .getClips(ids)
     }

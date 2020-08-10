@@ -27,12 +27,11 @@ fun main() {
     )
     val streamService = StreamService(apiSettings, ApacheEngineConfig())
     val userService = UserService(apiSettings, ApacheEngineConfig())
-    val channelService = ChannelService(apiSettings, ApacheEngineConfig())
     runBlocking {
         val currentUser = userService.getUser().resource
         currentUser?.let {
-            val result = streamService.getStreamKey(currentUser.id)
-            print(result.resource?.streamKey)
+            val result = userService.getUserActiveExtensions()
+            print(result.resource.panelExtensions)
         }
     }
 

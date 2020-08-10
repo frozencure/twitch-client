@@ -21,17 +21,17 @@ class ClipService : ResourceService {
         const val BASE_URL = "${ResourceService.BASE_URL}/clips"
     }
 
-    suspend fun getClip(id: String) = ClipHelixResponse(
+    suspend fun getClip(id: String) = ClipResponse(
         httpClient.get(BASE_URL) {
             parameter("id", id)
         }
     )
 
-    suspend fun getClips(ids: Collection<String>): ClipsHelixResponse {
+    suspend fun getClips(ids: Collection<String>): ClipsResponse {
         if (ids.size > 100) {
             throw BadRequestException("The maximum number of clips that can be retrieved cannot exceed 100")
         }
-        return ClipsHelixResponse(
+        return ClipsResponse(
             httpClient.get(BASE_URL)
             {
                 ids.forEach {
@@ -63,7 +63,7 @@ class ClipService : ResourceService {
         getClipsByGameOrBroadcaster("game_id", gameId, startedAt, endedAt)
 
 
-    suspend fun createClip(broadcasterId: Long, hasDelay: Boolean = false) = ClipCreationHelixResponse(
+    suspend fun createClip(broadcasterId: Long, hasDelay: Boolean = false) = ClipCreationResponse(
         httpClient.post(BASE_URL) {
             parameter("broadcaster_id", broadcasterId)
             parameter("has_delay", hasDelay)

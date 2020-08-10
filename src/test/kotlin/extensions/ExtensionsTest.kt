@@ -1,7 +1,7 @@
 package extensions
 
 import helix.extensions.ExtensionService
-import helix.extensions.TransactionsHelixResponse
+import helix.extensions.TransactionsResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -13,7 +13,7 @@ class `Given GET extension transactions is called` {
 
     private val transactionIds = listOf("1", "2")
 
-    private val transactionsResponse = runBlocking<TransactionsHelixResponse> {
+    private val transactionsResponse = runBlocking<TransactionsResponse> {
         ExtensionService(HttpClientMockBuilder.withJsonContent(ExtensionsTestData.MULTIPLE_TRANSACTIONS_WITH_PAGINATION))
             .getTransactions(extensionId, transactionIds = transactionIds)
     }
@@ -45,7 +45,7 @@ class `Given GET extension transactions is called` {
 
         private val extensionId = "12345"
 
-        private val transactionsResponse = runBlocking<TransactionsHelixResponse?> {
+        private val transactionsResponse = runBlocking<TransactionsResponse?> {
             ExtensionService(HttpClientMockBuilder.withJsonContent(ExtensionsTestData.MULTIPLE_TRANSACTIONS_WITH_PAGINATION))
                 .getTransactions(extensionId).nextPage()
         }

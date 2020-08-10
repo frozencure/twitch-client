@@ -1,6 +1,7 @@
 package helix.extensions.model
 
 
+import helix.extensions.model.transaction.Cost
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

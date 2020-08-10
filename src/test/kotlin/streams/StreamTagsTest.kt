@@ -1,7 +1,7 @@
 package streams
 
 import helix.streams.StreamService
-import helix.streams.tags.StreamTagsHelixResponse
+import helix.streams.tags.StreamTagsResponse
 import helix.streams.tags.model.ReplaceTagsRequest
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
@@ -18,7 +18,7 @@ class `Given GET all stream tags is called` {
 
     private val tagIds = listOf("621fb5bf-5498-4d8f-b4ac-db4d40d401bf", "7b49f69a-5d95-4c94-b7e3-66e2c0c6f6c6")
 
-    private val streamTagsResponse = runBlocking<StreamTagsHelixResponse> {
+    private val streamTagsResponse = runBlocking<StreamTagsResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAM_TAGS_WITH_PAGINATION))
             .getStreamTags(tagIds = tagIds)
     }
@@ -43,7 +43,7 @@ class `Given GET all stream tags is called` {
 
     class `And next page is retrieved` {
 
-        private val streamTagsResponse = runBlocking<StreamTagsHelixResponse?> {
+        private val streamTagsResponse = runBlocking<StreamTagsResponse?> {
             StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAM_TAGS_WITH_PAGINATION))
                 .getStreamTags().nextPage()
         }
@@ -66,7 +66,7 @@ class `Given GET stream tags for broadcaster is called` {
 
     private val broadcasterId: Long = 12345
 
-    private val streamTagsResponse = runBlocking<StreamTagsHelixResponse> {
+    private val streamTagsResponse = runBlocking<StreamTagsResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAM_TAGS_WITH_PAGINATION))
             .getStreamTags(broadcasterId)
     }
@@ -89,7 +89,7 @@ class `Given GET stream tags for broadcaster is called` {
 
         private val broadcasterId: Long = 12345
 
-        private val streamTagsResponse = runBlocking<StreamTagsHelixResponse?> {
+        private val streamTagsResponse = runBlocking<StreamTagsResponse?> {
             StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAM_TAGS_WITH_PAGINATION))
                 .getStreamTags(broadcasterId).nextPage()
         }

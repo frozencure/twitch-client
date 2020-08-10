@@ -1,7 +1,7 @@
 package streams
 
 import helix.streams.StreamService
-import helix.streams.markers.StreamMarkerHelixResponse
+import helix.streams.markers.StreamMarkerResponse
 import helix.streams.markers.UserStreamMarkersResponse
 import helix.streams.markers.model.StreamMarkerRequest
 import io.ktor.client.statement.request
@@ -18,7 +18,7 @@ class `Given POST create stream marker is called` {
     private val userId: Long = 123;
     private val description = "test description"
 
-    private val streamMarkerResponse = runBlocking<StreamMarkerHelixResponse> {
+    private val streamMarkerResponse = runBlocking<StreamMarkerResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.SINGLE_STREAM_MARKER))
             .createStreamMarker(userId, description)
     }

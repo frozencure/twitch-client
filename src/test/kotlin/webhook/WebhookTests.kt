@@ -1,7 +1,7 @@
 package webhook
 
 import helix.webhook.WebhookService
-import helix.webhook.WebhooksHelixResponse
+import helix.webhook.WebhooksResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -9,7 +9,7 @@ import util.HttpClientMockBuilder
 
 class `Given GET webhook subscriptions is called` {
 
-    private val webhooksHelixResponse = runBlocking<WebhooksHelixResponse> {
+    private val webhooksHelixResponse = runBlocking<WebhooksResponse> {
         WebhookService(HttpClientMockBuilder.withJsonContent(WebhooksTestData.WEBHOOK_SUBSCRIPTIONS))
             .getSubscriptions()
     }
@@ -34,7 +34,7 @@ class `Given GET webhook subscriptions is called` {
 
     class `And next page is retrieved` {
 
-        private val webhooksHelixResponse = runBlocking<WebhooksHelixResponse?> {
+        private val webhooksHelixResponse = runBlocking<WebhooksResponse?> {
             WebhookService(HttpClientMockBuilder.withJsonContent(WebhooksTestData.WEBHOOK_SUBSCRIPTIONS))
                 .getSubscriptions().nextPage()
         }

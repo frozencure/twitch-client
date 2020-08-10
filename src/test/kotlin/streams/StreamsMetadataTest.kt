@@ -1,7 +1,7 @@
 package streams
 
 import helix.streams.StreamService
-import helix.streams.metadata.StreamsMetadataHelixResponse
+import helix.streams.metadata.StreamsMetadataResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -9,7 +9,7 @@ import util.HttpClientMockBuilder
 
 class `Given GET streams metadata is called and a Hearthstone stream is retrieved` {
 
-    private val streamMarkerResponse = runBlocking<StreamsMetadataHelixResponse> {
+    private val streamMarkerResponse = runBlocking<StreamsMetadataResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.HEARTHSTONE_STREAM_METADATA))
             .getStreamsMetadata()
     }
@@ -37,7 +37,7 @@ class `Given GET streams metadata is called and a Hearthstone stream is retrieve
 
 class `Given GET streams metadata is called and an Overwatch stream is retrieved` {
 
-    private val streamMarkerResponse = runBlocking<StreamsMetadataHelixResponse> {
+    private val streamMarkerResponse = runBlocking<StreamsMetadataResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.OVERWATCH_STREAM_METADATA))
             .getStreamsMetadata()
     }
@@ -61,7 +61,7 @@ class `Given GET streams metadata is called and an Overwatch stream is retrieved
 
 class `Given GET streams metadata is called and a stream without metadata is retrieved` {
 
-    private val streamMarkerResponse = runBlocking<StreamsMetadataHelixResponse> {
+    private val streamMarkerResponse = runBlocking<StreamsMetadataResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.EMPTY_STREAM_METADATA))
             .getStreamsMetadata()
     }
@@ -89,7 +89,7 @@ class `Given GET streams metadata is called and multiple streams are retrieved` 
 
     private val userIds = listOf<Long>(1234, 12345)
 
-    private val streamMarkerResponse = runBlocking<StreamsMetadataHelixResponse> {
+    private val streamMarkerResponse = runBlocking<StreamsMetadataResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAMS_METADATA_WITH_PAGINATION))
             .getStreamsMetadata(userIds = userIds)
     }
@@ -112,7 +112,7 @@ class `Given GET streams metadata is called and multiple streams are retrieved` 
 
     class `And next page is retreived` {
 
-        private val streamMarkerResponse = runBlocking<StreamsMetadataHelixResponse?> {
+        private val streamMarkerResponse = runBlocking<StreamsMetadataResponse?> {
             StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAMS_METADATA_WITH_PAGINATION))
                 .getStreamsMetadata().nextPage()
         }

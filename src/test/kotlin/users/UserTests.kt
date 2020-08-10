@@ -1,11 +1,13 @@
 package users
 
 import helix.exceptions.BadRequestException
-import helix.extensions.ExtensionsHelixResponse
-import helix.users.FollowsHelixResponse
-import helix.users.UserHelixResponse
+import helix.extensions.ActiveExtensionsResponse
+import helix.extensions.ExtensionsResponse
+import helix.extensions.model.active.ActiveExtensions
+import helix.users.FollowsResponse
+import helix.users.UserResponse
 import helix.users.UserService
-import helix.users.UsersHelixResponse
+import helix.users.UsersResponse
 import helix.users.model.ChangeFollowRequest
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
@@ -15,6 +17,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.parse
 import org.junit.Test
 import util.HttpClientMockBuilder
 
@@ -23,7 +26,7 @@ class UserTests {
 
     class `Given GET user is called` {
 
-        private val userResponse = runBlocking<UserHelixResponse> {
+        private val userResponse = runBlocking<UserResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.SINGLE_USER_WITH_EMAIL))
                 .getUser()
         }
@@ -47,7 +50,7 @@ class UserTests {
 
     class `Given GET user with login name is called` {
 
-        private val userResponse = runBlocking<UserHelixResponse> {
+        private val userResponse = runBlocking<UserResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.SINGLE_USER_WITH_EMAIL))
                 .getUser("dallas")
         }
@@ -68,7 +71,7 @@ class UserTests {
     }
 
     class `Given GET user with id is called` {
-        private val userResponse = runBlocking<UserHelixResponse> {
+        private val userResponse = runBlocking<UserResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.SINGLE_USER))
                 .getUser(44322889)
         }
@@ -104,7 +107,7 @@ class UserTests {
     }
 
     class `Given GET users with login names is called` {
-        private val usersResponse = runBlocking<UsersHelixResponse> {
+        private val usersResponse = runBlocking<UsersResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.MULTIPLE_USERS))
                 .getUsers(loginNames = listOf("dallas", "user_2"))
         }
@@ -126,7 +129,7 @@ class UserTests {
 
     class `Given GET users with pagination is called` {
 
-        val usersResponse = runBlocking<UsersHelixResponse> {
+        val usersResponse = runBlocking<UsersResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.MULTIPLE_USERS_WITH_PAGINATION))
                 .getUsers(loginNames = listOf("dallas", "user_2"))
         }
@@ -154,7 +157,7 @@ class UserTests {
     }
 
     class `Given GET users with ids is called` {
-        private val usersResponse = runBlocking<UsersHelixResponse> {
+        private val usersResponse = runBlocking<UsersResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.MULTIPLE_USERS))
                 .getUsers(ids = listOf(44322889, 54232423))
         }
@@ -175,7 +178,7 @@ class UserTests {
     }
 
     class `Given GET user followers with to_user id is called` {
-        private val followsResponse = runBlocking<FollowsHelixResponse> {
+        private val followsResponse = runBlocking<FollowsResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.USER_FOLLOWERS))
                 .getUserFollowers(toUserId = 23161357)
         }
@@ -201,7 +204,7 @@ class UserTests {
     }
 
     class `Given GET user followers with from_user id is called` {
-        private val followsResponse = runBlocking<FollowsHelixResponse> {
+        private val followsResponse = runBlocking<FollowsResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.USER_FOLLOWERS))
                 .getUserFollowers(fromUserId = 23161357)
         }
@@ -242,7 +245,7 @@ class UserTests {
     }
 
     class `Given PUT update user description is called` {
-        private val userResponse = runBlocking<UserHelixResponse> {
+        private val userResponse = runBlocking<UserResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.SINGLE_USER))
                 .updateUserDescription("new description")
         }
@@ -258,7 +261,7 @@ class UserTests {
     }
 
     class `Given GET user extensions is called` {
-        private val extensionsResponse = runBlocking<ExtensionsHelixResponse> {
+        private val extensionsResponse = runBlocking<ExtensionsResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.USER_EXTENSIONS))
                 .getUserExtensions()
         }
@@ -319,5 +322,48 @@ class UserTests {
             ).toString()
         )
 
+    }
+
+    class `Given GET active extensions with user ID is called` {
+
+        private val userId = 123L
+
+        private val activeExtensionsResponse = runBlocking<ActiveExtensionsResponse> {
+            UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.USER_ACTIVE_EXTENSIONS))
+                .getUserActiveExtensions(userId)
+        }
+
+
+        @Test
+        fun `then request has user ID as parameter`() =
+            assert(activeExtensionsResponse.httpResponse.request.url.parameters["user_id"] == userId.toString())
+
+
+        @Test
+        fun `then non-empty active extensions are returned`() =
+            assert(activeExtensionsResponse.resource.componentExtension.firstExtension.x != null)
+
+    }
+
+    class `Given PUT update user active extensions is called` {
+
+        @ImplicitReflectionSerializer
+        private val newActiveExtensions =
+            Json.parse<ActiveExtensions>(UsersTestData.USER_ACTIVE_EXTENSIONS_WITHOUT_WRAPPER)
+
+        @ImplicitReflectionSerializer
+        private val activeExtensionsResponse = runBlocking<ActiveExtensionsResponse> {
+            UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.USER_ACTIVE_EXTENSIONS))
+                .updateActiveUserExtensions(newActiveExtensions)
+        }
+
+
+        @ImplicitReflectionSerializer
+        @Test
+        fun `then request has active extensions as body`() = assert(
+            (activeExtensionsResponse.httpResponse.request.content as TextContent).text == Json.toJson(
+                newActiveExtensions
+            ).toString()
+        )
     }
 }

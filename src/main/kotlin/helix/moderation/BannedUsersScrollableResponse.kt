@@ -1,7 +1,7 @@
 package helix.moderation
 
-import helix.http.model.HelixDTO
-import helix.http.model.ScrollableHelixResponse
+import helix.http.model.array.HelixArrayDTO
+import helix.http.model.array.ScrollableResponse
 import helix.moderation.model.BannedUser
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
@@ -12,9 +12,9 @@ class BannedUsersScrollableResponse(
     httpResponse: HttpResponse,
     httpClient: HttpClient
 ) :
-    ScrollableHelixResponse<BannedUser>(httpResponse, httpClient) {
-    override val helixDTO: HelixDTO<BannedUser> = runBlocking {
-        httpResponse.receive<HelixDTO<BannedUser>>()
+    ScrollableResponse<BannedUser>(httpResponse, httpClient) {
+    override val helixArrayDTO: HelixArrayDTO<BannedUser> = runBlocking {
+        httpResponse.receive<HelixArrayDTO<BannedUser>>()
     }
 
     override suspend fun nextPage(): BannedUsersScrollableResponse? =

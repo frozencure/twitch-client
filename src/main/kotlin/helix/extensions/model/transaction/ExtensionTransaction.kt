@@ -1,6 +1,7 @@
-package helix.extensions.model
+package helix.extensions.model.transaction
 
 
+import helix.extensions.model.Product
 import helix.http.model.AbstractResource
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

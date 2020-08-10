@@ -1,16 +1,16 @@
 package helix.bits
 
 import helix.bits.model.BitsLeaderboardEntry
-import helix.http.model.CollectionHelixResponse
-import helix.http.model.HelixDTO
+import helix.http.model.array.CollectionResponse
+import helix.http.model.array.HelixArrayDTO
 import io.ktor.client.call.receive
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.runBlocking
 
 
 class BitsLeaderboardResponse(httpResponse: HttpResponse) :
-    CollectionHelixResponse<BitsLeaderboardEntry>(httpResponse) {
-    override val helixDTO: HelixDTO<BitsLeaderboardEntry> = runBlocking {
-        httpResponse.receive<HelixDTO<BitsLeaderboardEntry>>()
+    CollectionResponse<BitsLeaderboardEntry>(httpResponse) {
+    override val helixArrayDTO: HelixArrayDTO<BitsLeaderboardEntry> = runBlocking {
+        httpResponse.receive<HelixArrayDTO<BitsLeaderboardEntry>>()
     }
 }

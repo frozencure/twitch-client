@@ -2,7 +2,6 @@ package helix.subscriptions
 
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
-import helix.users.UserHelixResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.request.get
@@ -18,8 +17,8 @@ class SubscriptionService : ResourceService {
         const val BASE_URL = "${ResourceService.BASE_URL}/subscriptions"
     }
 
-    suspend fun getSubscriptions(broadcasterId: Long, userId: Long? = null): SubscriptionsHelixResponse =
-        SubscriptionsHelixResponse(
+    suspend fun getSubscriptions(broadcasterId: Long, userId: Long? = null): SubscriptionsResponse =
+        SubscriptionsResponse(
             httpClient
                 .get(BASE_URL) {
                     parameter("broadcaster_id", broadcasterId)

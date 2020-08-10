@@ -27,7 +27,7 @@ class ChannelService : ResourceService {
     }
 
     suspend fun getChannels(query: String, liveOnly: Boolean = false, first: Int = 100) =
-        ChannelsHelixResponse(
+        ChannelsResponse(
             httpClient.get("${ResourceService.BASE_URL}/search/channels") {
                 parameter("query", query)
                 parameter("live_only", liveOnly)

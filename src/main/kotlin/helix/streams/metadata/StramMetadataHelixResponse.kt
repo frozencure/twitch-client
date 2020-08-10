@@ -1,22 +1,22 @@
 package helix.streams.metadata
 
-import helix.http.model.HelixDTO
-import helix.http.model.ScrollableHelixResponse
+import helix.http.model.array.HelixArrayDTO
+import helix.http.model.array.ScrollableResponse
 import helix.streams.metadata.model.StreamMetadata
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.runBlocking
 
-class StreamsMetadataHelixResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
-    ScrollableHelixResponse<StreamMetadata>(httpResponse, httpClient) {
-    override val helixDTO: HelixDTO<StreamMetadata> = runBlocking {
-        httpResponse.receive<HelixDTO<StreamMetadata>>()
+class StreamsMetadataResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
+    ScrollableResponse<StreamMetadata>(httpResponse, httpClient) {
+    override val helixArrayDTO: HelixArrayDTO<StreamMetadata> = runBlocking {
+        httpResponse.receive<HelixArrayDTO<StreamMetadata>>()
     }
 
-    override suspend fun nextPage(): StreamsMetadataHelixResponse? =
+    override suspend fun nextPage(): StreamsMetadataResponse? =
         nextPageHttpResponse("after")?.let {
-            StreamsMetadataHelixResponse(
+            StreamsMetadataResponse(
                 it, httpClient
             )
         }

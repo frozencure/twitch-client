@@ -1,7 +1,9 @@
 package helix.users
 
 import helix.exceptions.BadRequestException
-import helix.extensions.ExtensionsHelixResponse
+import helix.extensions.ActiveExtensionsResponse
+import helix.extensions.ExtensionsResponse
+import helix.extensions.model.active.ActiveExtensions
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
 import helix.users.model.ChangeFollowRequest
@@ -25,32 +27,32 @@ class UserService : ResourceService {
         const val BASE_URL = "${ResourceService.BASE_URL}/users"
     }
 
-    suspend fun getUser(): UserHelixResponse =
-        UserHelixResponse(
+    suspend fun getUser(): UserResponse =
+        UserResponse(
             httpClient
                 .get(BASE_URL)
         )
 
 
-    suspend fun getUser(userId: Long): UserHelixResponse =
-        UserHelixResponse(httpClient
+    suspend fun getUser(userId: Long): UserResponse =
+        UserResponse(httpClient
             .get(BASE_URL) {
                 parameter("id", userId)
             })
 
 
-    suspend fun getUser(loginName: String): UserHelixResponse =
-        UserHelixResponse(httpClient
+    suspend fun getUser(loginName: String): UserResponse =
+        UserResponse(httpClient
             .get(BASE_URL) {
                 parameter("login", loginName)
             })
 
 
-    suspend fun getUsers(ids: Collection<Long>? = null, loginNames: Collection<String>? = null): UsersHelixResponse {
+    suspend fun getUsers(ids: Collection<Long>? = null, loginNames: Collection<String>? = null): UsersResponse {
         if (ids.isNullOrEmpty() && loginNames.isNullOrEmpty()) {
             throw BadRequestException("Must provide at least one ID, Login or OAuth Token.")
         }
-        return UsersHelixResponse(
+        return UsersResponse(
             httpClient
                 .get(BASE_URL) {
                     ids?.forEach {
@@ -67,11 +69,11 @@ class UserService : ResourceService {
         fromUserId: Long? = null,
         toUserId: Long? = null,
         first: Int? = 100
-    ): FollowsHelixResponse {
+    ): FollowsResponse {
         if (fromUserId == null && toUserId == null) {
             throw BadRequestException("Must provide either a from ID or to ID")
         }
-        return FollowsHelixResponse(
+        return FollowsResponse(
             httpClient
                 .get("$BASE_URL/follows") {
                     parameter("from_id", fromUserId)
@@ -81,30 +83,36 @@ class UserService : ResourceService {
         )
     }
 
-    suspend fun createFollow(fromId: Long, toId: Long, allowNotifications: Boolean = false) = httpClient.post<HttpResponse>("${BASE_URL}/follows") {
-        contentType(ContentType.Application.Json)
-        body = ChangeFollowRequest(fromId, toId, allowNotifications)
-    }
+    suspend fun createFollow(fromId: Long, toId: Long, allowNotifications: Boolean = false) =
+        httpClient.post<HttpResponse>("${BASE_URL}/follows") {
+            contentType(ContentType.Application.Json)
+            body = ChangeFollowRequest(fromId, toId, allowNotifications)
+        }
 
     suspend fun deleteFollow(fromId: Long, toId: Long) = httpClient.delete<HttpResponse>("${BASE_URL}/follows") {
         contentType(ContentType.Application.Json)
         body = ChangeFollowRequest(fromId, toId)
     }
 
-    // TODO#29: add user:edit req
-    suspend fun updateUserDescription(description: String): UserHelixResponse =
-        UserHelixResponse(httpClient.put(BASE_URL) {
+    suspend fun updateUserDescription(description: String): UserResponse =
+        UserResponse(httpClient.put(BASE_URL) {
             parameter("description", description)
         })
 
-    // TODO#29: add user:read:broadcast req
-    suspend fun getUserExtensions(): ExtensionsHelixResponse =
-        ExtensionsHelixResponse(httpClient.get("$BASE_URL/extensions/list"))
+    suspend fun getUserExtensions(): ExtensionsResponse =
+        ExtensionsResponse(httpClient.get("$BASE_URL/extensions/list"))
 
-    // TODO#28 : Get user active extensions (auth = user:read:broadcast or user:edit:broadcast)
-    //    suspend fun getUserActiveExtensions(): HelixResponse<Extension> =
-    //        httpClient.get("$BASE_URL/extensions")
 
-    // TODO#28: Update user extensions (auth=user:edit:broadcast)
+    suspend fun getUserActiveExtensions(userId: Long? = null) = ActiveExtensionsResponse(
+        httpClient.get("$BASE_URL/extensions") {
+            userId?.let { parameter("user_id", userId) }
+        }
+    )
 
+    suspend fun updateActiveUserExtensions(activeExtensions: ActiveExtensions) = ActiveExtensionsResponse(
+        httpClient.put("$BASE_URL/extensions") {
+            contentType(ContentType.Application.Json)
+            body = activeExtensions
+        }
+    )
 }

@@ -1,5 +1,6 @@
-package helix.http.model
+package helix.http.model.array
 
+import helix.http.model.AbstractResource
 import io.ktor.client.HttpClient
 import io.ktor.client.request.headers
 import io.ktor.client.request.parameter
@@ -8,11 +9,11 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
 
-abstract class ScrollableHelixResponse<T : AbstractResource>(
+abstract class ScrollableResponse<T : AbstractResource>(
     httpResponse: HttpResponse,
     protected val httpClient: HttpClient
 ) :
-    CollectionHelixResponse<T>(httpResponse) {
+    CollectionResponse<T>(httpResponse) {
 
     protected suspend fun nextPageHttpResponse(cursorKey: String? = null): HttpResponse? =
         pagination?.let {
@@ -24,6 +25,6 @@ abstract class ScrollableHelixResponse<T : AbstractResource>(
             }
         }
 
-    abstract suspend fun nextPage(): CollectionHelixResponse<T>?
+    abstract suspend fun nextPage(): CollectionResponse<T>?
 
 }

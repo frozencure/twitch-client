@@ -1,10 +1,11 @@
-package helix.http.model
+package helix.http.model.array
 
+import helix.http.model.AbstractResource
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class HelixDTO<T : AbstractResource>(
+data class HelixArrayDTO<T : AbstractResource>(
     @SerialName("data")
     val resources: Collection<T>? = emptyList(),
     @SerialName("pagination")

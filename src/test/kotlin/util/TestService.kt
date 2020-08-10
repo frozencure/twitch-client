@@ -3,9 +3,9 @@ package util
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
 import helix.http.model.AbstractResource
-import helix.http.model.CollectionHelixResponse
-import helix.http.model.HelixDTO
-import helix.http.model.ScrollableHelixResponse
+import helix.http.model.array.CollectionResponse
+import helix.http.model.array.HelixArrayDTO
+import helix.http.model.array.ScrollableResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.engine.HttpClientEngineConfig
@@ -26,15 +26,15 @@ class TestService : ResourceService {
 
 }
 
-class TestsHelixResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
-    ScrollableHelixResponse<TestDTO>(httpResponse, httpClient) {
-    override val helixDTO: HelixDTO<TestDTO> = runBlocking {
-        httpResponse.receive<HelixDTO<TestDTO>>()
+class TestsResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
+    ScrollableResponse<TestDTO>(httpResponse, httpClient) {
+    override val helixArrayDTO: HelixArrayDTO<TestDTO> = runBlocking {
+        httpResponse.receive<HelixArrayDTO<TestDTO>>()
     }
 
-    override suspend fun nextPage(): CollectionHelixResponse<TestDTO>? =
+    override suspend fun nextPage(): CollectionResponse<TestDTO>? =
         nextPageHttpResponse()?.let {
-            TestsHelixResponse(it, httpClient)
+            TestsResponse(it, httpClient)
         }
 
 
