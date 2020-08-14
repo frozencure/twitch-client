@@ -1,10 +1,21 @@
 package helix.auth.oauth
 
+import io.ktor.client.features.auth.Auth
 import io.ktor.client.features.auth.AuthProvider
+import io.ktor.client.features.auth.providers.BasicAuthConfig
+import io.ktor.client.features.auth.providers.BasicAuthProvider
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.HttpHeaders
 import io.ktor.http.auth.AuthScheme
 import io.ktor.http.auth.HttpAuthHeader
+
+fun Auth.oauth(block: OAuthConfig.() -> Unit) {
+    with(OAuthConfig().apply(block)) {
+        providers.add(OAuthProvider(clientId, clientKey, token, sendWithoutRequest))
+    }
+}
+
+
 
 class OAuthProvider(
     private val clientId: String,

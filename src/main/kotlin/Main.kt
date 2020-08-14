@@ -1,6 +1,7 @@
 import helix.auth.AuthService
 import helix.auth.model.AuthScope
 import helix.auth.model.request.OauthAuthorizeRequestModel
+import helix.auth.oauth.OAuthConfig
 import helix.channels.ChannelService
 import helix.http.credentials.DefaultApiSettings
 import helix.http.credentials.OauthApiCredentials
@@ -17,16 +18,11 @@ import kotlinx.serialization.UnstableDefault
 @ImplicitReflectionSerializer
 fun main() {
 //    authenticateUser()
-    val apiSettings = DefaultApiSettings(
-        Properties.store(
-            OauthApiCredentials(
-                "7omkmgbiz7ynbx5cwxod8263tysjmu",
-                "nyufzvu4k8h80iq0r7ya4zx1fsas7d"
-            )
-        )
-    )
-    val streamService = StreamService(apiSettings, ApacheEngineConfig())
-    val userService = UserService(apiSettings, ApacheEngineConfig())
+    val authConfig = OAuthConfig()
+    authConfig.token = "7omkmgbiz7ynbx5cwxod8263tysjmu"
+    authConfig.clientId = "nyufzvu4k8h80iq0r7ya4zx1fsas7d"
+    val streamService = StreamService(ApacheEngineConfig(), authConfig)
+    val userService = UserService(ApacheEngineConfig(), authConfig)
     runBlocking {
         val currentUser = userService.getUser().resource
         currentUser?.let {

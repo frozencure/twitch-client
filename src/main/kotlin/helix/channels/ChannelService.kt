@@ -1,5 +1,6 @@
 package helix.channels
 
+import helix.auth.basic.OnlyClientAuthConfig
 import helix.channels.model.ModifyChannelBody
 import helix.channels.model.commercial.CommercialLength
 import helix.channels.model.commercial.CommercialRequest
@@ -17,8 +18,8 @@ import io.ktor.http.contentType
 
 class ChannelService : ResourceService {
 
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(apiSettings, httpClientEngineConfig)
+    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
+            : super(httpClientEngineConfig, authSettings)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

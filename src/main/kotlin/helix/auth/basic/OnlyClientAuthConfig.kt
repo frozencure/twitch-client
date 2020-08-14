@@ -1,6 +1,6 @@
 package helix.auth.basic
 
-class BasicAuthConfig {
+open class OnlyClientAuthConfig {
 
     var clientKey: String = "Client-ID"
 

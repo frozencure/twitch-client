@@ -6,14 +6,14 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.auth.AuthScheme
 import io.ktor.http.auth.HttpAuthHeader
 
-fun Auth.onlyClient(block: BasicAuthConfig.() -> Unit) {
-    with(BasicAuthConfig().apply(block)) {
-        providers.add(BasicAuthProvider(clientId, clientKey, sendWithoutRequest))
+fun Auth.onlyClient(block: OnlyClientAuthConfig.() -> Unit) {
+    with(OnlyClientAuthConfig().apply(block)) {
+        providers.add(OnlyClientAuthProvider(clientId, clientKey, sendWithoutRequest))
     }
 }
 
 
-class BasicAuthProvider(
+class OnlyClientAuthProvider(
     private val clientId: String,
     private val clientKey: String,
     override val sendWithoutRequest: Boolean

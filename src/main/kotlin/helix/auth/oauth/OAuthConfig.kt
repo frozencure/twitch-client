@@ -1,10 +1,7 @@
-package helix.auth.basic
+package helix.auth.oauth
 
-class OAuthConfig {
+import helix.auth.basic.OnlyClientAuthConfig
 
+class OAuthConfig: OnlyClientAuthConfig() {
     lateinit var token: String
-
-    var clientKey: String = "Client-ID"
-
-    lateinit var clientId: String
 }

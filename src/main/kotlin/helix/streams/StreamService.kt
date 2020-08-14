@@ -1,5 +1,6 @@
 package helix.streams
 
+import helix.auth.basic.OnlyClientAuthConfig
 import helix.exceptions.BadRequestException
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
@@ -21,8 +22,8 @@ import io.ktor.http.contentType
 
 class StreamService : ResourceService {
 
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(apiSettings, httpClientEngineConfig)
+    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
+            : super(httpClientEngineConfig, authSettings)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

@@ -1,5 +1,6 @@
 package helix.webhook
 
+import helix.auth.basic.OnlyClientAuthConfig
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
 import io.ktor.client.HttpClient
@@ -10,8 +11,8 @@ import io.ktor.client.request.parameter
 class WebhookService : ResourceService {
 
 
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(apiSettings, httpClientEngineConfig)
+    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
+            : super(httpClientEngineConfig, authSettings)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

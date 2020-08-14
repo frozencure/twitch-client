@@ -1,25 +1,41 @@
 package helix.http
 
-import helix.http.credentials.ApiSettings
-import helix.http.extensions.headersOfSerializableObject
+import helix.auth.basic.OnlyClientAuthConfig
+import helix.auth.basic.onlyClient
+import helix.auth.oauth.OAuthConfig
+import helix.auth.oauth.oauth
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
-import io.ktor.client.features.defaultRequest
+import io.ktor.client.features.auth.Auth
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 
 abstract class ResourceService(
     protected val httpClient: HttpClient
 ) {
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
+    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
             : this(HttpClient {
         engine { httpClientEngineConfig }
         install(JsonFeature) {
             serializer = KotlinxSerializer()
         }
-        defaultRequest {
-            headersOfSerializableObject(apiSettings.credentials)
-        }
+//        install(Auth) {
+//            if(authSettings is OAuthConfig) {
+//                oauth {
+//                    clientId = authSettings.clientId
+//                    clientKey = authSettings.clientKey
+//                    token = authSettings.token
+//                }
+//            } else {
+//                onlyClient {
+//                    clientId = authSettings.clientId
+//                    clientKey = authSettings.clientKey
+//                }
+//            }
+//        }
+//        defaultRequest {
+//            headersOfSerializableObject(apiSettings.credentials)
+//        }
     })
 
     companion object {

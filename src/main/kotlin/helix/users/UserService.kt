@@ -1,5 +1,6 @@
 package helix.users
 
+import helix.auth.basic.OnlyClientAuthConfig
 import helix.exceptions.BadRequestException
 import helix.extensions.ActiveExtensionsResponse
 import helix.extensions.ExtensionsResponse
@@ -18,8 +19,8 @@ import kotlinx.serialization.UnstableDefault
 @UnstableDefault
 class UserService : ResourceService {
 
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(apiSettings, httpClientEngineConfig)
+    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
+            : super(httpClientEngineConfig, authSettings)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

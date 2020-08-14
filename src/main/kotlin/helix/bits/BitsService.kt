@@ -1,5 +1,6 @@
 package helix.bits
 
+import helix.auth.basic.OnlyClientAuthConfig
 import helix.http.ResourceService
 import helix.http.credentials.ApiSettings
 import helix.shared.model.request.Period
@@ -12,8 +13,8 @@ import java.time.Instant
 class BitsService : ResourceService {
 
 
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(apiSettings, httpClientEngineConfig)
+    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
+            : super(httpClientEngineConfig, authSettings)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 
