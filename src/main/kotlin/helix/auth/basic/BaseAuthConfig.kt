@@ -1,10 +1,10 @@
 package helix.auth.basic
 
-open class OnlyClientAuthConfig {
+open class BaseAuthConfig {
 
     var clientKey: String = "Client-ID"
 
     lateinit var clientId: String
 
-    var sendWithoutRequest: Boolean = false
+    var sendWithoutRequest: Boolean = true
 }

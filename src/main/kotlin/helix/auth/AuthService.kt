@@ -1,8 +1,10 @@
 package helix.auth
 
-import helix.auth.model.request.OauthAuthorizeRequestModel
+import helix.auth.model.request.OauthAppTokenRequestModel
 import helix.auth.model.request.OauthRevokeRequestModel
-import helix.auth.model.response.TokenValidation
+import helix.auth.model.request.OauthUserTokenRequestModel
+import helix.auth.model.response.AppToken
+import helix.auth.model.response.UserToken
 import helix.http.extensions.headersOfSerializableObject
 import helix.http.extensions.parametersOfSerializableObject
 import io.ktor.client.HttpClient
@@ -27,8 +29,15 @@ class AuthService(
     }
 
     @ImplicitReflectionSerializer
-    suspend fun authorizeAppForUser(requestModel: OauthAuthorizeRequestModel): HttpResponse {
+    suspend fun requestUserToken(requestModel: OauthUserTokenRequestModel): HttpResponse {
         return httpClient.get("https://id.twitch.tv/oauth2/authorize") {
+            parametersOfSerializableObject(requestModel)
+        }
+    }
+
+    @ImplicitReflectionSerializer
+    suspend fun requestAppToken(requestModel: OauthAppTokenRequestModel): AppToken {
+        return httpClient.post("https://id.twitch.tv/oauth2/token") {
             parametersOfSerializableObject(requestModel)
         }
     }
@@ -41,7 +50,7 @@ class AuthService(
         }
     }
 
-    suspend fun validateUser(token: String): TokenValidation {
+    suspend fun validateUser(token: String): UserToken {
         return httpClient.get("https://id.twitch.tv/oauth2/validate") {
             header("Authorization", "OAuth $token")
         }

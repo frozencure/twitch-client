@@ -1,7 +1,7 @@
 package util
 
+import helix.auth.model.AuthCredentials
 import helix.http.ResourceService
-import helix.http.credentials.ApiSettings
 import helix.http.model.AbstractResource
 import helix.http.model.array.CollectionResponse
 import helix.http.model.array.HelixArrayDTO
@@ -19,8 +19,8 @@ data class TestDTO(val test: String) : AbstractResource()
 
 class TestService : ResourceService {
 
-    constructor(apiSettings: ApiSettings, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(apiSettings, httpClientEngineConfig)
+    constructor(credentials: AuthCredentials, httpClientEngineConfig: HttpClientEngineConfig)
+            : super(credentials, httpClientEngineConfig)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

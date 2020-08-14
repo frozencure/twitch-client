@@ -1,9 +1,8 @@
 package helix.streams
 
-import helix.auth.basic.OnlyClientAuthConfig
+import helix.auth.model.AuthCredentials
 import helix.exceptions.BadRequestException
 import helix.http.ResourceService
-import helix.http.credentials.ApiSettings
 import helix.streams.markers.StreamMarkerResponse
 import helix.streams.markers.UserStreamMarkersResponse
 import helix.streams.markers.model.StreamMarkerRequest
@@ -12,6 +11,7 @@ import helix.streams.tags.StreamTagsResponse
 import helix.streams.tags.model.ReplaceTagsRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.apache.ApacheEngineConfig
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
@@ -22,8 +22,8 @@ import io.ktor.http.contentType
 
 class StreamService : ResourceService {
 
-    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
-            : super(httpClientEngineConfig, authSettings)
+    constructor(credentials: AuthCredentials, engineConfig: HttpClientEngineConfig = ApacheEngineConfig())
+            : super(credentials, engineConfig)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

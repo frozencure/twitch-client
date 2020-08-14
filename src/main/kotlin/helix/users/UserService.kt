@@ -1,15 +1,15 @@
 package helix.users
 
-import helix.auth.basic.OnlyClientAuthConfig
+import helix.auth.model.AuthCredentials
 import helix.exceptions.BadRequestException
 import helix.extensions.ActiveExtensionsResponse
 import helix.extensions.ExtensionsResponse
 import helix.extensions.model.active.ActiveExtensions
 import helix.http.ResourceService
-import helix.http.credentials.ApiSettings
 import helix.users.model.ChangeFollowRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.apache.ApacheEngineConfig
 import io.ktor.client.request.*
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
@@ -19,8 +19,8 @@ import kotlinx.serialization.UnstableDefault
 @UnstableDefault
 class UserService : ResourceService {
 
-    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
-            : super(httpClientEngineConfig, authSettings)
+    constructor(credentials: AuthCredentials, engineConfig: HttpClientEngineConfig = ApacheEngineConfig())
+            : super(credentials, engineConfig)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

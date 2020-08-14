@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TokenValidation(
+data class UserToken(
     @SerialName("client_id")
     val clientId: String,
     @SerialName("login")

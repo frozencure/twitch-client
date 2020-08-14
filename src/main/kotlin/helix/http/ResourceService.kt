@@ -1,11 +1,12 @@
 package helix.http
 
-import helix.auth.basic.OnlyClientAuthConfig
-import helix.auth.basic.onlyClient
-import helix.auth.oauth.OAuthConfig
+import helix.auth.basic.default
+import helix.auth.model.AuthCredentials
+import helix.auth.model.OAuthCredentials
 import helix.auth.oauth.oauth
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.apache.ApacheEngineConfig
 import io.ktor.client.features.auth.Auth
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -13,29 +14,29 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 abstract class ResourceService(
     protected val httpClient: HttpClient
 ) {
-    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
+    constructor(
+        credentials: AuthCredentials,
+        httpClientEngineConfig: HttpClientEngineConfig = ApacheEngineConfig()
+    )
             : this(HttpClient {
         engine { httpClientEngineConfig }
         install(JsonFeature) {
             serializer = KotlinxSerializer()
         }
-//        install(Auth) {
-//            if(authSettings is OAuthConfig) {
-//                oauth {
-//                    clientId = authSettings.clientId
-//                    clientKey = authSettings.clientKey
-//                    token = authSettings.token
-//                }
-//            } else {
-//                onlyClient {
-//                    clientId = authSettings.clientId
-//                    clientKey = authSettings.clientKey
-//                }
-//            }
-//        }
-//        defaultRequest {
-//            headersOfSerializableObject(apiSettings.credentials)
-//        }
+        install(Auth) {
+            if (credentials is OAuthCredentials) {
+                oauth {
+                    clientId = credentials.clientId
+                    clientKey = credentials.clientKey
+                    token = credentials.token
+                }
+            } else {
+                default {
+                    clientId = credentials.clientId
+                    clientKey = credentials.clientKey
+                }
+            }
+        }
     })
 
     companion object {

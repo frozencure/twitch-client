@@ -5,7 +5,7 @@ import helix.auth.model.AuthScope
 import kotlinx.serialization.*
 
 @Serializable
-data class OauthAuthorizeRequestModel(
+data class OauthUserTokenRequestModel(
     @SerialName("client_id")
     val clientId: String,
     @SerialName("redirect_uri")
@@ -22,7 +22,7 @@ data class OauthAuthorizeRequestModel(
 )
 
 @Serializer(forClass = List::class)
-private object AuthScopeListSerializer : KSerializer<List<AuthScope>> {
+internal object AuthScopeListSerializer : KSerializer<List<AuthScope>> {
     override val descriptor: SerialDescriptor
         get() = PrimitiveDescriptor("AuthScopeList", PrimitiveKind.STRING)
 

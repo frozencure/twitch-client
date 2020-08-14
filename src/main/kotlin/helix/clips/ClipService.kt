@@ -1,11 +1,11 @@
 package helix.clips
 
-import helix.auth.basic.OnlyClientAuthConfig
+import helix.auth.model.AuthCredentials
 import helix.exceptions.BadRequestException
 import helix.http.ResourceService
-import helix.http.credentials.ApiSettings
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.apache.ApacheEngineConfig
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
@@ -13,8 +13,8 @@ import java.time.Instant
 
 class ClipService : ResourceService {
 
-    constructor(httpClientEngineConfig: HttpClientEngineConfig, authSettings: OnlyClientAuthConfig)
-            : super(httpClientEngineConfig, authSettings)
+    constructor(credentials: AuthCredentials, engineConfig: HttpClientEngineConfig = ApacheEngineConfig())
+            : super(credentials, engineConfig)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

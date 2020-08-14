@@ -27,7 +27,7 @@ In this case, the API credentials are converted to a `Map<String, Any?>` with th
 
 This library currently supports only the *Implicit OAuth code flow*. It is advised to first go through the [Twitch API reference authentication section](https://dev.twitch.tv/docs/authentication) for a more in depth understanding.
 
-#### 1.2.1 Getting an OAuth token for an user
+#### 1.2.1 Getting an OAuth token for a user
 
 The first step in the OAuth flow is to register the Twitch user with your app. This means that the user will have to authorize your app to access his private Twitch data or perform requests on his behalf.
 
@@ -82,6 +82,11 @@ val userService = UserService(
         println(userService.getUser("frozencure").resource.toString())
     }
 ```
+
+### 1.2.2 Getting an app OAuth token
+
+You can simply obtain an app access token by simply calling the `requestAppToken(requestModel: OauthAppTokenRequestModel)` function.
+Firstly, you will have to create an instance of the `OauthAppTokenRequestModel` class, which has the following fields:
 
 ### 1.2.2 OAuth token validation
 
