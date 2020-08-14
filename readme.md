@@ -149,8 +149,8 @@ val requestModel = OauthAppTokenRequestModel(
     * DELETE delete user follow :heavy_check_mark:
     * PUT update user :heavy_check_mark:
     * GET user extensions :heavy_check_mark:
-    * GET user active extensions :x:
-    * PUT update user extensions :x:
+    * GET user active extensions :heavy_check_mark:
+    * PUT update user extensions :heavy_check_mark:
 * Videos
     * GET videos :heavy_check_mark:
 * Clips
