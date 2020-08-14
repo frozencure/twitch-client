@@ -171,9 +171,9 @@ val requestModel = OauthAppTokenRequestModel(
 * Extensions
     * GET extension transactions :heavy_check_mark:
 * Entitlements
-    * POST Create entitlement grants upload URL :x:
-    * GET code status :x:
-    * POST redeem code :x:
+    * POST Create entitlement grants upload URL :heavy_check_mark:
+    * GET code status :heavy_check_mark:
+    * POST redeem code :heavy_check_mark:
 * Moderation
     * POST check auto-mod status :heavy_check_mark:
     * GET banned events :heavy_check_mark:
