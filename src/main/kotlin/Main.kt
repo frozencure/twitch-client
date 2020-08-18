@@ -1,9 +1,11 @@
+import helix.analytics.AnalyticsService
 import helix.auth.AuthService
 import helix.auth.model.AuthCredentials
 import helix.auth.model.AuthScope
 import helix.auth.model.OAuthCredentials
 import helix.auth.model.request.OauthAppTokenRequestModel
 import helix.auth.model.request.OauthUserTokenRequestModel
+import helix.channels.ChannelService
 import helix.games.GameService
 import helix.streams.StreamService
 import helix.users.UserService
@@ -22,10 +24,11 @@ fun main() {
 //    val credentials = AuthCredentials("nyufzvu4k8h80iq0r7ya4zx1fsas7d")
     val credentials = OAuthCredentials("4j4u933wfyaayp71pxilgqrva7693c", "nyufzvu4k8h80iq0r7ya4zx1fsas7d")
     val streamService = StreamService(credentials)
-    val userService = UserService(credentials)
     val gameService = GameService(credentials)
+    val channelService = ChannelService(credentials)
+    val analyticsService = AnalyticsService(credentials)
     runBlocking {
-        print(gameService.getGames("league of leg").resources)
+//        print(gameService.getGames("league of legends").resources)
     }
 
 }

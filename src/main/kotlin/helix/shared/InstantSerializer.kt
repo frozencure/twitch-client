@@ -3,7 +3,7 @@ package helix.shared
 import kotlinx.serialization.*
 import java.time.Instant
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
+import java.time.temporal.ChronoUnit
 
 @Serializer(forClass = Instant::class)
 object InstantSerializer : KSerializer<Instant> {
@@ -12,7 +12,7 @@ object InstantSerializer : KSerializer<Instant> {
         PrimitiveDescriptor("Instant", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: Instant) {
-        encoder.encodeString(DateTimeFormatter.ISO_DATE_TIME.format(value))
+        encoder.encodeString(DateTimeFormatter.ISO_INSTANT.format(value.truncatedTo(ChronoUnit.SECONDS)))
     }
 
     override fun deserialize(decoder: Decoder): Instant {
