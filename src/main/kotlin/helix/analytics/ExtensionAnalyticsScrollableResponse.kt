@@ -9,6 +9,9 @@ import io.ktor.client.call.receive
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.runBlocking
 
+/**
+ * A collection response that can contain multiple pages of extension reports.
+ */
 class ExtensionAnalyticsScrollableResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
     ScrollableResponse<ExtensionReport>(httpResponse, httpClient) {
     override val helixArrayDTO: HelixArrayDTO<ExtensionReport> = runBlocking {

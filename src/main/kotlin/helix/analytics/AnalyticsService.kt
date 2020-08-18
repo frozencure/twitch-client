@@ -1,6 +1,7 @@
 package helix.analytics
 
 import helix.auth.model.AuthCredentials
+import helix.auth.model.AuthScope
 import helix.http.ResourceService
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig
@@ -11,29 +12,37 @@ import io.ktor.client.request.parameter
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import helix.auth.model.AuthScope
 
 /**
- *
+ * Service class that encapsulates the *Analytics* endpoints:
+ * *GET game analytics* and *GET extension analytics*.
  */
 class AnalyticsService : ResourceService {
 
 
+    /**
+     * Creates a new analytics service object given some authentication credentials and a HTTP client configuration.
+     * @param credentials The authentication credentials: can be OAuth or simple credentials with only a client ID
+     * @param engineConfig Engine configuration for the HTTP client. Apache engine is used as default.
+     */
     constructor(credentials: AuthCredentials, engineConfig: HttpClientEngineConfig = ApacheEngineConfig())
             : super(credentials, engineConfig)
 
+    /**
+     * Creates a new analytics service object given an HTTP client.
+     */
     constructor(httpClient: HttpClient) : super(httpClient)
 
-    companion object {
-        const val BASE_URL = "${ResourceService.BASE_URL}/analytics"
+    private companion object {
+        private const val BASE_URL = "${ResourceService.BASE_URL}/analytics"
     }
 
 
     /**
      * Gets a URL that game developers can use to download analytics reports (CSV files) for their games.
      * The URL is valid for 5 minutes.
-     * Requires [AuthScope.ANALYTICS_READ_GAMES]
-     * For more information see [the Twitch developer reference](https://dev.twitch.tv/docs/api/reference#get-game-analytics)
+     * Requires [AuthScope.ANALYTICS_READ_GAMES].
+     * For more information see the [Twitch developer reference](https://dev.twitch.tv/docs/api/reference#get-game-analytics)
      *
      * @param gameId If this is specified, the returned URL points to an analytics report for just the specified game. If this is not specified, the response includes multiple URLs (paginated), pointing to separate analytics reports for each of the authenticated user’s games.
      * @param startedAt Starting date/time for returned reports. If this is provided, [endedAt] also must be specified. If [startedAt] is earlier than the default start date, the default date is used.
@@ -63,8 +72,8 @@ class AnalyticsService : ResourceService {
     /**
      * Gets a URL that extension developers can use to download analytics reports (CSV files) for their extensions.
      * The URL is valid for 5 minutes.
-     * Requires [AuthScope.ANALYTICS_READ_EXTENSIONS]
-     * For more information see [the Twitch developer reference](https://dev.twitch.tv/docs/api/reference#get-extension-analytics)
+     * Requires [AuthScope.ANALYTICS_READ_EXTENSIONS].
+     * For more information see the [Twitch developer reference](https://dev.twitch.tv/docs/api/reference#get-extension-analytics)
      *
      * @param extensionId If this is specified, the returned URL points to an analytics report for just the specified extension. If this is not specified, the response includes multiple URLs (paginated), pointing to separate analytics reports for each of the authenticated user’s extensions.
      * @param startedAt Starting date/time for returned reports. If this is provided, [endedAt] also must be specified. If [startedAt] is earlier than the default start date, the default date is used.

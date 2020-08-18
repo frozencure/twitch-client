@@ -25,6 +25,11 @@ abstract class ScrollableResponse<T : AbstractResource>(
             }
         }
 
+    /**
+     * When a collection has more than a certain number of elements, it will be split into multiple pages.
+     * If the collection response has multiple pages, a cursor will be used to access the next page.
+     * @return The next part of the collection, if the current response has a cursor.
+     */
     abstract suspend fun nextPage(): CollectionResponse<T>?
 
 }
