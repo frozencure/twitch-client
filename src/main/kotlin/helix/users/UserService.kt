@@ -14,9 +14,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import kotlinx.serialization.UnstableDefault
 
-@UnstableDefault
 class UserService : ResourceService {
 
     constructor(credentials: AuthCredentials, engineConfig: HttpClientEngineConfig = ApacheEngineConfig())

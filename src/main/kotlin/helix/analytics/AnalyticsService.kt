@@ -11,6 +11,7 @@ import io.ktor.client.request.parameter
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import helix.auth.model.AuthScope
 
 class AnalyticsService : ResourceService {
 
@@ -25,6 +26,20 @@ class AnalyticsService : ResourceService {
     }
 
 
+    /**
+     * Gets a URL that game developers can use to download analytics reports (CSV files) for their games.
+     * The URL is valid for 5 minutes.
+     * Requires [AuthScope.ANALYTICS_READ_GAMES]
+     * For more information see [the Twitch developer reference](https://dev.twitch.tv/docs/api/reference#get-game-analytics)
+     *
+     * @param gameId If this is specified, the returned URL points to an analytics report for just the specified game. If this is not specified, the response includes multiple URLs (paginated), pointing to separate analytics reports for each of the authenticated user’s games.
+     * @param startedAt Starting date/time for returned reports. If this is provided, [endedAt] also must be specified. If [startedAt] is earlier than the default start date, the default date is used.
+     * @param endedAt Ending date/time for returned reports. If this is provided, [startedAt] also must be specified. If [endedAt] is later than the default end date, the default date is used.
+     * @param first Maximum number of objects to return. Maximum: 100, Default: 100
+     * @param type Type of analytics report that is returned. Valid values: "overview_v1", "overview_v2". Default: all report types for the authenticated user’s games.
+     * @return A collection of game reports that can have multiple, scrollable pages.
+     * @sample samples.getGameAnalytics
+     */
     suspend fun getGameAnalytics(
         gameId: Long? = null,
         startedAt: Instant? = null,
@@ -42,6 +57,20 @@ class AnalyticsService : ResourceService {
         )
 
 
+    /**
+     * Gets a URL that extension developers can use to download analytics reports (CSV files) for their extensions.
+     * The URL is valid for 5 minutes.
+     * Requires [AuthScope.ANALYTICS_READ_EXTENSIONS]
+     * For more information see [the Twitch developer reference](https://dev.twitch.tv/docs/api/reference#get-extension-analytics)
+     *
+     * @param extensionId If this is specified, the returned URL points to an analytics report for just the specified extension. If this is not specified, the response includes multiple URLs (paginated), pointing to separate analytics reports for each of the authenticated user’s extensions.
+     * @param startedAt Starting date/time for returned reports. If this is provided, [endedAt] also must be specified. If [startedAt] is earlier than the default start date, the default date is used.
+     * @param endedAt Ending date/time for returned reports. If this is provided, [startedAt] also must be specified. If [endedAt] is later than the default end date, the default date is used.
+     * @param first Maximum number of objects to return. Maximum: 100, Default: 100
+     * @param type Type of analytics report that is returned. Valid values: "overview_v1", "overview_v2". Default: all report types for the authenticated user’s games.
+     * @return A collection of game reports that can have multiple, scrollable pages.
+     * @sample samples.getExtensionAnalytics
+     */
     suspend fun getExtensionAnalytics(
         extensionId: Long? = null,
         startedAt: Instant? = null,

@@ -1,3 +1,4 @@
+import helix.HelixClient
 import helix.analytics.AnalyticsService
 import helix.auth.AuthService
 import helix.auth.model.AuthCredentials
@@ -23,12 +24,12 @@ fun main() {
 //    authenticateApp()
 //    val credentials = AuthCredentials("nyufzvu4k8h80iq0r7ya4zx1fsas7d")
     val credentials = OAuthCredentials("4j4u933wfyaayp71pxilgqrva7693c", "nyufzvu4k8h80iq0r7ya4zx1fsas7d")
-    val streamService = StreamService(credentials)
+    val helix = HelixClient(credentials)
     val gameService = GameService(credentials)
     val channelService = ChannelService(credentials)
     val analyticsService = AnalyticsService(credentials)
     runBlocking {
-//        print(gameService.getGames("league of legends").resources)
+        print(helix.games.getGames("league of legends").resources)
     }
 
 }
