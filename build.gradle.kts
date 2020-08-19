@@ -33,6 +33,12 @@ tasks.dokkaHtml {
         configureEach {
             includes = listOf("readme.md")
             samples = getSampleFiles()
+            sourceLink {
+                path = "src/main/kotlin"
+                url = "https://github.com/frozencure/twitch-client/" +
+                        "tree/develop/src/main/kotlin"
+                lineSuffix = "#L"
+            }
         }
     }
 }
