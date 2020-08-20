@@ -7,6 +7,22 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.Instant
 
+/**
+ * Data transfer object for a clip.
+ * One-to-one mapping to the Twitch clip JSON object.
+ * @constructor Creates a new clip object.
+ * @param broadcasterId The ID of the user that owns the broadcast from which the clip was created.
+ * @param broadcasterName The name of user that owns the broadcast from which the clip was created.
+ * @param createdAt The timestamp of when the clip was created.
+ * @param creatorId The ID of the user that created the clip.
+ * @param creatorName The name of the user that created the clip.
+ * @param embedUrl URL that can be used to embed the clip inside a web page.
+ * @param gameId The ID of the game that was being played when the clip was created.
+ * @param title The title of the clip.
+ * @param url The URL where the clip can be viewed.
+ * @param videoId ID of the video from which the clip was created.
+ * @param viewCount Number of times the clip has been viewed.
+ */
 @Serializable
 data class Clip(
     @SerialName("broadcaster_id")

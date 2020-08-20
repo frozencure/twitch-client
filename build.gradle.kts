@@ -47,7 +47,8 @@ tasks.dokkaHtml {
                 lineSuffix = "#L"
             }
             perPackageOption {
-                prefix = "samples"
+                prefix = "samples."
+                reportUndocumented = false
                 suppress = true
             }
         }

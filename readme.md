@@ -10,12 +10,12 @@ A modern Kotlin library for accessing the newest Twitch Helix API.
 
 In order to get a client id for your twitch extension follow [this guide](https://dev.twitch.tv/docs/api).
 
-Example of performing a GET user request
+Example of performing a GET user request:
 ```
 val credentials = AuthCredentials("<app client id>")
-val userService = UserService(credentials)
+val helixClient = HelixClient(credentials)
 runBlocking {
-    println(userService.getUser("frozencure").resource.toString())
+    println(helixClient.users.getUser("frozencure").resource.toString())
 }
 ```
 
@@ -138,9 +138,9 @@ val requestModel = OauthAppTokenRequestModel(
 ```
 
 
-## 2. Currently supported features
+## 2. Features
 
-### 2.1 Endpoints
+### 2.1 Currently supported endpoints
 
 * Users
     * GET users :heavy_check_mark:
@@ -174,6 +174,7 @@ val requestModel = OauthAppTokenRequestModel(
     * POST Create entitlement grants upload URL :heavy_check_mark:
     * GET code status :heavy_check_mark:
     * POST redeem code :heavy_check_mark:
+    * GET drops entitlements :heavy_check_mark:
 * Moderation
     * POST check auto-mod status :heavy_check_mark:
     * GET banned events :heavy_check_mark:
@@ -198,7 +199,7 @@ val requestModel = OauthAppTokenRequestModel(
     * GET hype train events :heavy_check_mark:
     * PATCH modify channel information :heavy_check_mark:
     
-### 2.2 Webhooks
+### 2.2 Supported webhooks
 * Subscribe To/Unsubscribe From Events :x:
 * Topic: User Follows :x:
 * Topic: Stream Changed :x:
@@ -211,6 +212,10 @@ val requestModel = OauthAppTokenRequestModel(
 ### 2.3 Authentication
 * User access token :heavy_check_mark:
 * App access token :heavy_check_mark:
+
+### 2.4 Documentation
+
+For a complete reference of all public classes and members visit [this page](https://frozencure.github.io/twitch-client/twitch-client/).
     
 ## 3. Dependencies
 
