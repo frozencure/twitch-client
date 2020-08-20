@@ -3,8 +3,8 @@ package channels
 import helix.channels.ChannelService
 import helix.channels.ChannelsResponse
 import helix.channels.CommercialResponse
-import helix.channels.HypeTrainScrollableResponse
-import helix.channels.model.ModifyChannelBody
+import helix.channels.HypeTrainEventsResponse
+import helix.channels.model.ModifyChannelRequestModel
 import helix.channels.model.commercial.CommercialLength
 import helix.channels.model.commercial.CommercialRequest
 import io.ktor.client.statement.HttpResponse
@@ -74,7 +74,7 @@ class `Given GET hype train events is called with broadcaster id and event id` {
 
     private val eventId = "1b0AsbInCHZW2SQFQkCzqN07Ib2"
 
-    private val hypeTrainResponse = runBlocking<HypeTrainScrollableResponse> {
+    private val hypeTrainResponse = runBlocking<HypeTrainEventsResponse> {
         ChannelService(HttpClientMockBuilder.withJsonContent(ChannelsTestData.HYPE_TRAIN_EVENTS_WITH_PAGINATION))
             .getHypeTrainEvents(broadcasterId, eventId)
     }
@@ -106,7 +106,7 @@ class `Given GET hype train events is called with broadcaster id and event id` {
 
         private val eventId = "1b0AsbInCHZW2SQFQkCzqN07Ib2"
 
-        private val hypeTrainResponse = runBlocking<HypeTrainScrollableResponse?> {
+        private val hypeTrainResponse = runBlocking<HypeTrainEventsResponse?> {
             ChannelService(HttpClientMockBuilder.withJsonContent(ChannelsTestData.HYPE_TRAIN_EVENTS_WITH_PAGINATION))
                 .getHypeTrainEvents(broadcasterId, eventId).nextPage()
         }
@@ -169,7 +169,7 @@ class `Given PATCH modify channel information is called` {
     @Test
     fun `then request has broadcaster id, game id, title, language in body`() = assert(
         (modifyInfoResponse.request.content as TextContent).text == Json.toJson(
-            ModifyChannelBody(
+            ModifyChannelRequestModel(
                 gameId.toString(),
                 title,
                 language

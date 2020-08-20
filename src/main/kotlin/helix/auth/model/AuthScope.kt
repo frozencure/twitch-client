@@ -3,6 +3,11 @@ package helix.auth.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * An enum that contains all the current authentication scopes available for the Twitch Helix API.
+ * @constructor Creates a new authentication scope value, given a [String].
+ * @param scope The scope in [String] format.
+ */
 @Serializable
 enum class AuthScope(val scope: String) {
     /**

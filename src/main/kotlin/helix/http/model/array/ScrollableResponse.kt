@@ -1,14 +1,15 @@
 package helix.http.model.array
 
 import helix.http.model.AbstractResource
-import io.ktor.client.HttpClient
-import io.ktor.client.request.headers
-import io.ktor.client.request.parameter
-import io.ktor.client.request.request
-import io.ktor.client.request.url
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 
+/**
+ * Generic class used for all Twitch Helix responses that can return more than one page of results.
+ * Holds the state of the last request and provides an easy way of requesting the next pages.
+ * @param httpClient The HTTP client necessary for making requests for the next parts of the collection (pages).
+ */
 abstract class ScrollableResponse<T : AbstractResource>(
     httpResponse: HttpResponse,
     protected val httpClient: HttpClient

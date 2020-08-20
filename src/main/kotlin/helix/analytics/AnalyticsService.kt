@@ -3,22 +3,21 @@ package helix.analytics
 import helix.auth.model.AuthCredentials
 import helix.auth.model.AuthScope
 import helix.http.ResourceService
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.HttpClientEngineConfig
-import io.ktor.client.engine.apache.ApacheEngineConfig
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
+import io.ktor.client.*
+import io.ktor.client.engine.*
+import io.ktor.client.engine.apache.*
+import io.ktor.client.request.*
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import helix.analytics.model.GameReport
+import helix.analytics.model.ExtensionReport
 
 /**
- * Service class that encapsulates the *Analytics* endpoints:
+ * Service class that can be used to access *Analytics* endpoints:
  * *GET game analytics* and *GET extension analytics*.
  */
 class AnalyticsService : ResourceService {
-
 
     /**
      * Creates a new analytics service object given some authentication credentials and a HTTP client configuration.
@@ -30,13 +29,13 @@ class AnalyticsService : ResourceService {
 
     /**
      * Creates a new analytics service object given an HTTP client.
+     * @param httpClient The HTTP client.
      */
     constructor(httpClient: HttpClient) : super(httpClient)
 
     private companion object {
         private const val BASE_URL = "${ResourceService.BASE_URL}/analytics"
     }
-
 
     /**
      * Gets a URL that game developers can use to download analytics reports (CSV files) for their games.
@@ -49,7 +48,7 @@ class AnalyticsService : ResourceService {
      * @param endedAt Ending date/time for returned reports. If this is provided, [startedAt] also must be specified. If [endedAt] is later than the default end date, the default date is used.
      * @param first Maximum number of objects to return. Maximum: 100, Default: 100
      * @param type Type of analytics report that is returned. Valid values: "overview_v1", "overview_v2". Default: all report types for the authenticated user’s games.
-     * @return A collection of game reports that can have multiple, scrollable pages.
+     * @return A [GameAnalyticsScrollableResponse] that holds a collection of [GameReport] resources (can have multiple pages).
      * @sample samples.getGameAnalytics
      */
     suspend fun getGameAnalytics(
@@ -68,7 +67,6 @@ class AnalyticsService : ResourceService {
             }, httpClient
         )
 
-
     /**
      * Gets a URL that extension developers can use to download analytics reports (CSV files) for their extensions.
      * The URL is valid for 5 minutes.
@@ -80,7 +78,7 @@ class AnalyticsService : ResourceService {
      * @param endedAt Ending date/time for returned reports. If this is provided, [startedAt] also must be specified. If [endedAt] is later than the default end date, the default date is used.
      * @param first Maximum number of objects to return. Maximum: 100, Default: 100
      * @param type Type of analytics report that is returned. Valid values: "overview_v1", "overview_v2". Default: all report types for the authenticated user’s games.
-     * @return A collection of game reports that can have multiple, scrollable pages.
+     * @return A [ExtensionAnalyticsScrollableResponse] that holds a collection of [ExtensionReport] resources (can have multiple pages).
      * @sample samples.getExtensionAnalytics
      */
     suspend fun getExtensionAnalytics(
@@ -119,6 +117,4 @@ class AnalyticsService : ResourceService {
         parameter("first", first)
         type?.let { parameter("type", type) }
     }
-
-
 }

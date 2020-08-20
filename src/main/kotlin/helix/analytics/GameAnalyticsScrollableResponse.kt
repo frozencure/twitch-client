@@ -9,7 +9,8 @@ import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.runBlocking
 
 /**
- * A collection response that can contain multiple pages of game reports.
+ * A collection response that has one or multiple pages of game reports as payload.
+ * @constructor Creates a new games analytics response object.
  */
 class GameAnalyticsScrollableResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
     ScrollableResponse<GameReport>(httpResponse, httpClient) {

@@ -1,10 +1,13 @@
 package helix.auth.basic
 
+/**
+ * Holds the configuration properties for the basic Twitch Helix authentication, where only a client ID is used.
+ */
 open class BaseAuthConfig {
 
-    var clientKey: String = "Client-ID"
+    internal var clientKey: String = "Client-ID"
 
-    lateinit var clientId: String
+    internal lateinit var clientId: String
 
-    var sendWithoutRequest: Boolean = true
+    internal var sendWithoutRequest: Boolean = true
 }

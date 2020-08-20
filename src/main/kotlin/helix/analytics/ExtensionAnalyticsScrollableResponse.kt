@@ -10,7 +10,8 @@ import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.runBlocking
 
 /**
- * A collection response that can contain multiple pages of extension reports.
+ * A collection response has one or multiple pages of extension reports as payload.
+ * @constructor Creates a new extension analytics response object.
  */
 class ExtensionAnalyticsScrollableResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
     ScrollableResponse<ExtensionReport>(httpResponse, httpClient) {

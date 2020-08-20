@@ -8,7 +8,7 @@ import java.time.Instant
 
 
 fun getExtensionAnalytics() {
-    val credentials = OAuthCredentials("4j4u933wfyaayp71pxilgqrva7693c", "nyufzvu4k8h80iq0r7ya4zx1fsas7d")
+    val credentials = OAuthCredentials("<OAuth access token here>", "<App Client ID here>")
     val helixClient = HelixClient(credentials)
     runBlocking {
         print(helixClient.analytics.getExtensionAnalytics(12345, Instant.now() - Duration.ofDays(1), Instant.now()))
@@ -16,7 +16,7 @@ fun getExtensionAnalytics() {
 }
 
 fun getGameAnalytics() {
-    val credentials = OAuthCredentials("4j4u933wfyaayp71pxilgqrva7693c", "nyufzvu4k8h80iq0r7ya4zx1fsas7d")
+    val credentials = OAuthCredentials("<OAuth access token here>", "<App Client ID here>")
     val helixClient = HelixClient(credentials)
     runBlocking {
         print(helixClient.analytics.getGameAnalytics(12345, Instant.now() - Duration.ofDays(1), Instant.now()))

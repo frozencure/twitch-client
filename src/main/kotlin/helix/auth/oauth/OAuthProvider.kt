@@ -9,6 +9,10 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.auth.AuthScheme
 import io.ktor.http.auth.HttpAuthHeader
 
+/**
+ * The OAuth Twitch Helix authentication, where a client ID as well as a OAuth token are used.
+ * Can be used with both user- and app access tokens.
+ */
 fun Auth.oauth(block: OAuthConfig.() -> Unit) {
     with(OAuthConfig().apply(block)) {
         providers.add(OAuthProvider(clientId, clientKey, token, sendWithoutRequest))
@@ -17,7 +21,7 @@ fun Auth.oauth(block: OAuthConfig.() -> Unit) {
 
 
 
-class OAuthProvider(
+internal class OAuthProvider(
     private val clientId: String,
     private val clientKey: String,
     private val token: String,

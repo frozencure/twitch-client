@@ -1,5 +1,8 @@
 package helix.channels.model.commercial
 
+/**
+ * Enum that holds all the possible commercial lengths.
+ */
 enum class CommercialLength(val length: Int) {
     THIRTY(30),
     SIXTY(60),
