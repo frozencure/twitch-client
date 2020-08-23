@@ -5,25 +5,98 @@ A modern Kotlin library for accessing the newest Twitch Helix API.
 
 ## 1. Getting started
 
-### 1.1 Using only a client ID (without OAuth)
+### 1.1 Importing the library
 
 
-In order to get a client id for your twitch extension follow [this guide](https://dev.twitch.tv/docs/api).
+1. Add the Bintray maven repository to the `repositories` block:
+- Gradle Kotlin DSL:
+    ```
+    repositories {
+        mavenCentral()
+        maven {
+            setUrl("https://dl.bintray.com/frozencure/maven")
+        }
+    }
+    ```
+- Gradle Groovy DSL:
+    ```
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://dl.bintray.com/frozencure/maven'
+        }
+    }
+    ```
+- Maven:
+    ```
+    <repository>
+        <id>twitch-client-repo</id>
+        <url>https://dl.bintray.com/frozencure/maven</url>
+    </repository>
+    ```
 
-Example of performing a GET user request:
-```
-val credentials = AuthCredentials("<app client id>")
-val helixClient = HelixClient(credentials)
-runBlocking {
-    println(helixClient.users.getUser("frozencure").resource.toString())
-}
-```
+2. Add the library as a dependency:
+* Gradle Kotlin DSL:
+    ```
+    dependencies {
+        ...
+        implementation("com.github.frozencure:twitch-client:0.0.1")
+    }
+    ```
+* Gradle Groovy DSL:
+    ```
+    dependencies {
+        ...
+        implementation 'com.github.frozencure:twitch-client:0.0.1'
+    }
+    ```
+* Maven:
+    ```
+    <dependency>
+        <groupId>com.github.frozencure</groupId>
+        <artifactId>twitch-client</artifactId>
+        <version>0.0.1</version>
+        <type>pom</type>
+    </dependency>
+    ```
 
-### 1.2 Using an OAuth token
+### 1.2 Performing requests
 
-This library currently supports only the *Implicit OAuth code flow*. It is advised to first go through the [Twitch API reference authentication section](https://dev.twitch.tv/docs/authentication) for a more in depth understanding.
+* Using only a client ID (without OAuth)
 
-#### 1.2.1 Getting an OAuth token for an user
+    In order to get a client ID for your twitch extension follow [this guide](https://dev.twitch.tv/docs/api).
+
+    Example of performing a GET user request:
+    ```
+    val credentials = AuthCredentials("<app client id>")
+    val helixClient = HelixClient(credentials)
+    runBlocking {
+        println(helixClient.users.getUser().resource.toString())
+    }
+    ```
+* Using an OAuth token:
+
+    Most of the Twitch endpoints require the user/app to be authenticated using the OAuth 2.0 Standard.
+
+    More information about how to retrieve a user token and how the authentication works can be found in [section 2](#2. Authentication) or in the [Twitch API reference authentication section](https://dev.twitch.tv/docs/authentication).
+
+    Example of performing a GET user request:
+    ```
+    val credentials = OauthCredentials("<your access token", "<app client id>")
+    val helixClient = HelixClient(credentials)
+    runBlocking {
+        println(helixClient.users.getUser().resource.toString())
+    }
+    ```
+
+
+## 2. Authentication
+
+### 2.1 Using an OAuth token
+
+This library currently supports the *Implicit OAuth code flow* and *Credentials OAuth code flow*. It is advised to first go through the [Twitch API reference authentication section](https://dev.twitch.tv/docs/authentication) for a more in depth understanding.
+
+#### 2.2.1 Getting an OAuth token for an user
 
 The first step in the OAuth flow is to register the Twitch user with your app. This means that the user will have to authorize your app to access his private Twitch data or perform requests on his behalf.
 
@@ -76,7 +149,7 @@ runBlocking {
 }
 ```
 
-### 1.2.2 OAuth token validation
+### 2.2.2 OAuth token validation
 
 When using OAuth tokens to perform requests, it is advised to periodically validate the token, to make sure that the user didn't revoke access of the app to his data. The Twitch team mentions that failure of doing this can lead revoking the developer API key or throttling of the application.
 
@@ -98,7 +171,7 @@ TokenValidation(
 )
 ```
 
-### 1.2.3 Revoking a token
+### 2.2.3 Revoking a token
 
 To clean up previously obtained access tokens, the `AuthService` offers support for programatically revoking the OAuth tokens:
 ```
@@ -112,7 +185,7 @@ To clean up previously obtained access tokens, the `AuthService` offers support 
     }
 ```
 
-### 1.2.4 Getting an app OAuth token
+### 2.2.4 Getting an app OAuth token
 
 You can simply obtain an app access token by simply calling the `requestAppToken(requestModel: OauthAppTokenRequestModel)` function.
 Firstly, you will have to create an instance of the `OauthAppTokenRequestModel` class, which has the following fields:
@@ -138,9 +211,9 @@ val requestModel = OauthAppTokenRequestModel(
 ```
 
 
-## 2. Features
+## 3. Features
 
-### 2.1 Currently supported endpoints
+### 3.1 Currently supported endpoints
 
 * Users
     * GET users :heavy_check_mark:
@@ -163,8 +236,8 @@ val requestModel = OauthAppTokenRequestModel(
     * GET top games :heavy_check_mark:
     * GET search categories :heavy_check_mark:
 * Analytics
-    * GET extension analytics :x:
-    * GET game analytics :x:
+    * GET extension analytics :heheavy_check_marka:
+    * GET game analytics :heavy_check_mark:
 * Bits
     * GET bits leaderboard :heavy_check_mark:
     * GET cheermotes :x:
@@ -199,7 +272,7 @@ val requestModel = OauthAppTokenRequestModel(
     * GET hype train events :heavy_check_mark:
     * PATCH modify channel information :heavy_check_mark:
     
-### 2.2 Supported webhooks
+### 3.2 Supported webhooks
 * Subscribe To/Unsubscribe From Events :x:
 * Topic: User Follows :x:
 * Topic: Stream Changed :x:
@@ -209,24 +282,24 @@ val requestModel = OauthAppTokenRequestModel(
 * Topic: Channel Ban Change Events :x:
 * Topic: Topic: Subscription Events :x:
 
-### 2.3 Authentication
+### 3.3 Authentication
 * User access token :heavy_check_mark:
 * App access token :heavy_check_mark:
 
-### 2.4 Documentation
+### 3.4 Documentation
 
 For a complete reference of all public classes and members visit [this page](https://frozencure.github.io/twitch-client/twitch-client/).
     
-## 3. Dependencies
+## 4. Dependencies
 
-### 3.1 Ktor client
+### 4.1 Ktor client
 
 - Built on top of the *Ktor* library
 - Reasons for choosing *Ktor* over *Spring Boot*:
     - More lightweight, less complexity
     - Customizable, doesn't include all of the extra dependencies that are brought with Spring Boot
 
-### 3.2 Kotlinx.serializaiton
+### 4.2 Kotlinx.serializaiton
 
 - All JSON operations are done using the *Kotlinx Serialization* library
 - Reasons for choosing *Kotlinx* over other libraries:

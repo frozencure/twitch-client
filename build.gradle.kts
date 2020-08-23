@@ -112,7 +112,7 @@ publishing {
             version = artifactVersion
             from(components["java"])
 
-            artifact(dokkaJar)
+//            artifact(dokkaJar)
             artifact(sourcesJar)
 
             pom.withXml {
