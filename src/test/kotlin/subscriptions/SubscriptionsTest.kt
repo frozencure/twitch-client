@@ -1,8 +1,8 @@
 package subscriptions
 
-import helix.subscriptions.SubscriptionService
-import helix.subscriptions.SubscriptionsResponse
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.subscriptions.SubscriptionService
+import com.github.frozencure.helix.subscriptions.SubscriptionsResponse
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

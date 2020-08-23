@@ -1,8 +1,8 @@
 package samples
 
-import helix.HelixClient
-import helix.auth.model.OAuthCredentials
-import helix.shared.model.request.Period
+import com.github.frozencure.helix.HelixClient
+import com.github.frozencure.helix.auth.model.OAuthCredentials
+import com.github.frozencure.helix.shared.model.request.Period
 import kotlinx.coroutines.runBlocking
 import java.time.Duration
 import java.time.Instant

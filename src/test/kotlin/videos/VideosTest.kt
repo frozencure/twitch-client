@@ -1,12 +1,12 @@
 package videos
 
-import helix.videos.ScrollableVideosResponse
-import helix.videos.VideoResponse
-import helix.videos.VideoService
-import helix.videos.VideosResponse
-import helix.videos.model.VideoType
-import helix.videos.model.VideoVisibility
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.videos.ScrollableVideosResponse
+import com.github.frozencure.helix.videos.VideoResponse
+import com.github.frozencure.helix.videos.VideoService
+import com.github.frozencure.helix.videos.VideosResponse
+import com.github.frozencure.helix.videos.model.VideoType
+import com.github.frozencure.helix.videos.model.VideoVisibility
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

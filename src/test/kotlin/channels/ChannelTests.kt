@@ -1,20 +1,17 @@
 package channels
 
-import helix.channels.ChannelService
-import helix.channels.ChannelsResponse
-import helix.channels.CommercialResponse
-import helix.channels.HypeTrainEventsResponse
-import helix.channels.model.ModifyChannelRequestModel
-import helix.channels.model.commercial.CommercialLength
-import helix.channels.model.commercial.CommercialRequest
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
-import io.ktor.content.TextContent
-import io.ktor.http.HttpStatusCode
+import com.github.frozencure.helix.channels.ChannelService
+import com.github.frozencure.helix.channels.ChannelsResponse
+import com.github.frozencure.helix.channels.CommercialResponse
+import com.github.frozencure.helix.channels.HypeTrainEventsResponse
+import com.github.frozencure.helix.channels.model.ModifyChannelRequestModel
+import com.github.frozencure.helix.channels.model.commercial.CommercialLength
+import com.github.frozencure.helix.channels.model.commercial.CommercialRequest
+import io.ktor.client.statement.*
+import io.ktor.content.*
+import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.UnstableDefault
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json.Default.encodeToString
 import org.junit.Test
 import util.HttpClientMockBuilder
 
@@ -133,16 +130,15 @@ class `Given POST start commercial with broadcaster id and length is called` {
             .startCommercial(broadcasterId, length)
     }
 
-    @OptIn(UnstableDefault::class)
-    @ImplicitReflectionSerializer
     @Test
     fun `then request has broadcaster id and length in body`() = assert(
-        (commercialResponse.httpResponse.request.content as TextContent).text == Json.toJson(
+        (commercialResponse.httpResponse.request.content as TextContent).text == encodeToString(
+            CommercialRequest.serializer(),
             CommercialRequest(
                 broadcasterId,
                 30
             )
-        ).toString()
+        )
     )
 
     @Test
@@ -164,17 +160,16 @@ class `Given PATCH modify channel information is called` {
             .modifyChannelInfo(broadcasterId, title, gameId, language)
     }
 
-    @OptIn(UnstableDefault::class)
-    @ImplicitReflectionSerializer
     @Test
     fun `then request has broadcaster id, game id, title, language in body`() = assert(
-        (modifyInfoResponse.request.content as TextContent).text == Json.toJson(
+        (modifyInfoResponse.request.content as TextContent).text == encodeToString(
+            ModifyChannelRequestModel.serializer(),
             ModifyChannelRequestModel(
                 gameId.toString(),
                 title,
                 language
             )
-        ).toString()
+        )
     )
 
     @Test

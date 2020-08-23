@@ -1,15 +1,13 @@
 package streams
 
-import helix.streams.StreamService
-import helix.streams.markers.StreamMarkerResponse
-import helix.streams.markers.UserStreamMarkersResponse
-import helix.streams.markers.model.StreamMarkerRequest
-import io.ktor.client.statement.request
-import io.ktor.content.TextContent
+import com.github.frozencure.helix.streams.StreamService
+import com.github.frozencure.helix.streams.markers.StreamMarkerResponse
+import com.github.frozencure.helix.streams.markers.UserStreamMarkersResponse
+import com.github.frozencure.helix.streams.markers.model.StreamMarkerRequest
+import io.ktor.client.statement.*
+import io.ktor.content.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.UnstableDefault
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json.Default.encodeToString
 import org.junit.Test
 import util.HttpClientMockBuilder
 
@@ -23,17 +21,16 @@ class `Given POST create stream marker is called` {
             .createStreamMarker(userId, description)
     }
 
-    @OptIn(UnstableDefault::class)
-    @ImplicitReflectionSerializer
     @Test
     fun `then request has user ID and description as body`() =
         assert(
-            (streamMarkerResponse.httpResponse.request.content as TextContent).text == Json.toJson(
+            (streamMarkerResponse.httpResponse.request.content as TextContent).text == encodeToString(
+                StreamMarkerRequest.serializer(),
                 StreamMarkerRequest(
                     userId,
                     description
                 )
-            ).toString()
+            )
         )
 
     @Test

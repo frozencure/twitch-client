@@ -1,8 +1,8 @@
 package streams
 
-import helix.streams.StreamKeyResponse
-import helix.streams.StreamService
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.streams.StreamKeyResponse
+import com.github.frozencure.helix.streams.StreamService
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

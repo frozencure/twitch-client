@@ -1,10 +1,10 @@
 package games
 
-import helix.games.GameResponse
-import helix.games.GameService
-import helix.games.GamesResponse
-import helix.games.ScrollableGamesResponse
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.games.GameResponse
+import com.github.frozencure.helix.games.GameService
+import com.github.frozencure.helix.games.GamesResponse
+import com.github.frozencure.helix.games.ScrollableGamesResponse
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

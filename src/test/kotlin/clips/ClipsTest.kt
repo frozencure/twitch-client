@@ -1,8 +1,8 @@
 import clips.ClipsTestData
-import helix.clips.ClipResponse
-import helix.clips.ClipService
-import helix.clips.ClipsResponse
-import helix.clips.ScrollableClipsResponse
+import com.github.frozencure.helix.clips.ClipResponse
+import com.github.frozencure.helix.clips.ClipService
+import com.github.frozencure.helix.clips.ClipsResponse
+import com.github.frozencure.helix.clips.ScrollableClipsResponse
 import io.ktor.client.statement.request
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

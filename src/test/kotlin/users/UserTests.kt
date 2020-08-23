@@ -1,27 +1,24 @@
 package users
 
-import helix.exceptions.BadRequestException
-import helix.extensions.ActiveExtensionsResponse
-import helix.extensions.ExtensionsResponse
-import helix.extensions.model.active.ActiveExtensions
-import helix.users.FollowsResponse
-import helix.users.UserResponse
-import helix.users.UserService
-import helix.users.UsersResponse
-import helix.users.model.ChangeFollowRequest
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
-import io.ktor.content.TextContent
-import io.ktor.http.HttpStatusCode
+import com.github.frozencure.helix.exceptions.BadRequestException
+import com.github.frozencure.helix.extensions.ActiveExtensionsResponse
+import com.github.frozencure.helix.extensions.ExtensionsResponse
+import com.github.frozencure.helix.extensions.model.active.ActiveExtensions
+import com.github.frozencure.helix.users.FollowsResponse
+import com.github.frozencure.helix.users.UserResponse
+import com.github.frozencure.helix.users.UserService
+import com.github.frozencure.helix.users.UsersResponse
+import com.github.frozencure.helix.users.model.ChangeFollowRequest
+import io.ktor.client.statement.*
+import io.ktor.content.*
+import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.parse
+import kotlinx.serialization.json.Json.Default.encodeToString
 import org.junit.Test
 import util.HttpClientMockBuilder
 
-@UnstableDefault
+
 class UserTests {
 
     class `Given GET user is called` {
@@ -286,10 +283,10 @@ class UserTests {
             UserService(HttpClientMockBuilder.withStatusResponse(HttpStatusCode.NoContent)).createFollow(fromId, toId)
         }
 
-        @ImplicitReflectionSerializer
         @Test
         fun `then request has from id and to id as body`() = assert(
-            (createFollowResponse.request.content as TextContent).text == Json.toJson(
+            (createFollowResponse.request.content as TextContent).text == encodeToString(
+                ChangeFollowRequest.serializer(),
                 ChangeFollowRequest(
                     fromId,
                     toId,
@@ -311,15 +308,15 @@ class UserTests {
             UserService(HttpClientMockBuilder.withStatusResponse(HttpStatusCode.NoContent)).deleteFollow(fromId, toId)
         }
 
-        @ImplicitReflectionSerializer
         @Test
         fun `then request has from id and to id as body`() = assert(
-            (createFollowResponse.request.content as TextContent).text == Json.toJson(
+            (createFollowResponse.request.content as TextContent).text == encodeToString(
+                ChangeFollowRequest.serializer(),
                 ChangeFollowRequest(
                     fromId,
                     toId
                 )
-            ).toString()
+            )
         )
 
     }
@@ -347,23 +344,20 @@ class UserTests {
 
     class `Given PUT update user active extensions is called` {
 
-        @ImplicitReflectionSerializer
         private val newActiveExtensions =
-            Json.parse<ActiveExtensions>(UsersTestData.USER_ACTIVE_EXTENSIONS_WITHOUT_WRAPPER)
+            Json.decodeFromString(ActiveExtensions.serializer(), UsersTestData.USER_ACTIVE_EXTENSIONS_WITHOUT_WRAPPER)
 
-        @ImplicitReflectionSerializer
         private val activeExtensionsResponse = runBlocking<ActiveExtensionsResponse> {
             UserService(HttpClientMockBuilder.withJsonContent(UsersTestData.USER_ACTIVE_EXTENSIONS))
                 .updateActiveUserExtensions(newActiveExtensions)
         }
 
 
-        @ImplicitReflectionSerializer
         @Test
         fun `then request has active extensions as body`() = assert(
-            (activeExtensionsResponse.httpResponse.request.content as TextContent).text == Json.toJson(
-                newActiveExtensions
-            ).toString()
+            (activeExtensionsResponse.httpResponse.request.content as TextContent).text == encodeToString(
+                ActiveExtensions.serializer(), newActiveExtensions
+            )
         )
     }
 }

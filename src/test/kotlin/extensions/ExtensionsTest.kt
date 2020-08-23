@@ -1,8 +1,8 @@
 package extensions
 
-import helix.extensions.ExtensionService
-import helix.extensions.TransactionsResponse
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.extensions.ExtensionService
+import com.github.frozencure.helix.extensions.TransactionsResponse
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

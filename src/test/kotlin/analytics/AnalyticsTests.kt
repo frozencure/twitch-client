@@ -1,10 +1,9 @@
 package analytics
 
-import helix.analytics.AnalyticsService
-import helix.analytics.ExtensionAnalyticsScrollableResponse
-import helix.analytics.GameAnalyticsScrollableResponse
-import helix.games.model.Game
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.analytics.AnalyticsService
+import com.github.frozencure.helix.analytics.ExtensionAnalyticsScrollableResponse
+import com.github.frozencure.helix.analytics.GameAnalyticsScrollableResponse
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder
@@ -70,7 +69,6 @@ class `Given GET extension analytics with extension ID and started at and ended 
             assert(extensionAnalyticsResponse?.httpResponse?.request?.url?.parameters?.get("after") != null)
     }
 }
-
 
 
 class `Given GET game analytics with game ID and started at and ended at date is called` {

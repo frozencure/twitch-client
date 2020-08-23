@@ -1,3 +1,2 @@
 rootProject.name = 'twitch-client'
-enableFeaturePreview('GRADLE_METADATA')
 

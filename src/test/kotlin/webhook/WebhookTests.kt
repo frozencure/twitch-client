@@ -1,8 +1,8 @@
 package webhook
 
-import helix.webhook.WebhookService
-import helix.webhook.WebhooksResponse
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.webhook.WebhookService
+import com.github.frozencure.helix.webhook.WebhooksResponse
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

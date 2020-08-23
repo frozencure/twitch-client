@@ -1,9 +1,9 @@
 package entitlements
 
-import helix.entitlements.CodeStatusResponse
-import helix.entitlements.EntitlementGrantUrlResponse
-import helix.entitlements.EntitlementService
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.entitlements.CodeStatusResponse
+import com.github.frozencure.helix.entitlements.EntitlementGrantUrlResponse
+import com.github.frozencure.helix.entitlements.EntitlementService
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder

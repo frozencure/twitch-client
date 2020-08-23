@@ -1,8 +1,8 @@
 package samples
 
-import helix.HelixClient
-import helix.auth.model.OAuthCredentials
-import helix.channels.model.commercial.CommercialLength
+import com.github.frozencure.helix.HelixClient
+import com.github.frozencure.helix.auth.model.OAuthCredentials
+import com.github.frozencure.helix.channels.model.commercial.CommercialLength
 import kotlinx.coroutines.runBlocking
 
 fun searchChannels() {

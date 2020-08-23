@@ -1,15 +1,14 @@
 package util
 
-import helix.auth.model.AuthCredentials
-import helix.http.ResourceService
-import helix.http.model.AbstractResource
-import helix.http.model.array.CollectionResponse
-import helix.http.model.array.HelixArrayDTO
-import helix.http.model.array.ScrollableResponse
-import io.ktor.client.HttpClient
-import io.ktor.client.call.receive
-import io.ktor.client.engine.HttpClientEngineConfig
-import io.ktor.client.statement.HttpResponse
+import com.github.frozencure.helix.auth.model.AuthCredentials
+import com.github.frozencure.helix.http.ResourceService
+import com.github.frozencure.helix.http.model.AbstractResource
+import com.github.frozencure.helix.http.model.array.CollectionResponse
+import com.github.frozencure.helix.http.model.array.HelixArrayDTO
+import com.github.frozencure.helix.http.model.array.ScrollableResponse
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -19,8 +18,8 @@ data class TestDTO(val test: String) : AbstractResource()
 
 class TestService : ResourceService {
 
-    constructor(credentials: AuthCredentials, httpClientEngineConfig: HttpClientEngineConfig)
-            : super(credentials, httpClientEngineConfig)
+    constructor(credentials: AuthCredentials)
+            : super(credentials)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 

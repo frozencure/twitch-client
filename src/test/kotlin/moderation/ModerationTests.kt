@@ -1,19 +1,15 @@
 package moderation
 
-import helix.moderation.*
-import helix.moderation.model.AutoModMessage
-import helix.moderation.model.AutoModRequest
-import io.ktor.client.statement.request
-import io.ktor.content.TextContent
+import com.github.frozencure.helix.moderation.*
+import com.github.frozencure.helix.moderation.model.AutoModMessage
+import com.github.frozencure.helix.moderation.model.AutoModRequest
+import io.ktor.client.statement.*
+import io.ktor.content.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import org.junit.Test
 import util.HttpClientMockBuilder
 
-@UnstableDefault
-@ImplicitReflectionSerializer
 class `Given auto mod check with messages and broadcaster id is called` {
     private val userId: Long = 1
 
@@ -35,7 +31,7 @@ class `Given auto mod check with messages and broadcaster id is called` {
     fun `then request has messages as body`() {
         assert(
             (autoModResponse.httpResponse.request.content as TextContent).text ==
-                    Json.toJson(AutoModRequest(messages)).toString()
+                    Json.encodeToString(AutoModRequest.serializer(), AutoModRequest(messages))
         )
     }
 

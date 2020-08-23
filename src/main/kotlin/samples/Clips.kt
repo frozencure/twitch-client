@@ -1,7 +1,7 @@
 package samples
 
-import helix.HelixClient
-import helix.auth.model.OAuthCredentials
+import com.github.frozencure.helix.HelixClient
+import com.github.frozencure.helix.auth.model.OAuthCredentials
 import kotlinx.coroutines.runBlocking
 
 fun getSingleClip() {

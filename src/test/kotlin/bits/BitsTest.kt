@@ -1,8 +1,8 @@
 package bits
 
-import helix.bits.BitsLeaderboardResponse
-import helix.bits.BitsService
-import io.ktor.client.statement.request
+import com.github.frozencure.helix.bits.BitsLeaderboardResponse
+import com.github.frozencure.helix.bits.BitsService
+import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import util.HttpClientMockBuilder
@@ -39,6 +39,7 @@ class `Given GET bits leaderboard is called` {
     @Test
     fun `then total is returned`() =
         assert(leaderboardResponse.total == 2L)
+
 
     @Test
     fun `then date range is returned`() =

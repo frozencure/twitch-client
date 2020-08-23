@@ -1,15 +1,12 @@
 package streams
 
-import helix.streams.StreamService
-import helix.streams.tags.StreamTagsResponse
-import helix.streams.tags.model.ReplaceTagsRequest
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
-import io.ktor.content.TextContent
-import io.ktor.http.HttpStatusCode
+import com.github.frozencure.helix.streams.StreamService
+import com.github.frozencure.helix.streams.tags.StreamTagsResponse
+import com.github.frozencure.helix.streams.tags.model.ReplaceTagsRequest
+import io.ktor.client.statement.*
+import io.ktor.content.*
+import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import org.junit.Test
 import util.HttpClientMockBuilder
@@ -124,14 +121,12 @@ class `Given PUT replace stream tags is called` {
     fun `then request has broadcaster id as parameter`() =
         assert(httpResponse.request.url.parameters["broadcaster_id"] == broadcasterId.toString())
 
-    @OptIn(UnstableDefault::class)
-    @ImplicitReflectionSerializer
     @Test
     fun `then request has tag IDs as body`() =
         assert(
-            (httpResponse.request.content as TextContent).text == Json.toJson(
-                ReplaceTagsRequest(tagIds)
-            ).toString()
+            (httpResponse.request.content as TextContent).text == Json.encodeToString(
+                ReplaceTagsRequest.serializer(), ReplaceTagsRequest(tagIds)
+            )
         )
 
 
