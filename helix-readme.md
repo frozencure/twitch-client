@@ -7,7 +7,7 @@
 ---
 ## Features
 
-* All [Twitch Helix]() endpoints are implemented and tested
+* All [Twitch Helix](https://dev.twitch.tv/docs/api) endpoints are implemented and tested
 * Works with Kotlin/JVM and Java projects
 * Works with Android Studio projects
 * Authentication service included for an easy OAuth flow implementation
