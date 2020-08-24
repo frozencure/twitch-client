@@ -24,19 +24,15 @@ dependencies {
     testImplementation("io.ktor:ktor-client-mock-jvm:1.4.0")
 }
 
-fun getSampleFiles(): List<String> {
-    val samplesPath = "src/main/kotlin/samples/"
-    return File(samplesPath).walk().filter { f -> f.isFile }.map { f -> samplesPath + f.name.toString() }.toList()
+fun getFilePaths(folderPath: String): List<String> {
+    return File(folderPath).walk().filter { f -> f.isFile }.map { f -> folderPath + f.name.toString() }.toList()
 }
 
 tasks.dokkaHtml {
     dokkaSourceSets {
         configureEach {
-            includes = listOf(
-                "helix-readme.md",
-                "docs/auth-readme.md"
-            )
-            samples = getSampleFiles()
+            includes = getFilePaths("docs/")
+            samples = getFilePaths("src/main/kotlin/samples/")
             includeNonPublic = false
             reportUndocumented = false
             skipEmptyPackages = true
