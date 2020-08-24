@@ -33,7 +33,7 @@ tasks.dokkaHtml {
     dokkaSourceSets {
         configureEach {
             includes = listOf(
-                "docs/helix-readme.md",
+                "helix-readme.md",
                 "docs/auth-readme.md"
             )
             samples = getSampleFiles()
