@@ -32,7 +32,10 @@ fun getSampleFiles(): List<String> {
 tasks.dokkaHtml {
     dokkaSourceSets {
         configureEach {
-            includes = listOf("readme.md")
+            includes = listOf(
+                "README.md", "docs/helix-readme.md",
+                "docs/auth-readme.md"
+            )
             samples = getSampleFiles()
             includeNonPublic = false
             reportUndocumented = false
@@ -152,8 +155,20 @@ bintray {
         userOrg = "frozencure"
         githubRepo = githubRepository
         vcsUrl = pomScmUrl
-        description = "A Twitch API client wrapper written using Kotlin and Ktor"
-        setLabels("kotlin", "twitch", "twitch-api", "ktor-client", "twitch-helix", "ktor", "dokka", "client", "api")
+        description =
+            "A Twitch API client wrapper written in Kotlin. Compatible with Kotlin/JVM - and Android Studio projects."
+        setLabels(
+            "kotlin",
+            "twitch",
+            "twitch-api",
+            "ktor-client",
+            "twitch-helix",
+            "ktor",
+            "dokka",
+            "client",
+            "api",
+            "android"
+        )
         setLicenses("MIT")
         desc = description
         websiteUrl = pomUrl
