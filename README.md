@@ -8,7 +8,7 @@
 ---
 ## Features
 
-* All [Twitch Helix]() endpoints are implemented and tested
+* All [Twitch Helix](https://dev.twitch.tv/docs/api) endpoints are implemented and tested
 * Works with Kotlin/JVM and Java projects
 * Works with Android Studio projects
 * Authentication service included for an easy OAuth flow implementation
@@ -20,9 +20,9 @@
 
 ## Upcoming features
 
-* Addition of [Twitch Helix Webhooks]()
+* Addition of [Twitch Helix Webhooks](https://dev.twitch.tv/docs/api/webhooks-guide)
 * Support for Kotlin-Native, Javascript, iOS projects
-* Addition of missing [Twitch v5 API]() endpoints
+* Addition of missing [Twitch v5 API](https://dev.twitch.tv/docs/v5) endpoints
 
 # Getting started
 

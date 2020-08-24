@@ -1,4 +1,4 @@
-# Package com.github.frozencure.authentication.helix.auth
+# Package com.github.frozencure.helix.auth
 
 # Authentication
 

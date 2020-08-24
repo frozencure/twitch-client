@@ -33,7 +33,7 @@ tasks.dokkaHtml {
     dokkaSourceSets {
         configureEach {
             includes = listOf(
-                "README.md", "docs/helix-readme.md",
+                "docs/helix-readme.md",
                 "docs/auth-readme.md"
             )
             samples = getSampleFiles()
@@ -94,7 +94,7 @@ val pomIssueUrl = "https://github.com/frozencure/twitch-client/issues"
 val pomDesc = "https://github.com/frozencure/twitch-client"
 
 val githubRepository = "frozencure/twitch-client"
-val githubReadme = "readme.md"
+val githubReadme = "README.md"
 
 val pomLicenseName = "MIT"
 val pomLicenseUrl = "https://opensource.org/licenses/mit-license.php"
