@@ -1,4 +1,4 @@
-# Package com.github.frozencure.analytics
+# Package com.github.frozencure.helix.analytics
 
 # Analytics
 
@@ -8,7 +8,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET game analytics](https://dev.twitch.tv/docs/api/reference#get-game-analytics)
     - see the *AnalyticsService.getGameAnalytics()* sample 
 
-# Package com.github.frozencure.bits
+# Package com.github.frozencure.helix.bits
 
 # Bits
 
@@ -16,7 +16,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET bits leaderboard](https://dev.twitch.tv/docs/api/reference#get-bits-leaderboard)
     - see the *BitsService.getBitsLeaderboard()* sample 
 
-# Package com.github.frozencure.channels
+# Package com.github.frozencure.helix.channels
 
 # Channels
 
@@ -30,7 +30,7 @@ This package contains the implementation for accessing the following endpoints:
 * [PATCH modify channel information](https://dev.twitch.tv/docs/api/reference#modify-channel-information)
     - see the *ChannelService.modifyChannelInfo()* sample 
 
-# Package com.github.frozencure.clips
+# Package com.github.frozencure.helix.clips
 
 # Clips
 
@@ -41,7 +41,7 @@ This package contains the implementation for accessing the following endpoints:
     - see the *ClipService.createClip()* sample 
 
 
-# Package com.github.frozencure.entitlements
+# Package com.github.frozencure.helix.entitlements
 
 # Entitlements
 
@@ -56,7 +56,7 @@ This package contains the implementation for accessing the following endpoints:
     - see the *EntitlementService.getDropsEntitlement()* sample
     
     
-# Package com.github.frozencure.extensions
+# Package com.github.frozencure.helix.extensions
 
 # Extensions
 
@@ -64,7 +64,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET extension transactions](https://dev.twitch.tv/docs/api/reference#get-extension-transactions)
     - see the *ExtensionService.getTransactions()* sample 
 
-# Package com.github.frozencure.games
+# Package com.github.frozencure.helix.games
 
 # Games
 
@@ -74,7 +74,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET top games](https://dev.twitch.tv/docs/api/reference#get-top-games)
     - see the *GameService.getTopGames()* sample 
 
-# Package com.github.frozencure.moderation
+# Package com.github.frozencure.helix.moderation
 
 # Moderation
 
@@ -90,7 +90,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET moderator events](https://dev.twitch.tv/docs/api/reference#get-moderator-events)
     - see the *ModerationService.getModeratorEvents()* sample 
 
-# Package com.github.frozencure.streams
+# Package com.github.frozencure.helix.streams
 
 # Streams
 
@@ -110,7 +110,7 @@ This package contains the implementation for accessing the following endpoints:
 * [PUT replace stream tags](https://dev.twitch.tv/docs/api/reference#replace-stream-tags)
     - see the *StreamService.updateStreamTags()* sample
       
-# Package com.github.frozencure.subscriptions
+# Package com.github.frozencure.helix.subscriptions
 
 # Subscriptions
 
@@ -118,7 +118,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET subscriptions](https://dev.twitch.tv/docs/api/reference#get-broadcaster-subscriptions)
     - see the *SubscriptionService.getSubscriptions()* sample
 
-# Package com.github.frozencure.users
+# Package com.github.frozencure.helix.users
 
 # Users
 
@@ -140,7 +140,7 @@ This package contains the implementation for accessing the following endpoints:
 * [DELETE user follow](https://dev.twitch.tv/docs/api/reference#delete-user-follows)
     - see the *UserService.deleteFollow()* sample 
 
-# Package com.github.frozencure.videos
+# Package com.github.frozencure.helix.videos
 
 # Videos
 
@@ -148,7 +148,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET videos](https://dev.twitch.tv/docs/api/reference#get-videos)
     - see the *VideoService.getVideos()* sample
 
-# Package com.github.frozencure.webhook
+# Package com.github.frozencure.helix.webhook
 
 # Webhooks
 
