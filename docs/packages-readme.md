@@ -102,7 +102,7 @@ This package contains the implementation for accessing the following endpoints:
 * [POST create stream marker](https://dev.twitch.tv/docs/api/reference#create-stream-marker)
     - see the [StreamService.createStreamMarker] sample
 * [GET stream markers](https://dev.twitch.tv/docs/api/reference#get-stream-markers)
-    - see the [StreamService.getUserStreamMarkers] or *StreamService.getVideoStreamMarkers] sample 
+    - see the [StreamService.getUserStreamMarkers] or [StreamService.getVideoStreamMarkers] sample 
 * [GET stream tags](https://dev.twitch.tv/docs/api/reference#get-stream-tags)
     - see the [StreamService.getStreamTags] sample
 * [GET all stream tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags)
