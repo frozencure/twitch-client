@@ -6,6 +6,9 @@ import com.github.frozencure.helix.channels.model.ModifyChannelRequestModel
 import com.github.frozencure.helix.channels.model.commercial.CommercialLength
 import com.github.frozencure.helix.channels.model.commercial.CommercialRequest
 import com.github.frozencure.helix.http.ResourceService
+import com.github.frozencure.helix.channels.model.Channel
+import com.github.frozencure.helix.channels.model.hypetrain.HypeTrain
+import com.github.frozencure.helix.channels.model.commercial.Commercial
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*

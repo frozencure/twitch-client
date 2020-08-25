@@ -3,6 +3,8 @@ package com.github.frozencure.helix.bits
 import com.github.frozencure.helix.auth.model.AuthCredentials
 import com.github.frozencure.helix.http.ResourceService
 import com.github.frozencure.helix.shared.model.request.Period
+import com.github.frozencure.helix.auth.model.AuthScope
+import com.github.frozencure.helix.bits.model.BitsLeaderboardEntry
 import io.ktor.client.*
 import io.ktor.client.request.*
 import java.time.Instant

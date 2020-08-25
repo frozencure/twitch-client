@@ -3,6 +3,9 @@ package com.github.frozencure.helix.clips
 import com.github.frozencure.helix.auth.model.AuthCredentials
 import com.github.frozencure.helix.exceptions.BadRequestException
 import com.github.frozencure.helix.http.ResourceService
+import com.github.frozencure.helix.auth.model.AuthScope
+import com.github.frozencure.helix.clips.model.ClipCreation
+import com.github.frozencure.helix.clips.model.Clip
 import io.ktor.client.*
 import io.ktor.client.request.*
 import java.time.Instant

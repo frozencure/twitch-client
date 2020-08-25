@@ -1,6 +1,9 @@
 package com.github.frozencure.helix.entitlements
 
 import com.github.frozencure.helix.auth.model.AuthCredentials
+import com.github.frozencure.helix.entitlements.model.CodeStatus
+import com.github.frozencure.helix.entitlements.model.Entitlement
+import com.github.frozencure.helix.entitlements.model.EntitlementUrl
 import com.github.frozencure.helix.exceptions.BadRequestException
 import com.github.frozencure.helix.http.ResourceService
 import io.ktor.client.*

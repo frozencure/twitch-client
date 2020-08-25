@@ -6,23 +6,16 @@ import com.github.frozencure.helix.http.ResourceService
 import com.github.frozencure.helix.streams.markers.StreamMarkerResponse
 import com.github.frozencure.helix.streams.markers.UserStreamMarkersResponse
 import com.github.frozencure.helix.streams.markers.model.StreamMarkerRequest
-import com.github.frozencure.helix.streams.metadata.StreamsMetadataResponse
 import com.github.frozencure.helix.streams.tags.StreamTagsResponse
 import com.github.frozencure.helix.streams.tags.model.ReplaceTagsRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.HttpClientEngineConfig
-import io.ktor.client.engine.apache.ApacheEngineConfig
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
-import io.ktor.client.request.put
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 
 class StreamService : ResourceService {
 
-    constructor(credentials: AuthCredentials): super(credentials)
+    constructor(credentials: AuthCredentials) : super(credentials)
 
     constructor(httpClient: HttpClient) : super(httpClient)
 
@@ -56,19 +49,6 @@ class StreamService : ResourceService {
 
     suspend fun getVideoStreamMarkers(videoId: Long, first: Int = 100) =
         getStreamMarkersByUserOrVideo("video_id", videoId, first)
-
-    suspend fun getStreamsMetadata(
-        first: Int = 100, gameIds: Collection<Long>? = null,
-        languages: Collection<String>? = null,
-        userIds: Collection<Long>? = null,
-        userLoginNames: Collection<String>? = null
-    ): StreamsMetadataResponse {
-        checkForBadRequest(gameIds, languages, userIds, userLoginNames)
-        return StreamsMetadataResponse(
-            httpGetWithNullables("$BASE_URL/metadata", first, gameIds, languages, userIds, userLoginNames),
-            httpClient
-        )
-    }
 
     suspend fun getStreamTags(
         tagIds: Collection<String>? = null, first: Int = 100

@@ -162,7 +162,6 @@ For a complete reference of all public classes and members visit [this page](htt
     * POST create stream marker :heavy_check_mark:
     * GET streams :heavy_check_mark:
     * GET stream markers :heavy_check_mark:
-    * GET stream metadata :heavy_check_mark:
     * GET stream key :heavy_check_mark:
 * Subscriptions
     * GET broadcaster subscriptions :heavy_check_mark:
@@ -175,6 +174,7 @@ For a complete reference of all public classes and members visit [this page](htt
     * POST start commercial :heavy_check_mark:
     * GET hype train events :heavy_check_mark:
     * PATCH modify channel information :heavy_check_mark:
+    * GET channel information :x:
     
 ---
 ## Supported webhooks
