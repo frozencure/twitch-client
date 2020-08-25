@@ -4,7 +4,7 @@
 
 This package contains the implementation for accessing the following endpoints: 
 * [GET extension analytics](https://dev.twitch.tv/docs/api/reference#get-extension-analytics)
-    - see the *AnalyticsService.getExtensionAnalytics()* sample 
+    - see the [AnalyticsService.getExtensionAnalytics] sample 
 * [GET game analytics](https://dev.twitch.tv/docs/api/reference#get-game-analytics)
     - see the *AnalyticsService.getGameAnalytics()* sample 
 
