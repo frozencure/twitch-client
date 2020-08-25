@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.github.frozencure.helix.auth</title>
+    <link href="../../styles/style.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../scripts/navigationLoader.js" async="async"></script>
+    <script type="text/javascript" src="../../scripts/platformContentHandler.js" async="async"></script>
+    <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+    <script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+    <link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <script>var pathToRoot = "../../";</script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="searchBar"></div>
+        <script type="text/javascript" src="../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../scripts/main.js"></script>
+        <div id="content" pageIds="com.github.frozencure.helix.auth////PointingToDeclaration/">
+          <div class="breadcrumbs">//<a href="../index.html">twitch-client</a>/<a href="index.html">com.github.frozencure.helix.auth</a></div>
+          <div class="cover ">
+            <h1 class="cover"><a data-name="packagecom.github.frozencure.helix.auth"></a>Package com.github.frozencure.helix.auth</h1>
+            <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div class="block"><div class="block"><h1 class="paragraph"><a></a>Authentication</h1>This library currently supports the Implicit OAuth code flow and Credentials OAuth code flow. It is advised to first go through the <a href="https://dev.twitch.tv/docs/authentication">Twitch API reference authentication section</a> for a more in depth understanding.<h2 class="paragraph"><a></a> Getting an OAuth token for an user</h2>The first step in the OAuth flow is to register the Twitch user with your app. This means that the user will have to authorize your app to access his private Twitch data or perform requests on his behalf.Firstly, you will have to create an instance of the <code>OauthUserTokenRequestModel</code> class, which has the following fields:<ul><li><p class="paragraph">clientId -&gt; your app's client ID</p></li><li><p class="paragraph">redirectURI -&gt; the URI where the user will be redirected after authorization, you can find it in the Twitch Developer console. It has to be the same as the one mentioned in your Twitch app settings, otherwise the authorization will not work</p></li><li><p class="paragraph">responseType -&gt; for the implicit OAuth code flow the only available option is &quot;token&quot;</p></li><li><p class="paragraph">scope -&gt; the scopes that the user will be asked to authorize</p></li><li><p class="paragraph">forceVerify -&gt; when true, (re)authorization will be required for every single request (optional)</p></li><li><p class="paragraph">state -&gt; variable used to mitigate CSFR attacks (optional)</p></li></ul>Here is an example of a valid <code>OauthUserTokenRequestModel</code> instance:<div class="sample-container"><code class="paragraph" theme="idea">val requestModel = OauthUserTokenRequestModel(<br>    &quot;nsfsgvu4k8h80iq0r7ya4zx1fasfa&quot;, // client-id<br>    &quot;http://localhost&quot;, // redirect-URI<br>    &quot;token&quot;, // response type<br>    AuthScope.values().toList()// scopes<br>)</code></div>Next, we will use the <code>AuthService</code> to retrieve URL where the user will be directed to login. This can be done in the following way:<div class="sample-container"><code class="paragraph" theme="idea">val authService = AuthService(ApacheEngineConfig())<br>runBlocking {<br>        val response = authService.authorizeAppForUser(requestModel)<br>        println(response)<br>    }</code></div>The code snippet from above will return the following response with URL:<div class="sample-container"><code class="paragraph" theme="idea">https://www.twitch.tv/login?client_id=&lt;your client id&gt;&amp;redirect_params=&lt;scopes + other parameters&gt;</code></div>Next, the user will authorize the app by accepting the requested permissions and logging in to Twitch. After the login completes successfully, he will be redirected to the <code>redirectURI</code> mentioned above:<div class="sample-container"><code class="paragraph" theme="idea">http://localhost/#access_token=1abcgtpzp1iwrsiiqlr0tvfvkiawy3&amp;scope=&lt;accepted scopes&gt;&amp;token_type=bearer</code></div>Inside the redirect URL you will be able to find the OAuth user token.From now on, you will be able to use this token to make request on the user behalf. For example:<div class="sample-container"><code class="paragraph" theme="idea">val credentials = OAuthCredentials(&quot;&lt;OAuth token&gt;&quot;, &quot;&lt;app client id&gt;&quot;)<br>val userService = UserService(credentials)<br>runBlocking {<br>    println(userService.getUser(&quot;frozencure&quot;).resource.toString())<br>}</code></div><h2 class="paragraph"><a></a> OAuth token validation</h2>When using OAuth tokens to perform requests, it is advised to periodically validate the token, to make sure that the user didn't revoke access of the app to his data. The Twitch team mentions that failure of doing this can lead revoking the developer API key or throttling of the application.The <code>AuthService</code> also supports validation:<div class="sample-container"><code class="paragraph" theme="idea">val authService = AuthService(ApacheEngineConfig())<br>    runBlocking {<br>        val tokenValidationModel = authService.validateUser(&quot;&lt;the auth token&gt;&quot;)<br>        println(tokenValidationModel)<br>    }</code></div>This will retrieve the following <code>TokenValidation</code> instance:<div class="sample-container"><code class="paragraph" theme="idea">TokenValidation(<br>    clientId=nyufzabdsf8h80iq0r7ya4zx1fsas7d, userLogin=frozencure, <br>    scopes=[ANALYTICS_READ_EXTENSIONS, ANALYTICS_READ_GAMES, BITS_READ, CHANNEL_READ_SUBSCRIPTIONS, ...], userId=83035654, <br>    expirationTime=5662299<br>)</code></div><h2 class="paragraph"><a></a> Revoking a token</h2>To clean up previously obtained access tokens, the <code>AuthService</code> offers support for programatically revoking the OAuth tokens:<div class="sample-container"><code class="paragraph" theme="idea">    val authService = AuthService(ApacheEngineConfig())<br>    runBlocking {<br>        val response = authService.revokeToken(<br>            OauthRevokeRequestModel(&quot;&lt;client-id&gt;&quot;,<br>            &quot;&lt;auth-token&gt;&quot;)<br>        )<br>        println(response)<br>    }</code></div><h2 class="paragraph"><a></a> Getting an app OAuth token</h2>You can simply obtain an app access token by simply calling the <code>requestAppToken(requestModel: OauthAppTokenRequestModel)</code> function. Firstly, you will have to create an instance of the <code>OauthAppTokenRequestModel</code> class, which has the following fields:<ul><li><p class="paragraph">clientId -&gt; your app's client ID</p></li><li><p class="paragraph">clientSecret -&gt; your app's secret, can also be found in the Twitch Developer Console</p></li><li><p class="paragraph">scope -&gt; the scopes that the user will be asked to authorize</p></li><li><p class="paragraph">grantType -&gt; will always be <code>client_credentials</code></p></li></ul>Next, we'll use the <code>AuthService</code> to make the request to retrieve the token:<div class="sample-container"><code class="paragraph" theme="idea">val requestModel = OauthAppTokenRequestModel(<br>        &quot;&lt;client id&gt;&quot;,<br>        &quot;&lt;client secret&gt;&quot;,<br>        AuthScope.values().toList()<br>    )<br>    val authService = AuthService(ApacheEngineConfig())<br>    runBlocking {<br>        val response = authService.requestAppToken(requestModel)<br>        println(response)<br>    }</code></div></div></div></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>
+            <div class="tabs-section-body">
+              <h2 class=""><a data-name="types"></a>Types</h2>
+              <div class="table" data-togglable="Types"><a data-name="com.github.frozencure.helix.auth/AuthService///PointingToDeclaration/"></a>
+                <div class="table-row" data-filterable-current=":/main" data-filterable-set=":/main">
+                  <div class="main-subrow "><span><a href="-auth-service/index.html">AuthService</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="com.github.frozencure.helix.auth/AuthService///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                        <div class="copy-popup-wrapper "><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                      </span></span></div>
+                  <div class="platform-dependent-row keyValue">
+                    <div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":/main" data-filterable-set=":/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief ">Service class that can be used to perform different authentication actions for the Twitch Helix API, like requesting access tokens, revoking tokens and validationg users.</div></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div class="symbol monospace">class <a href="-auth-service/index.html">AuthService</a>(httpClientConfig: <a href="">HttpClientEngineConfig</a>)<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#container"><svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.3337 9.66683H0.666992L6.00033 3.66683L11.3337 9.66683Z" fill="black"/>
+    <path d="M0.666992 0.333496H11.3337V1.66683H0.666992V0.333496Z" fill="black"/>
+</svg></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 0H2.3949L4.84076 2.44586L0 7.28662L0.713376 8L5.55414 3.15924L8 5.6051V0Z" fill="black"/>
+</svg></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+
