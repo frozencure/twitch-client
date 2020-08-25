@@ -6,7 +6,7 @@ This package contains the implementation for accessing the following endpoints:
 * [GET extension analytics](https://dev.twitch.tv/docs/api/reference#get-extension-analytics)
     - see the [AnalyticsService.getExtensionAnalytics] sample 
 * [GET game analytics](https://dev.twitch.tv/docs/api/reference#get-game-analytics)
-    - see the [AnalyticsService.getGameAnalytics()] sample 
+    - see the [AnalyticsService.getGameAnalytics] sample 
 
 # Package com.github.frozencure.helix.bits
 
@@ -14,7 +14,7 @@ This package contains the implementation for accessing the following endpoints:
 
 This package contains the implementation for accessing the following endpoints: 
 * [GET bits leaderboard](https://dev.twitch.tv/docs/api/reference#get-bits-leaderboard)
-    - see the [BitsService.getBitsLeaderboard()] sample 
+    - see the [BitsService.getBitsLeaderboard] sample 
 
 # Package com.github.frozencure.helix.channels
 
@@ -96,7 +96,7 @@ This package contains the implementation for accessing the following endpoints:
 
 This package contains the implementation for accessing the following endpoints: 
 * [GET streams](https://dev.twitch.tv/docs/api/reference#get-streams)
-    - see the [AnalyticsService.getStreams] sample 
+    - see the [StreamService.getStreams] sample 
 * [GET stream key](https://dev.twitch.tv/docs/api/reference#get-stream-key)
     - see the [StreamService.getStreamKey] sample 
 * [POST create stream marker](https://dev.twitch.tv/docs/api/reference#create-stream-marker)
