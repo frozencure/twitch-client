@@ -2,7 +2,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>getGames</title>
-    <link href="../../../styles/style.css" rel="Stylesheet">
+<script src="https://unpkg.com/kotlin-playground@1" data-selector="code.runnablesample"></script>    <link href="../../../styles/style.css" rel="Stylesheet">
     <script type="text/javascript" src="../../../scripts/navigationLoader.js" async="async"></script>
     <script type="text/javascript" src="../../../scripts/platformContentHandler.js" async="async"></script>
     <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
@@ -25,7 +25,23 @@
           <div class="cover ">
             <h1 class="cover"><a data-name="getgames"></a>getGames</h1>
           </div>
-<div class="divergent-group" data-filterable-current=":/main" data-filterable-set=":/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"></div>
+<div class="divergent-group" data-filterable-current=":/main" data-filterable-set=":/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="block"><div class="block">Retrieves multiple games given a list of game names and/or a list of game IDs. For more information visit the <a href="https://dev.twitch.tv/docs/api/reference#get-games">Twitch Developer Reference</a></div></div><div class="block"><h4 class="block"><a data-name="return"></a>Return</h4><div class="block">A <a href="../-games-response/index.html">GamesResponse</a> object that holds one or multiple <a href="../../com.github.frozencure.helix.games.model/-game/index.html">Game</a> resources.</div></div><h2 class=""><a data-name="samples"></a>Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div class="sample-container"><code class="runnablesample monospace" theme="idea">import com.github.frozencure.helix.HelixClient
+import com.github.frozencure.helix.auth.model.OAuthCredentials
+import kotlinx.coroutines.runBlocking
+fun main() { 
+   //sampleStart 
+   val credentials = OAuthCredentials(&quot;&lt;OAuth access token here&gt;&quot;, &quot;&lt;App Client ID here&gt;&quot;)
+val helixClient = HelixClient(credentials)
+runBlocking {
+    println(
+        helixClient.games.getGames(
+            ids = listOf(33214),
+            names = listOf(&quot;Overwatch&quot;)
+        ).resources
+    )
+} 
+   //sampleEnd
+}</code></div></div></div><h2 class=""><a data-name="parameters"></a>Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><a data-name="com.github.frozencure.helix.games/GameService/getGames/#kotlin.collections.Collection[kotlin.String]?#kotlin.collections.Collection[kotlin.Long]?/PointingToDeclaration/"></a><div class="table-row" data-filterable-current=":/main" data-filterable-set=":/main"><div class="platform-dependent-row keyValue"><div>ids</div><div class="title"><div data-togglable="Parameters">A list of game IDs.</div></div></div></div><a data-name="com.github.frozencure.helix.games/GameService/getGames/#kotlin.collections.Collection[kotlin.String]?#kotlin.collections.Collection[kotlin.Long]?/PointingToDeclaration/"></a><div class="table-row" data-filterable-current=":/main" data-filterable-set=":/main"><div class="platform-dependent-row keyValue"><div>names</div><div class="title"><div data-togglable="Parameters">A list of game names.</div></div></div></div></div></div></div></div></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
@@ -33,7 +49,30 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
-</svg><span>Content copied to clipboard</span></div></span></div></div><div class="symbol "><div class="symbol monospace">suspend fun <a href="get-games.html">getGames</a>(query: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, first: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="../-scrollable-games-response/index.html">ScrollableGamesResponse</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg><span>Content copied to clipboard</span></div></span></div></div></div></div>
+  </div>
+</div>
+<div class="divergent-group" data-filterable-current=":/main" data-filterable-set=":/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="block"><div class="block">Returns a list of games or categories that match the query via name either entirely or partially. Requires an app or user access token. For more information visit the <a href="https://dev.twitch.tv/docs/api/reference#search-categories">Twitch Developer Reference</a></div></div><div class="block"><h4 class="block"><a data-name="return"></a>Return</h4><div class="block">A <a href="../-scrollable-games-response/index.html">ScrollableGamesResponse</a> that holds one or multiple <a href="../../com.github.frozencure.helix.games.model/-game/index.html">Game</a> resources as payload (can have multiple pages).</div></div><h2 class=""><a data-name="samples"></a>Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div class="sample-container"><code class="runnablesample monospace" theme="idea">import com.github.frozencure.helix.HelixClient
+import com.github.frozencure.helix.auth.model.OAuthCredentials
+import kotlinx.coroutines.runBlocking
+fun main() { 
+   //sampleStart 
+   val credentials = OAuthCredentials(&quot;&lt;OAuth access token here&gt;&quot;, &quot;&lt;App Client ID here&gt;&quot;)
+val helixClient = HelixClient(credentials)
+runBlocking {
+    println(
+        helixClient.games.getGames(
+            query = &quot;League Of Legends&quot;,
+            first = 5
+        ).resources
+    )
+} 
+   //sampleEnd
+}</code></div></div></div><h2 class=""><a data-name="parameters"></a>Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><a data-name="com.github.frozencure.helix.games/GameService/getGames/#kotlin.String#kotlin.Int/PointingToDeclaration/"></a><div class="table-row" data-filterable-current=":/main" data-filterable-set=":/main"><div class="platform-dependent-row keyValue"><div>first</div><div class="title"><div data-togglable="Parameters">Maximum number of games to return. Maximum: 100. Default: 100.</div></div></div></div><a data-name="com.github.frozencure.helix.games/GameService/getGames/#kotlin.String#kotlin.Int/PointingToDeclaration/"></a><div class="table-row" data-filterable-current=":/main" data-filterable-set=":/main"><div class="platform-dependent-row keyValue"><div>query</div><div class="title"><div data-togglable="Parameters">The search query that needs to be matched fully or partially.</div></div></div></div></div></div></div></div></div></div>
+<span class="pull-right"></span></div>
+
+  <div class="main-subrow">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":/main"><div class="symbol "><div class="symbol monospace">suspend fun <a href="get-games.html">getGames</a>(query: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, first: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="../-scrollable-games-response/index.html">ScrollableGamesResponse</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
