@@ -40,6 +40,7 @@ class EntitlementService : ResourceService {
      * @param type of entitlement being granted. Only *bulk_drops_grant* is supported.
      * @return A [EntitlementGrantUrlResponse] that holds a single [EntitlementUrl] resource.
      * @throws BadRequestException Exception is thrown if the manifest identifier has more than 64 characters.
+     * @sample samples.createEntitlementGrants
      */
     suspend fun createEntitlementGrants(manifestId: String, type: String = "bulk_drops_grant") =
         EntitlementGrantUrlResponse(
@@ -60,6 +61,7 @@ class EntitlementService : ResourceService {
      * @param userId The user account for which the code status is checked.
      * @return A [CodeStatusResponse] that holds a collection of [CodeStatus] resources as payload.
      * @throws BadRequestException An exception is thrown if more than 20 codes are specified.
+     * @sample samples.getCodeStatus
      */
     suspend fun getCodeStatus(codes: List<String>, userId: Long) = CodeStatusResponse(
         httpClient.get("$BASE_URL/codes") {
@@ -79,6 +81,7 @@ class EntitlementService : ResourceService {
      * @param userId The user account which is going to receive the entitlement associated with the code.
      * @return A [CodeStatusResponse] that holds a collection of [CodeStatus] resources as payload.
      * @throws BadRequestException An exception is thrown if more than 20 codes are specified.
+     * @sample samples.redeemCodes
      */
     suspend fun redeemCodes(codes: List<String>, userId: Long) = CodeStatusResponse(
         httpClient.post("$BASE_URL/code") {
@@ -95,6 +98,7 @@ class EntitlementService : ResourceService {
      * For more information visit the [Twitch Developer Reference](https://dev.twitch.tv/docs/api/reference#get-drops-entitlements)
      * @param entitlementId The ID of the entitlement.
      * @return A [EntitlementResponse] that holds a single [Entitlement] resource as payload.
+     * @sample samples.getDropsEntitlement
      */
     suspend fun getDropsEntitlement(entitlementId: String) = EntitlementResponse(
         httpClient.get("$BASE_URL/drops") {
@@ -109,6 +113,7 @@ class EntitlementService : ResourceService {
      * @param gameId The ID of the game that the entitlements have been granted to.
      * @param first Maximum number of entitlements to return. Default: 100, Max: 100.
      * @return A [EntitlementsResponse] that holds a collection of  [Entitlement] resources as payload. (can have multiple pages)
+     * @sample samples.getDropsEntitlements
      */
     suspend fun getDropsEntitlements(userId: Long? = null, gameId: Long? = null, first: Int = 100) =
         EntitlementsResponse(

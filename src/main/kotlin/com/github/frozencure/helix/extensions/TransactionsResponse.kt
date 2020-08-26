@@ -8,6 +8,11 @@ import io.ktor.client.call.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 
+/**
+ * A collection response that holds one or multiple extension transactions as payload.
+ * The resource collection can be split into multiple pages.
+ * @constructor Creates a new transactions response object.
+ */
 class TransactionsResponse(
     httpResponse: HttpResponse,
     httpClient: HttpClient

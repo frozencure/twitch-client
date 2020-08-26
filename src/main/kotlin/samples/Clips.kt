@@ -11,7 +11,7 @@ fun getSingleClip() {
         print(
             helixClient.clips.getClip(
                 "AwkwardHelplessSalamanderSwiftRage"
-            )
+            ).resource
         )
     }
 }
@@ -23,7 +23,7 @@ fun getMultipleClips() {
         print(
             helixClient.clips.getClips(
                 listOf("AwkwardHelplessSalamanderSwiftRage", "ArbitraryImportantPoxNononoCat")
-            )
+            ).resources
         )
     }
 }
@@ -35,7 +35,7 @@ fun getClipsByBroadcaster() {
         print(
             helixClient.clips.getClipsByBroadcaster(
                 83035654
-            )
+            ).resources
         )
     }
 }

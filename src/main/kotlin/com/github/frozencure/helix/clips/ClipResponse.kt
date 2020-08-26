@@ -52,7 +52,6 @@ class ClipsResponse(httpResponse: HttpResponse) :
  * The resource collection can be split into multiple pages.
  * @constructor Creates a new clips response object.
  */
-
 class ScrollableClipsResponse(httpResponse: HttpResponse, httpClient: HttpClient) :
     ScrollableResponse<Clip>(httpResponse, httpClient) {
     override val helixArrayDTO: HelixArrayDTO<Clip> = runBlocking {

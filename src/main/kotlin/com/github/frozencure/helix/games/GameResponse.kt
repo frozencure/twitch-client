@@ -10,19 +10,32 @@ import io.ktor.client.call.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 
+/**
+ * A collection response that can hold a single game resource as payload.
+ * @constructor Creates a new game response response object.
+ */
 class GameResponse(httpResponse: HttpResponse) : SingleResponse<Game>(httpResponse) {
     override val helixArrayDTO: HelixArrayDTO<Game> = runBlocking {
         httpResponse.receive<HelixArrayDTO<Game>>()
     }
 }
 
+
+/**
+ * A collection response that contains one or multiple game objects.
+ * @constructor Creates a new games response object.
+ */
 class GamesResponse(httpResponse: HttpResponse) : CollectionResponse<Game>(httpResponse) {
     override val helixArrayDTO: HelixArrayDTO<Game> = runBlocking {
         httpResponse.receive<HelixArrayDTO<Game>>()
     }
 }
 
-
+/**
+ * A collection response that holds one or multiple game resources as payload.
+ * The resource collection can be split into multiple pages.
+ * @constructor Creates a new scrollable games response object.
+ */
 class ScrollableGamesResponse(
     httpResponse: HttpResponse,
     httpClient: HttpClient

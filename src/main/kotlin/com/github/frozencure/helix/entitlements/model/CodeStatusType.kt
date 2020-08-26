@@ -3,6 +3,9 @@ package com.github.frozencure.helix.entitlements.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Enum class that consists of all posible Twitch code status types.
+ */
 @Serializable
 enum class CodeStatusType {
     @SerialName("SUCCESSFULLY_REDEEMED")

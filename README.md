@@ -140,7 +140,7 @@ For a complete reference of all public classes and members visit [this page](htt
     * GET top games :heavy_check_mark:
     * GET search categories :heavy_check_mark:
 * Analytics
-    * GET extension analytics :heheavy_check_marka:
+    * GET extension analytics :heavy_check_mark:
     * GET game analytics :heavy_check_mark:
 * Bits
     * GET bits leaderboard :heavy_check_mark:

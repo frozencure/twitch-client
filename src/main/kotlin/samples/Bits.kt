@@ -16,7 +16,7 @@ fun getBitsLeaderboard() {
                 count = 10,
                 period = Period.ALL,
                 startedAt = Instant.now() - Duration.ofDays(1)
-            )
+            ).resources
         )
     }
 }

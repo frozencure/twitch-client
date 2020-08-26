@@ -7,7 +7,10 @@ import io.ktor.client.call.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 
-
+/**
+ * A collection response that contains one or multiple code status objects.
+ * @constructor Creates a new code status response object.
+ */
 class CodeStatusResponse(httpResponse: HttpResponse) :
     CollectionResponse<CodeStatus>(httpResponse) {
 

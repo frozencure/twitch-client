@@ -14,7 +14,7 @@ fun searchChannels() {
                 query = "xQcOw",
                 liveOnly = true,
                 first = 5
-            )
+            ).resources
         )
     }
 }
@@ -26,7 +26,7 @@ fun getHypeTrainEvents() {
         print(
             helixClient.channels.getHypeTrainEvents(
                 broadcasterId = 12345L
-            )
+            ).resources
         )
     }
 }
@@ -40,7 +40,7 @@ fun startCommercial() {
             helixClient.channels.startCommercial(
                 broadcasterId = 12345L,
                 length = CommercialLength.THIRTY
-            )
+            ).resource
         )
     }
 }
