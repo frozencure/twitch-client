@@ -7,6 +7,11 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
+/**
+ * Serializer class used to convert a [String] to a nullable [String].
+ * When the [String] is empty it will be converted to null.
+ * @constructor Creates a new instant serializer object.
+ */
 object NullableStringSerializer : KSerializer<String?> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("NullableStringSerializer", PrimitiveKind.STRING)

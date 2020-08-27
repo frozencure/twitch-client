@@ -10,9 +10,19 @@ import io.ktor.client.features.auth.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 
+/**
+ * An abstract service class where the configuration of the HTTP client happens.
+ * @constructor Creates a new resource service given an HTTP client.
+ * @param httpClient The HTTP client used to perform HTTP requests.
+ */
 abstract class ResourceService(
     protected val httpClient: HttpClient
 ) {
+    /**
+     * Creates a new resource service object given some [AuthCredentials].
+     * Uses an [Apache] engine and a [KotlinxSerializer] for the JSON de-/serialization.
+     * @param credentials The credentials necessary for authenticating the requests made by the HTTP client.
+     */
     constructor(
         credentials: AuthCredentials
     )

@@ -11,6 +11,10 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.time.temporal.ChronoUnit
 
+/**
+ * Serializer class used to convert a nullable [String] containing a timestamp to a nullable [Instant].
+ * @constructor Creates a new instant serializer object.
+ */
 object NullableInstantSerializer : KSerializer<Instant?> {
 
     override val descriptor: SerialDescriptor =

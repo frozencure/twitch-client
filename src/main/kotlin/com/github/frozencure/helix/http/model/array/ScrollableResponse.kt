@@ -9,6 +9,7 @@ import io.ktor.client.statement.*
  * Generic class used for all Twitch Helix responses that can return more than one page of results.
  * Holds the state of the last request and provides an easy way of requesting the next pages.
  * @param httpClient The HTTP client necessary for making requests for the next parts of the collection (pages).
+ * @param T The type of the resources contained in the response. Can only be [AbstractResource], which is a super class of all Twitch Helix resources.
  */
 abstract class ScrollableResponse<T : AbstractResource>(
     httpResponse: HttpResponse,

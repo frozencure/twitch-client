@@ -13,8 +13,8 @@ import kotlinx.serialization.Serializable
  * @param pagination An object that holds the current state of the cursor used for requesting the next part of the collection of data.
  * @param total The total number of resources retrieved. Is only present in some of the Twitch Helix endpoints.
  * @param dateRange Holds the interval between two timestamps. Is only present in some of the Twitch Helix endpoints.
+ * @param T The type of the resources contained in the response. Can only be [AbstractResource], which is a super class of all Twitch Helix resources.
  */
-
 @Serializable
 data class HelixArrayDTO<T : AbstractResource>(
     @SerialName("data")

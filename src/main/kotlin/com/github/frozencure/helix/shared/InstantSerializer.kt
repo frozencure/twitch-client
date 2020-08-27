@@ -11,6 +11,10 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 
+/**
+ * Serializer class used to convert a [String] containing a timestamp to an [Instant].
+ * @constructor Creates a new instant serializer object.
+ */
 object InstantSerializer : KSerializer<Instant> {
 
     override val descriptor: SerialDescriptor =
