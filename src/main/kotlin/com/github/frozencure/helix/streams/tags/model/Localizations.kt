@@ -4,6 +4,10 @@ package com.github.frozencure.helix.streams.tags.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Contains a localization [String] for different languages.
+ * @constructor Creates a new localizations object.
+ */
 @Serializable
 data class Localizations(
     @SerialName("bg-bg")

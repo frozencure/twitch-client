@@ -2,7 +2,7 @@ package streams
 
 import com.github.frozencure.helix.streams.StreamService
 import com.github.frozencure.helix.streams.tags.StreamTagsResponse
-import com.github.frozencure.helix.streams.tags.model.ReplaceTagsRequest
+import com.github.frozencure.helix.streams.tags.model.ReplaceTagsRequestModel
 import io.ktor.client.statement.*
 import io.ktor.content.*
 import io.ktor.http.*
@@ -17,7 +17,7 @@ class `Given GET all stream tags is called` {
 
     private val streamTagsResponse = runBlocking<StreamTagsResponse> {
         StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAM_TAGS_WITH_PAGINATION))
-            .getStreamTags(tagIds = tagIds)
+            .getAllStreamTags(tagIds = tagIds)
     }
 
     @Test
@@ -42,7 +42,7 @@ class `Given GET all stream tags is called` {
 
         private val streamTagsResponse = runBlocking<StreamTagsResponse?> {
             StreamService(HttpClientMockBuilder.withJsonContent(StreamsTestData.MULTIPLE_STREAM_TAGS_WITH_PAGINATION))
-                .getStreamTags().nextPage()
+                .getAllStreamTags().nextPage()
         }
 
 
@@ -125,7 +125,7 @@ class `Given PUT replace stream tags is called` {
     fun `then request has tag IDs as body`() =
         assert(
             (httpResponse.request.content as TextContent).text == Json.encodeToString(
-                ReplaceTagsRequest.serializer(), ReplaceTagsRequest(tagIds)
+                ReplaceTagsRequestModel.serializer(), ReplaceTagsRequestModel(tagIds)
             )
         )
 

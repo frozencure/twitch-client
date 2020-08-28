@@ -3,7 +3,7 @@ package streams
 import com.github.frozencure.helix.streams.StreamService
 import com.github.frozencure.helix.streams.markers.StreamMarkerResponse
 import com.github.frozencure.helix.streams.markers.UserStreamMarkersResponse
-import com.github.frozencure.helix.streams.markers.model.StreamMarkerRequest
+import com.github.frozencure.helix.streams.markers.model.StreamMarkerRequestModel
 import io.ktor.client.statement.*
 import io.ktor.content.*
 import kotlinx.coroutines.runBlocking
@@ -25,8 +25,8 @@ class `Given POST create stream marker is called` {
     fun `then request has user ID and description as body`() =
         assert(
             (streamMarkerResponse.httpResponse.request.content as TextContent).text == encodeToString(
-                StreamMarkerRequest.serializer(),
-                StreamMarkerRequest(
+                StreamMarkerRequestModel.serializer(),
+                StreamMarkerRequestModel(
                     userId,
                     description
                 )
